@@ -20,7 +20,7 @@
         <ImageView
             android:layout_width="175dp"
             android:layout_height="175dp"
-            android:background="@drawable/touxiang1"/>
+            android:background="@mipmap/touxiang"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
