@@ -1,6 +1,7 @@
 package cn.jit.immessage;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.format.DateFormat;
@@ -15,15 +16,16 @@ import java.util.Calendar;
 import java.util.List;
 
 public class Info1Activity extends AppCompatActivity {
-    private Button button1;
+    private Button button2;
+    private Button button3;
     private TextView text;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_info1);
-        button1=(Button)findViewById(R.id.info1_btn2);
+        button2=(Button)findViewById(R.id.info1_btn2);
         text=(TextView)findViewById(R.id.info1_tv1);
-        button1.setOnClickListener(new View.OnClickListener() {
+        button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 final Calendar c = Calendar.getInstance();
@@ -35,6 +37,13 @@ public class Info1Activity extends AppCompatActivity {
                     }
                 }, c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH));
                 dialog.show();
+            }
+        });
+        button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(Info1Activity.this,LoginActivity.class);
+                startActivity(intent);
             }
         });
     }

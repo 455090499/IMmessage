@@ -113,7 +113,8 @@ public class Body1Activity extends AppCompatActivity
         } else if (id == R.id.nav_gallery) {
 
         } else if (id == R.id.nav_slideshow) {
-
+            Intent intent=new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+            startActivity(intent);
         } else if (id == R.id.nav_manage) {
             Intent intent=new Intent(Body1Activity.this,LoginActivity.class);
             startActivity(intent);
