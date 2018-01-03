@@ -22,7 +22,7 @@
             android:layout_width="30dp"
             android:layout_margin="8dp"
             android:layout_height="match_parent"
-            android:background="@drawable/chatting_plus_btn_icon"
+            android:background="@mipmap/chatting_plus_btn_icon"
             android:layout_weight="0.03" />
 
         <EditText
