@@ -10,8 +10,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".LoginActivity"
-            android:label="Immessage"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:label="Immessage">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -19,7 +18,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".RegisterActivity" />
-        <activity android:name=".Body1Activity" />
+        <activity android:name=".Body1Activity"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name=".ChatActivity" />
         <activity android:name=".Info1Activity" />
         <activity android:name=".Info2Activity"></activity>
