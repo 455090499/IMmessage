@@ -21,8 +21,8 @@ public class Info1Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_info1);
-        button1=(Button)findViewById(R.id.btn1_info1);
-        text=(TextView)findViewById(R.id.txt3_1_info1);
+        button1=(Button)findViewById(R.id.info1_btn2);
+        text=(TextView)findViewById(R.id.info1_tv1);
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

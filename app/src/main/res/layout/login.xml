@@ -3,7 +3,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@mipmap/Login_background">
+    android:background="@mipmap/login_background">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -13,7 +13,7 @@
         <ImageView
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:src="@mipmap/Logo"/>
+            android:src="@mipmap/logo"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -33,10 +33,11 @@
             android:textSize="24dp"
             android:layout_marginLeft="30dp" />
         <EditText
+            android:id="@+id/login_et1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="number"
-            android:id="@+id/Login_et_username"/>
+            />
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -49,29 +50,33 @@
             android:textSize="24dp"
             android:layout_marginLeft="30dp" />
         <EditText
+            android:id="@+id/login_et2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/Login_et_passwd"/>
+           />
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp">
         <Button
+            android:id="@+id/login_btn1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="登录"
             android:textSize="24dp"
             android:layout_marginLeft="50dp"
             android:background="@android:color/transparent"
-            android:id="@+id/Login_btn_login"/>
+           />
         <Button
+            android:id="@+id/login_btn2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="注册"
             android:textSize="24dp"
             android:layout_marginLeft="100dp"
             android:background="@android:color/transparent"
-            android:id="@+id/Login_btn_regist"/>
+            />
     </LinearLayout>
 </LinearLayout>
