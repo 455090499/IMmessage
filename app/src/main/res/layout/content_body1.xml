@@ -17,4 +17,68 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="222" />
+    <io.github.leibnik.wechatradiobar.WeChatRadioGroup
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/radiogroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true">
+        <io.github.leibnik.wechatradiobar.WeChatRadioButton
+
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.3"
+            android:gravity="center"
+            android:paddingTop="3dp"
+            android:text="消息"
+            android:textColor="#555"
+            android:textSize="13sp"
+            app:defocus_icon="@mipmap/message"
+            app:focus_color="#50ba26"
+            app:focus_icon="@mipmap/message_green"/>
+
+        <io.github.leibnik.wechatradiobar.WeChatRadioButton
+
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.3"
+            android:gravity="center"
+            android:paddingTop="3dp"
+            android:text="好友"
+            android:textColor="#555"
+            android:textSize="13sp"
+            app:defocus_icon="@mipmap/friend"
+            app:focus_color="#50ba26"
+            app:focus_icon="@mipmap/friend_green"/>
+
+        <io.github.leibnik.wechatradiobar.WeChatRadioButton
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.3"
+            android:gravity="center"
+            android:paddingTop="3dp"
+            android:text="群组"
+            android:textColor="#555"
+            android:textSize="13sp"
+            app:defocus_icon="@mipmap/group"
+            app:focus_color="#50ba26"
+            app:focus_icon="@mipmap/group_green"/>
+
+
+    </io.github.leibnik.wechatradiobar.WeChatRadioGroup>
+    <View
+        android:id="@+id/line"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_above="@id/radiogroup"
+        android:background="#555"
+        />
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/line"
+        />
 </RelativeLayout>
