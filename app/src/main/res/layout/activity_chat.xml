@@ -16,7 +16,6 @@
         android:layout_height="wrap_content"
         android:layout_width="match_parent">
 
-
         <ImageButton
             android:id="@+id/chat_plus"
             android:layout_width="30dp"
@@ -39,5 +38,38 @@
             android:layout_width="60dp"
             android:text="发送" />
     </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="20dp"
+        android:visibility="gone">
+
+        <ImageButton
+            android:id="@+id/chat_imageButton1"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="20dp"
+            android:background="@mipmap/chatting_pic_icon" />
+
+        <ImageButton
+            android:id="@+id/chat_imageButton2"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="20dp"
+            android:background="@mipmap/chatting_file_icon"
+            android:layout_toRightOf="@+id/chat_imageButton1"/>
+        <ImageButton
+            android:id="@+id/chat_imageButton3"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_toRightOf="@+id/chat_imageButton2"
+            android:layout_marginLeft="20dp"
+            android:background="@mipmap/chatting_cam_icon"/>
+
+    </RelativeLayout>
 
 </LinearLayout>

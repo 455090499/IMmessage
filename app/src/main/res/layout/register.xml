@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:background="@mipmap/register">
 <LinearLayout
     android:layout_width="match_parent"
@@ -79,12 +80,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="验证码     "
             android:textSize="24dp"
-            android:layout_marginLeft="20dp" />
+            android:layout_marginLeft="20dp"
+            android:id="@+id/textView3" />
+
         <EditText
             android:id="@+id/register_et4"
             android:layout_width="80dp"
@@ -100,6 +104,12 @@
             android:textSize="18sp"
             />
     </LinearLayout>
+    <TextView
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:layout_marginLeft="25dp"
+        android:text="（验证码为一分钟有效）"/>
 
 <LinearLayout
     android:layout_width="wrap_content"
