@@ -2,8 +2,19 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/action_settings"
+        android:id="@+id/body1_settings1"
         android:orderInCategory="100"
-        android:title="@string/action_settings"
+        android:title="搜索好友/群"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/body2_settings2"
+        android:orderInCategory="100"
+        android:title="创建群组"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/body3_settings3"
+        android:orderInCategory="100"
+        android:title="拍摄"
+        app:showAsAction="never" />
+
 </menu>

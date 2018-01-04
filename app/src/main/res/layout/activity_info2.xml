@@ -18,11 +18,13 @@
         android:layout_gravity="center"
 
         android:orientation="vertical">
-        <ImageView
+        <cn.jit.immessage.Round1ImageViewActivity
             android:id="@+id/info2_im"
             android:layout_width="175dp"
             android:layout_height="175dp"
-            android:src="@mipmap/touxiang1"/>
+            android:src="@mipmap/touxiang1"
+            />
+
     </LinearLayout>
 
     <LinearLayout
