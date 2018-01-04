@@ -22,7 +22,7 @@ public class ChatActivity extends AppCompatActivity  {
 
     private void initView() {
         plus = (ImageButton) findViewById(R.id.chat_plus);
-        layout = (RelativeLayout) findViewById(R.id.layout);
+        layout = (RelativeLayout)findViewById(R.id.layout);
     }
 
     private void initListener() {
