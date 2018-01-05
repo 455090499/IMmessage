@@ -25,6 +25,7 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText et2;
     private EditText et3;
     private EditText et4;
+    public pp p1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,13 +72,14 @@ public class RegisterActivity extends AppCompatActivity {
                                         if (e == null) {
                                             if (object.size() == 0){
                                                 //可以注册
-                                                pp p1=new pp();
+                                                p1=new pp();
                                                 p1.insertpp(et1.getText().toString(),et2.getText().toString());
                                                 Toast.makeText(RegisterActivity.this, "注册成功！", Toast.LENGTH_SHORT).show();
                                                 //页面的下一步跳转
                                                 Intent intent = new Intent(RegisterActivity.this, Info1Activity.class);
                                                 startActivity(intent);
                                             }
+                                            else
                                                 Toast.makeText(RegisterActivity.this, "该手机号已注册！", Toast.LENGTH_SHORT).show();
                                         } else {
                                             Log.i("bmob", "系统异常：" + e.getMessage() + "," + e.getErrorCode());
