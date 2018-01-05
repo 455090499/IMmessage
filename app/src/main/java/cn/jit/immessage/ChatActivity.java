@@ -10,6 +10,7 @@ public class ChatActivity extends AppCompatActivity  {
 
     private ImageButton plus;
     private RelativeLayout layout;
+    boolean visibility_Flag = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +30,13 @@ public class ChatActivity extends AppCompatActivity  {
         plus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                 layout.setVisibility(View.VISIBLE);
+                if(visibility_Flag) {
+                    layout.setVisibility(View.VISIBLE);
+                    visibility_Flag = false;
+                } else {
+                    layout.setVisibility(View.GONE);
+                    visibility_Flag = true;
+                }
             }
         });
     }
