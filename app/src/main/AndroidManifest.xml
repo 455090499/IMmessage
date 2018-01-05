@@ -17,7 +17,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".LoginActivity"
+            android:name=".SplashActivity"
             android:label="Immessage">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -35,7 +35,9 @@
         <activity android:name=".Info2Activity" />
         <activity android:name=".Notify1Activity" />
         <activity android:name=".Notify2Activity" />
-        <activity android:name=".CreatActivity"></activity>
+        <activity android:name=".CreatActivity" />
+        <activity android:name=".LoginActivity" />
+        <activity android:name=".Splash2Activity"></activity>
     </application>
 
 </manifest>
