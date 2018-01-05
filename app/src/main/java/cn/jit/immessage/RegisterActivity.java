@@ -1,6 +1,7 @@
 package cn.jit.immessage;
 
 import android.content.Intent;
+import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -44,7 +45,27 @@ public class RegisterActivity extends AppCompatActivity {
                     @Override
                     public void done(Integer smsId, BmobException ex) {
                         if(ex==null)
+                        {
                             Log.e("bmob", "短信id：" + smsId);//用于查询本次短信发送详情
+                            button1.setClickable(false);
+//        mbtn.setBackgroundColor(Color.GRAY);
+                            Toast.makeText(RegisterActivity.this, "验证码发送成功，请尽快使用", Toast.LENGTH_SHORT).show();
+                            new CountDownTimer(60000, 1000) {
+                                @Override
+                                public void onTick(long millisUntilFinished) {
+//                Message_btn.setBackgroundResource(R.drawable.button_shape02);
+                                    button1.setText(millisUntilFinished / 1000 + "秒");
+                                }
+
+                                @Override
+                                public void onFinish() {
+                                    button1.setClickable(true);
+//                Message_btn.setBackgroundResource(R.drawable.button_shape);
+                                    button1.setText("重新发送");
+                                }
+                            }.start();
+                        }
+
 
                     }
                 });
