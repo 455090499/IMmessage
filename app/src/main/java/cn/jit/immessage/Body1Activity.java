@@ -1,6 +1,7 @@
 package cn.jit.immessage;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
@@ -17,6 +18,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -93,7 +95,27 @@ public class Body1Activity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+
+        if (id == R.id.body1_settings1) {
+            Toast.makeText(Body1Activity.this,"SUCCESS",Toast.LENGTH_SHORT).show();
+            return true;
+        }
+        if (id == R.id.body2_settings2) {
+            //Toast.makeText(Body1Activity.this,"SUCCESS2",Toast.LENGTH_SHORT).show();
+            Intent intent=new Intent(Body1Activity.this,CreatActivity.class);
+            startActivity(intent);
+            return true;
+        }
+
+        if (id == R.id.body3_settings3) {
+            //Toast.makeText(Body1Activity.this,"SUCCESS3",Toast.LENGTH_SHORT).show();
+            String state = Environment.getExternalStorageState();// 获取内存卡可用状态
+            if(state.equals(Environment.MEDIA_MOUNTED)) {
+                Intent intent =new Intent("android.media.action.IMAGE_CAPTURE");
+                startActivityForResult(intent,1);
+            } else {
+                Toast.makeText(Body1Activity.this,"内存不可用", Toast.LENGTH_LONG).show();
+            }
             return true;
         }
 

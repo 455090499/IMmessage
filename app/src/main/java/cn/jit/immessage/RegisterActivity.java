@@ -45,6 +45,8 @@ public class RegisterActivity extends AppCompatActivity {
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent=new Intent(RegisterActivity.this,Info1Activity.class);
+                startActivity(intent);
                 BmobSMS.verifySmsCode(RegisterActivity.this,et1.getText().toString(), et4.getText().toString(), new VerifySMSCodeListener() {
 
                     @Override
@@ -52,8 +54,9 @@ public class RegisterActivity extends AppCompatActivity {
                         // TODO Auto-generated method stub
                         if(ex==null){//短信验证码已验证成功
                             Log.i("bmob", "验证通过");
-                            Intent intent=new Intent(RegisterActivity.this,Info1Activity.class);
-                            startActivity(intent);
+                            //页面的下一步跳转
+                           // Intent intent=new Intent(RegisterActivity.this,Info1Activity.class);
+                            //startActivity(intent);
                         }else{
                             Log.i("bmob", "验证失败：code ="+ex.getErrorCode()+",msg = "+ex.getLocalizedMessage());
                             Toast.makeText(RegisterActivity.this,"验证码错误",Toast.LENGTH_SHORT).show();
