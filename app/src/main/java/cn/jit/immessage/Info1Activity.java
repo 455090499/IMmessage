@@ -18,10 +18,16 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+
+import cn.bmob.v3.datatype.BmobFile;
+import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.UploadFileListener;
 
 public class Info1Activity extends AppCompatActivity {
     private Button button2;
@@ -36,10 +42,12 @@ public class Info1Activity extends AppCompatActivity {
     private EditText et3;
     private String isex = null;
     public uinfo ufo1;
+    public String img_url=null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_info1);
+        ufo1 = new uinfo();
         im=(ImageView)findViewById(R.id.info1_im);
         button2=(Button)findViewById(R.id.info1_btn2);
         button1=(Button)findViewById(R.id.info1_btn1);
@@ -69,6 +77,8 @@ public class Info1Activity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent i = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 startActivityForResult(i,2);
+                img_url=i.getStringExtra("123");
+                Toast.makeText(Info1Activity.this, img_url, Toast.LENGTH_SHORT).show();
             }
         });
         RadioGroup radioGroup = (RadioGroup) findViewById(R.id.info1_sex);
@@ -82,7 +92,7 @@ public class Info1Activity extends AppCompatActivity {
         button3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ufo1 = new uinfo();
+
                 ufo1.insertuinfo(RegisterActivity.p1.getPhone(),et1.getText().toString(),isex,text.getText().toString(),et2.getText().toString(),et3.getText().toString());
                 Intent intent=new Intent(Info1Activity.this,LoginActivity.class);
                 startActivity(intent);
@@ -98,9 +108,22 @@ public class Info1Activity extends AppCompatActivity {
             cursor.moveToFirst();
             int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
             String picturePath = cursor.getString(columnIndex);
+            final BmobFile icon = new BmobFile(new File(cursor.getString(columnIndex)));
+            ufo1.setPhoto(icon);
+            ufo1.getPhoto().uploadblock(new UploadFileListener(){
+
+                @Override
+                public void done(BmobException e) {
+
+                }
+            });
+
             cursor.close();
             ImageView imageView = (ImageView) findViewById(R.id.info1_im);
             imageView.setImageBitmap(BitmapFactory.decodeFile(picturePath));
+
+
         }
     }
+
 }

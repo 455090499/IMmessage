@@ -27,7 +27,7 @@ public class uinfo extends BmobObject {
     public BmobFile getPhoto() {
         return photo;
     }
-    public void setPhoto(){
+    public void setPhoto(BmobFile photo){
         this.photo=photo;
     }
 
