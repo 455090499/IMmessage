@@ -92,8 +92,12 @@ public class Info1Activity extends AppCompatActivity {
         button3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                ufo1.insertuinfo(RegisterActivity.p1.getPhone(),et1.getText().toString(),isex,text.getText().toString(),et2.getText().toString(),et3.getText().toString());
+                ufo1.getPhoto().uploadblock(new UploadFileListener() {
+                    @Override
+                    public void done(BmobException e) {
+                        ufo1.insertuinfo(RegisterActivity.p1.getPhone(),et1.getText().toString(),isex,text.getText().toString(),et2.getText().toString(),et3.getText().toString());
+                    }
+                });
                 Intent intent=new Intent(Info1Activity.this,LoginActivity.class);
                 startActivity(intent);
             }
@@ -110,14 +114,6 @@ public class Info1Activity extends AppCompatActivity {
             String picturePath = cursor.getString(columnIndex);
             final BmobFile icon = new BmobFile(new File(cursor.getString(columnIndex)));
             ufo1.setPhoto(icon);
-            ufo1.getPhoto().uploadblock(new UploadFileListener(){
-
-                @Override
-                public void done(BmobException e) {
-
-                }
-            });
-
             cursor.close();
             ImageView imageView = (ImageView) findViewById(R.id.info1_im);
             imageView.setImageBitmap(BitmapFactory.decodeFile(picturePath));
