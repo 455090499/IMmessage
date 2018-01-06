@@ -5,6 +5,7 @@ import android.widget.Toast;
 import java.util.Date;
 
 import cn.bmob.v3.BmobObject;
+import cn.bmob.v3.datatype.BmobFile;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.SaveListener;
 
@@ -21,7 +22,14 @@ public class uinfo extends BmobObject {
     private String birth;
     private String email;
     private String ps;
-    private Object photo;
+    private BmobFile photo;
+
+    public BmobFile getPhoto() {
+        return photo;
+    }
+    public void setPhoto(){
+        this.photo=photo;
+    }
 
         public String getPhone() {
             return phone;
@@ -65,14 +73,8 @@ public class uinfo extends BmobObject {
         this.ps = ps;
     }
 
-    public Object getPhoto() {
-        return photo;
-    }
-    public void setPhoto(Object photo) {
-        this.photo = photo;
-    }
 
-        public void insertuinfo(String phone,String niconame,String sex, String birth, String email,String ps,Object photo) {
+        public void insertuinfo(String phone,String niconame,String sex, String birth, String email,String ps) {
 
             this.setPhone(phone);
             this.setNiconame(niconame);
@@ -80,7 +82,6 @@ public class uinfo extends BmobObject {
             this.setBirth(birth);
             this.setEmail(email);
             this.setPs(ps);
-            this.setPhoto(photo);
             this.save(new SaveListener<String>() {
                 @Override
                 public void done(String objectId, BmobException e) {
@@ -97,4 +98,5 @@ public class uinfo extends BmobObject {
 
 
     }
+
 }

@@ -26,7 +26,7 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText et2;
     private EditText et3;
     private EditText et4;
-    public pp p1;
+    public static pp p1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

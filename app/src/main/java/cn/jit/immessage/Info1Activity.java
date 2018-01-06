@@ -83,7 +83,7 @@ public class Info1Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 ufo1 = new uinfo();
-                ufo1.insertuinfo(RegisterActivity.p1.getPhone(),et1.getText().toString(),isex,text.getText().toString(),et2.getText().toString(),et3.getText().toString(),null);
+                ufo1.insertuinfo(RegisterActivity.p1.getPhone(),et1.getText().toString(),isex,text.getText().toString(),et2.getText().toString(),et3.getText().toString());
                 Intent intent=new Intent(Info1Activity.this,LoginActivity.class);
                 startActivity(intent);
             }
