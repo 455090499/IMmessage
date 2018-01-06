@@ -97,7 +97,9 @@ public class Body1Activity extends AppCompatActivity
         //noinspection SimplifiableIfStatement
 
         if (id == R.id.body1_settings1) {
-            Toast.makeText(Body1Activity.this,"SUCCESS",Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(Body1Activity.this,AddActivity.class);
+            startActivity(intent);
+            // Toast.makeText(Body1Activity.this,"SUCCESS",Toast.LENGTH_SHORT).show();
             return true;
         }
         if (id == R.id.body2_settings2) {
