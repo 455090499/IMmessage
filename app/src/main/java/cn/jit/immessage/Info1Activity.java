@@ -26,6 +26,7 @@ import java.util.Calendar;
 import java.util.List;
 
 import cn.bmob.v3.datatype.BmobFile;
+import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.UploadFileListener;
 
 public class Info1Activity extends AppCompatActivity {
@@ -108,7 +109,15 @@ public class Info1Activity extends AppCompatActivity {
             int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
             String picturePath = cursor.getString(columnIndex);
             final BmobFile icon = new BmobFile(new File(cursor.getString(columnIndex)));
-            ufo1.updateicon(icon);
+            ufo1.setPhoto(icon);
+            ufo1.getPhoto().uploadblock(new UploadFileListener(){
+
+                @Override
+                public void done(BmobException e) {
+
+                }
+            });
+
             cursor.close();
             ImageView imageView = (ImageView) findViewById(R.id.info1_im);
             imageView.setImageBitmap(BitmapFactory.decodeFile(picturePath));
