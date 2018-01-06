@@ -26,6 +26,7 @@ import static cn.bmob.v3.Bmob.getApplicationContext;
 
 public class LoginActivity extends AppCompatActivity {
     private Button btn1;
+    private Button btn3;
     private Button btn2;
     private EditText et2;
     private EditText et1;
@@ -40,6 +41,7 @@ public class LoginActivity extends AppCompatActivity {
         Bmob.initialize(this, "a2994aaba430f692b3d442a44b73a089");
         btn1=(Button)findViewById(R.id.login_btn1);
         btn2=(Button)findViewById(R.id.login_btn2);
+        btn3=(Button)findViewById(R.id.login_btn3);
         et1=(EditText)findViewById(R.id.login_et1);
         et2=(EditText)findViewById(R.id.login_et2);
 
@@ -70,7 +72,13 @@ public class LoginActivity extends AppCompatActivity {
                 finish();
             }
         });
-
+        btn3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, ForgetActivity.class);
+                startActivity(intent);
+            }
+        });
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
