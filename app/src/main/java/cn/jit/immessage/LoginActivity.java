@@ -1,6 +1,7 @@
 package cn.jit.immessage;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -67,6 +68,17 @@ public class LoginActivity extends AppCompatActivity {
                 });
             }
         });
+        //设置Editview的图标
+        Drawable leftDrawable = et1.getCompoundDrawables()[0];
+        if(leftDrawable!=null){
+            leftDrawable.setBounds(0, 0, 60, 60);
+            et1.setCompoundDrawables(leftDrawable, et1.getCompoundDrawables()[1], et1.getCompoundDrawables()[2], et1.getCompoundDrawables()[3]);
+        }
+        Drawable leftDrawable1 = et2.getCompoundDrawables()[0];
+        if(leftDrawable1!=null){
+            leftDrawable1.setBounds(0, 0, 60, 60);
+            et2.setCompoundDrawables(leftDrawable1, et2.getCompoundDrawables()[1], et2.getCompoundDrawables()[2], et2.getCompoundDrawables()[3]);
+        }
 
 
     }
