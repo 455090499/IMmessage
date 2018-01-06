@@ -73,8 +73,22 @@ public class uinfo extends BmobObject {
         this.ps = ps;
     }
 
+    public void updateicon(BmobFile icon) {
+        this.setPhoto(icon);
+        this.save(new SaveListener<String>() {
+            @Override
+            public void done(String objectId, BmobException e) {
+                if(e==null){
+                    Toast.makeText(getApplicationContext(),"添加数据成功，返回objectId为："+objectId,Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(getApplicationContext(),"创建数据失败：" + e.getMessage(),Toast.LENGTH_SHORT).show();
+                }
+            }
 
-        public void insertuinfo(String phone,String niconame,String sex, String birth, String email,String ps,BmobFile icon) {
+        });
+
+    }
+        public void insertuinfo(String phone,String niconame,String sex, String birth, String email,String ps) {
 
             this.setPhone(phone);
             this.setNiconame(niconame);
@@ -82,7 +96,6 @@ public class uinfo extends BmobObject {
             this.setBirth(birth);
             this.setEmail(email);
             this.setPs(ps);
-            this.setPhoto(icon);
             this.save(new SaveListener<String>() {
                 @Override
                 public void done(String objectId, BmobException e) {

@@ -18,6 +18,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -40,7 +41,7 @@ public class Info1Activity extends AppCompatActivity {
     private EditText et3;
     private String isex = null;
     public uinfo ufo1;
-    public String img_url;
+    public String img_url=null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,6 +76,8 @@ public class Info1Activity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent i = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 startActivityForResult(i,2);
+                img_url=i.getStringExtra("123");
+                Toast.makeText(Info1Activity.this, img_url, Toast.LENGTH_SHORT).show();
             }
         });
         RadioGroup radioGroup = (RadioGroup) findViewById(R.id.info1_sex);
@@ -88,8 +91,8 @@ public class Info1Activity extends AppCompatActivity {
         button3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final BmobFile icon = new BmobFile(new File(img_url));
-                ufo1.insertuinfo(RegisterActivity.p1.getPhone(),et1.getText().toString(),isex,text.getText().toString(),et2.getText().toString(),et3.getText().toString(),icon);
+
+                ufo1.insertuinfo(RegisterActivity.p1.getPhone(),et1.getText().toString(),isex,text.getText().toString(),et2.getText().toString(),et3.getText().toString());
                 Intent intent=new Intent(Info1Activity.this,LoginActivity.class);
                 startActivity(intent);
             }
@@ -102,10 +105,10 @@ public class Info1Activity extends AppCompatActivity {
             String[] filePathColumn = {MediaStore.Images.Media.DATA};
             Cursor cursor = getContentResolver().query(selectedImage,filePathColumn,null,null,null);
             cursor.moveToFirst();
-            int index=cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
             int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
             String picturePath = cursor.getString(columnIndex);
-            img_url=cursor.getString(index);
+            final BmobFile icon = new BmobFile(new File(cursor.getString(columnIndex)));
+            ufo1.updateicon(icon);
             cursor.close();
             ImageView imageView = (ImageView) findViewById(R.id.info1_im);
             imageView.setImageBitmap(BitmapFactory.decodeFile(picturePath));
