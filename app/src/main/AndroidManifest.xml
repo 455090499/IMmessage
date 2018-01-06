@@ -29,7 +29,7 @@
             android:name=".Body1Activity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".ChatActivity" />
-        <activity android:name=".RegisterActivity"/>
+        <activity android:name=".RegisterActivity" />
         <activity android:name=".Info1Activity" />
         <activity android:name=".Info3Activity" />
         <activity android:name=".Info2Activity" />
@@ -37,7 +37,8 @@
         <activity android:name=".Notify2Activity" />
         <activity android:name=".CreatActivity" />
         <activity android:name=".LoginActivity" />
-        <activity android:name=".Splash2Activity"></activity>
+        <activity android:name=".Splash2Activity" />
+        <activity android:name=".AddActivity" />
     </application>
 
 </manifest>
