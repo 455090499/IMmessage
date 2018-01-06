@@ -1,12 +1,15 @@
 package cn.jit.immessage;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -25,6 +28,7 @@ public class LoginActivity extends AppCompatActivity {
     private Button btn2;
     private EditText et2;
     private EditText et1;
+    private CheckBox cbox;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +38,26 @@ public class LoginActivity extends AppCompatActivity {
         btn2=(Button)findViewById(R.id.login_btn2);
         et1=(EditText)findViewById(R.id.login_et1);
         et2=(EditText)findViewById(R.id.login_et2);
+        cbox=(CheckBox)findViewById(R.id.login_cbox);
+        cbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    SharedPreferences.Editor editor=getSharedPreferences("user",MODE_PRIVATE).edit();
+                    editor.putString("sms_content",et1.getText().toString());
+                    editor.putString("sms_content1",et2.getText().toString());
+                    editor.commit();
+
+                }else{
+
+                }
+            }
+        });
+        SharedPreferences pre=getSharedPreferences("user",MODE_PRIVATE);
+        String content=pre.getString("sms_content","");
+        String content1=pre.getString("sms_content1","");
+        et2.setText(""+content1);
+        et1.setText(""+content);
         btn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

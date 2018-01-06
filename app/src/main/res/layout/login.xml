@@ -39,6 +39,7 @@
         android:textSize="15dp"
         android:paddingLeft="20dp"
         android:drawableLeft="@mipmap/login2"
+        android:password="true"
         android:hint="密码"/>
 
     <LinearLayout
@@ -80,6 +81,7 @@
             android:background="@drawable/shape3_button"
 
            />
+
         <Button
             android:id="@+id/login_btn2"
             android:layout_width="255dp"
