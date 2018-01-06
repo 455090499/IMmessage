@@ -17,17 +17,16 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".SplashActivity"
-            android:label="Immessage">
+            android:name=".Body1Activity"
+            android:label="Immessage"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".Body1Activity"
-            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".SplashActivity" />
         <activity android:name=".ChatActivity" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".Info1Activity" />

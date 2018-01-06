@@ -1,5 +1,8 @@
 package cn.jit.immessage;
+import android.content.Context;
 import android.content.Intent;
+
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.design.widget.FloatingActionButton;
@@ -72,9 +75,12 @@ public class Body1Activity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+
+        SharedPreferences pre = getSharedPreferences("user", Context.MODE_PRIVATE);
+        islogin="1".equals(pre.getString("islogin","0").toString());
         if(islogin == false)
         {
-            Intent intent=new Intent(Body1Activity.this,LoginActivity.class);
+            Intent intent=new Intent(Body1Activity.this,SplashActivity.class);
             startActivity(intent);
         }
     }
@@ -150,7 +156,12 @@ public class Body1Activity extends AppCompatActivity
             startActivity(intent);
         } else if (id == R.id.nav_manage) {
             Intent intent=new Intent(Body1Activity.this,LoginActivity.class);
+            Body1Activity.islogin=false;
+            SharedPreferences.Editor editor = getSharedPreferences("user", Context.MODE_PRIVATE).edit();
+            editor.putString("islogin", "0");
+            editor.commit();
             startActivity(intent);
+            finish();
         } else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_send) {

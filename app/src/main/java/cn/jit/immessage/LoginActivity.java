@@ -1,5 +1,6 @@
 package cn.jit.immessage;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
@@ -62,7 +63,11 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(LoginActivity.this,RegisterActivity.class);
+                SharedPreferences.Editor editor = getSharedPreferences("user", MODE_PRIVATE).edit();
+                editor.putString("islogin","1");
+                Body1Activity.islogin=true;
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -90,6 +95,9 @@ public class LoginActivity extends AppCompatActivity {
                                 }
                                     Intent intent = new Intent(LoginActivity.this, Body1Activity.class);
                                     Body1Activity.islogin=true;
+                                SharedPreferences.Editor editor = getSharedPreferences("user", Context.MODE_PRIVATE).edit();
+                                editor.putString("islogin","1");
+                                editor.commit();
                                     startActivity(intent);
                                 finish();
 
