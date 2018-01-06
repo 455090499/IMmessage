@@ -29,6 +29,9 @@ public class LoginActivity extends AppCompatActivity {
     private EditText et2;
     private EditText et1;
     private CheckBox cbox;
+    public  boolean flag=false;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,26 +41,23 @@ public class LoginActivity extends AppCompatActivity {
         btn2=(Button)findViewById(R.id.login_btn2);
         et1=(EditText)findViewById(R.id.login_et1);
         et2=(EditText)findViewById(R.id.login_et2);
+
         cbox=(CheckBox)findViewById(R.id.login_cbox);
         cbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked){
-                    SharedPreferences.Editor editor=getSharedPreferences("user",MODE_PRIVATE).edit();
-                    editor.putString("sms_content",et1.getText().toString());
-                    editor.putString("sms_content1",et2.getText().toString());
-                    editor.commit();
+                flag=isChecked;
 
-                }else{
-
-                }
             }
         });
-        SharedPreferences pre=getSharedPreferences("user",MODE_PRIVATE);
-        String content=pre.getString("sms_content","");
-        String content1=pre.getString("sms_content1","");
-        et2.setText(""+content1);
-        et1.setText(""+content);
+
+                SharedPreferences pre = getSharedPreferences("user", MODE_PRIVATE);
+                String content = pre.getString("sms_content", "");
+                String content1 = pre.getString("sms_content1", "");
+                et2.setText("" + content1);
+                et1.setText("" + content);
+
+
         btn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -81,8 +81,16 @@ public class LoginActivity extends AppCompatActivity {
                             if(object.size()==0)
                                 Toast.makeText(LoginActivity.this,"密码错误！", Toast.LENGTH_SHORT).show();
                             for (pp p1 : object) {
+                                if(flag=true) {
+                                    SharedPreferences.Editor editor = getSharedPreferences("user", MODE_PRIVATE).edit();
+                                    editor.putString("sms_content", et1.getText().toString());
+                                    editor.putString("sms_content1", et2.getText().toString());
+                                    editor.commit();
+
+                                }
                                     Intent intent = new Intent(LoginActivity.this, Body1Activity.class);
                                     startActivity(intent);
+
                                 Toast.makeText(LoginActivity.this,p1.getObjectId()+","+et2.getText(), Toast.LENGTH_SHORT).show();
                             }
                         }else{
