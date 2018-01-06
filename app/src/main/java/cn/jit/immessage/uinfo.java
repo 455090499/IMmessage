@@ -27,7 +27,7 @@ public class uinfo extends BmobObject {
     public BmobFile getPhoto() {
         return photo;
     }
-    public void setPhoto(){
+    public void setPhoto(BmobFile photo){
         this.photo=photo;
     }
 
@@ -74,7 +74,7 @@ public class uinfo extends BmobObject {
     }
 
 
-        public void insertuinfo(String phone,String niconame,String sex, String birth, String email,String ps) {
+        public void insertuinfo(String phone,String niconame,String sex, String birth, String email,String ps,BmobFile icon) {
 
             this.setPhone(phone);
             this.setNiconame(niconame);
@@ -82,6 +82,7 @@ public class uinfo extends BmobObject {
             this.setBirth(birth);
             this.setEmail(email);
             this.setPs(ps);
+            this.setPhoto(icon);
             this.save(new SaveListener<String>() {
                 @Override
                 public void done(String objectId, BmobException e) {

@@ -19,9 +19,13 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+
+import cn.bmob.v3.datatype.BmobFile;
+import cn.bmob.v3.listener.UploadFileListener;
 
 public class Info1Activity extends AppCompatActivity {
     private Button button2;
@@ -36,10 +40,12 @@ public class Info1Activity extends AppCompatActivity {
     private EditText et3;
     private String isex = null;
     public uinfo ufo1;
+    public String img_url;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_info1);
+        ufo1 = new uinfo();
         im=(ImageView)findViewById(R.id.info1_im);
         button2=(Button)findViewById(R.id.info1_btn2);
         button1=(Button)findViewById(R.id.info1_btn1);
@@ -67,8 +73,10 @@ public class Info1Activity extends AppCompatActivity {
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                startActivityForResult(i,2);
+                Intent galleryIntent = new Intent(Intent.ACTION_GET_CONTENT);
+                galleryIntent.addCategory(Intent.CATEGORY_OPENABLE);
+                galleryIntent.setType("image/*");//图片
+                startActivityForResult(galleryIntent, 2);
             }
         });
         RadioGroup radioGroup = (RadioGroup) findViewById(R.id.info1_sex);
@@ -82,8 +90,8 @@ public class Info1Activity extends AppCompatActivity {
         button3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ufo1 = new uinfo();
-                ufo1.insertuinfo(RegisterActivity.p1.getPhone(),et1.getText().toString(),isex,text.getText().toString(),et2.getText().toString(),et3.getText().toString());
+                final BmobFile icon = new BmobFile(new File(img_url));
+                ufo1.insertuinfo(RegisterActivity.p1.getPhone(),et1.getText().toString(),isex,text.getText().toString(),et2.getText().toString(),et3.getText().toString(),icon);
                 Intent intent=new Intent(Info1Activity.this,LoginActivity.class);
                 startActivity(intent);
             }
@@ -95,12 +103,16 @@ public class Info1Activity extends AppCompatActivity {
             Uri selectedImage = data.getData();
             String[] filePathColumn = {MediaStore.Images.Media.DATA};
             Cursor cursor = getContentResolver().query(selectedImage,filePathColumn,null,null,null);
+            int index=cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
             cursor.moveToFirst();
             int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
             String picturePath = cursor.getString(columnIndex);
             cursor.close();
             ImageView imageView = (ImageView) findViewById(R.id.info1_im);
             imageView.setImageBitmap(BitmapFactory.decodeFile(picturePath));
+            img_url=cursor.getString(index);
+
         }
     }
+
 }
