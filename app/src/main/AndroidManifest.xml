@@ -38,6 +38,7 @@
         <activity android:name=".LoginActivity" />
         <activity android:name=".Splash2Activity" />
         <activity android:name=".AddActivity" />
+        <activity android:name=".ForgetActivity"></activity>
     </application>
 
 </manifest>
