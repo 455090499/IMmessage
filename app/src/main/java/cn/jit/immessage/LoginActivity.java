@@ -91,6 +91,7 @@ public class LoginActivity extends AppCompatActivity {
                                     Intent intent = new Intent(LoginActivity.this, Body1Activity.class);
                                     Body1Activity.islogin=true;
                                     startActivity(intent);
+                                finish();
 
                                 Toast.makeText(LoginActivity.this,p1.getObjectId()+","+et2.getText(), Toast.LENGTH_SHORT).show();
                             }
