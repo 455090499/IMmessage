@@ -7,22 +7,14 @@
     android:orientation="vertical"
     android:background="@mipmap/register"
     tools:context="cn.jit.immessage.Info1Activity">
-    <ImageView
+
+    <cn.jit.immessage.Round1ImageViewActivity
         android:id="@+id/info1_im"
-        android:layout_width="130dp"
-        android:layout_height="130dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginBottom="10dp"
-        android:src="@drawable/ic_menu_camera"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+       android:src="@mipmap/logo"
         android:layout_gravity="center"
-         />
-    <!--<cn.jit.immessage.Round1ImageViewActivity-->
-        <!--android:id="@+id/info1_im"-->
-        <!--android:layout_width="120dp"-->
-        <!--android:layout_height="120dp"-->
-        <!--android:src="@drawable/ic_menu_camera"-->
-        <!--android:layout_gravity="center"-->
-        <!--/>-->
+        />
 
     <Button
         android:id="@+id/info1_btn1"
