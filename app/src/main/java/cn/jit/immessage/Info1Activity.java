@@ -73,10 +73,8 @@ public class Info1Activity extends AppCompatActivity {
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent galleryIntent = new Intent(Intent.ACTION_GET_CONTENT);
-                galleryIntent.addCategory(Intent.CATEGORY_OPENABLE);
-                galleryIntent.setType("image/*");//图片
-                startActivityForResult(galleryIntent, 2);
+                Intent i = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(i,2);
             }
         });
         RadioGroup radioGroup = (RadioGroup) findViewById(R.id.info1_sex);
@@ -103,14 +101,15 @@ public class Info1Activity extends AppCompatActivity {
             Uri selectedImage = data.getData();
             String[] filePathColumn = {MediaStore.Images.Media.DATA};
             Cursor cursor = getContentResolver().query(selectedImage,filePathColumn,null,null,null);
-            int index=cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
             cursor.moveToFirst();
+            int index=cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
             int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
             String picturePath = cursor.getString(columnIndex);
+            img_url=cursor.getString(index);
             cursor.close();
             ImageView imageView = (ImageView) findViewById(R.id.info1_im);
             imageView.setImageBitmap(BitmapFactory.decodeFile(picturePath));
-            img_url=cursor.getString(index);
+
 
         }
     }
