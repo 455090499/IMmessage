@@ -16,7 +16,7 @@ public class Splash2Activity extends AppCompatActivity {
                 super.run();
                 try {
                     Thread.sleep(2000);
-                    Intent intent = new Intent(Splash2Activity.this,LoginActivity.class);
+                    Intent intent = new Intent(Splash2Activity.this,Body1Activity.class);
                     Splash2Activity.this.startActivity(intent);
                     Splash2Activity.this.finish();
                    // overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);

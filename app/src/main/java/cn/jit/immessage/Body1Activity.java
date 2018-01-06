@@ -29,11 +29,14 @@ public class Body1Activity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private ViewPager viewPager;
     private WeChatRadioGroup gradualRadioGroup;
+    static boolean islogin=false;
+    pp p2=new pp();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_body1);
+
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         gradualRadioGroup = (WeChatRadioGroup) findViewById(R.id.radiogroup);
         List<DemoFragment> list = new ArrayList<>();
@@ -68,6 +71,12 @@ public class Body1Activity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        if(islogin == false)
+        {
+            Intent intent=new Intent(Body1Activity.this,LoginActivity.class);
+            startActivity(intent);
+        }
     }
 
     @Override
