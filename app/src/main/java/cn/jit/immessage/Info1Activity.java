@@ -12,7 +12,10 @@ import android.text.format.DateFormat;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -25,14 +28,28 @@ public class Info1Activity extends AppCompatActivity {
     private Button button3;
     private Button button1;
     private TextView text;
+    private EditText et1;
+    private RadioButton rb1;
+    private RadioButton rb2;
+    private ImageView im;
+    private EditText et2;
+    private EditText et3;
+    private String isex = null;
+    public uinfo ufo1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_info1);
+        im=(ImageView)findViewById(R.id.info1_im);
         button2=(Button)findViewById(R.id.info1_btn2);
         button1=(Button)findViewById(R.id.info1_btn1);
         button3=(Button)findViewById(R.id.info1_btn3);
         text=(TextView)findViewById(R.id.info1_tv1);
+        et1=(EditText) findViewById(R.id.info1_et1);
+        et2=(EditText) findViewById(R.id.info1_et2);
+        et3=(EditText) findViewById(R.id.info1_et3);
+        rb1=(RadioButton)findViewById(R.id.info1_rb1);
+        rb2=(RadioButton)findViewById(R.id.info1_rb2);
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -54,9 +71,19 @@ public class Info1Activity extends AppCompatActivity {
                 startActivityForResult(i,2);
             }
         });
+        RadioGroup radioGroup = (RadioGroup) findViewById(R.id.info1_sex);
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                RadioButton radioButton = (RadioButton) group.findViewById(checkedId);
+                isex=radioButton.getText().toString();
+            }
+        });
         button3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ufo1 = new uinfo();
+                ufo1.insertuinfo(RegisterActivity.p1.getPhone(),et1.getText().toString(),isex,text.getText().toString(),et2.getText().toString(),et3.getText().toString(),null);
                 Intent intent=new Intent(Info1Activity.this,LoginActivity.class);
                 startActivity(intent);
             }
