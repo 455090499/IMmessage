@@ -13,10 +13,10 @@ public class Info2Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_info2);
-        TextView textView=(TextView)findViewById(R.id.toptitle_tv);
-        Button btn1=(Button)findViewById(R.id.toptitle_btn1);
+
+        Button btn1=(Button)findViewById(R.id.info2_btn1);
         Button btn2=(Button)findViewById(R.id.info2_btn2);
-        textView.setText("个人信息");
+
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
