@@ -19,6 +19,8 @@ import cn.bmob.sms.listener.VerifySMSCodeListener;
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.listener.FindListener;
 
+import static cn.jit.immessage.Body1Activity.p1;
+
 public class RegisterActivity extends AppCompatActivity {
     private Button button1;
     private Button button2;
@@ -26,7 +28,6 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText et2;
     private EditText et3;
     private EditText et4;
-    public static pp p1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,7 +100,6 @@ public class RegisterActivity extends AppCompatActivity {
                                                 //页面的下一步跳转
                                                 Intent intent = new Intent(RegisterActivity.this, Info1Activity.class);
                                                 startActivity(intent);
-                                                finish();
                                             }
                                             else
                                                 Toast.makeText(RegisterActivity.this, "该手机号已注册！", Toast.LENGTH_SHORT).show();

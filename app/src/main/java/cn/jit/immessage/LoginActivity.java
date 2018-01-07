@@ -87,7 +87,6 @@ public class LoginActivity extends AppCompatActivity {
                 editor.putString("islogin","1");
                 Body1Activity.islogin=true;
                 startActivity(intent);
-                finish();
             }
         });
         btn3.setOnClickListener(new View.OnClickListener() {
@@ -120,15 +119,15 @@ public class LoginActivity extends AppCompatActivity {
                                     editor.commit();
 
                                 }
-                                    Intent intent = new Intent(LoginActivity.this, Body1Activity.class);
-                                    Body1Activity.islogin=true;
+                                Intent intent=new Intent(LoginActivity.this,Body1Activity.class);
+                                Body1Activity.islogin=true;
                                 SharedPreferences.Editor editor = getSharedPreferences("user", Context.MODE_PRIVATE).edit();
                                 editor.putString("islogin","1");
                                 editor.commit();
-                                    startActivity(intent);
+                                Toast.makeText(LoginActivity.this,p1.getObjectId()+","+et2.getText(), Toast.LENGTH_SHORT).show();
+                                startActivity(intent);
                                 finish();
 
-                                Toast.makeText(LoginActivity.this,p1.getObjectId()+","+et2.getText(), Toast.LENGTH_SHORT).show();
                             }
                         }else{
                             Log.i("bmob","登录失败："+e.getMessage()+","+e.getErrorCode());
