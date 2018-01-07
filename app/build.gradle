@@ -9,6 +9,7 @@ android {
         useNewCruncher = false
 
     }
+
     defaultConfig {
         applicationId "cn.jit.immessage"
         minSdkVersion 15

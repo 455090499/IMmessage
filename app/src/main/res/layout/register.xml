@@ -30,6 +30,7 @@
         android:layout_marginTop="20dp"
         android:layout_gravity="center"
         android:hint="密码"
+        android:password="true"
         android:paddingLeft="10dp"
         android:background="@drawable/shape3_button"
         android:textSize="15dp" />
@@ -41,6 +42,7 @@
         android:layout_marginTop="20dp"
         android:layout_gravity="center"
         android:hint="确认密码"
+        android:password="true"
         android:paddingLeft="10dp"
         android:background="@drawable/shape3_button"
         android:textSize="15dp" />
