@@ -100,6 +100,7 @@ public class Info1Activity extends AppCompatActivity {
                 });
                 Intent intent=new Intent(Info1Activity.this,LoginActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
     }
