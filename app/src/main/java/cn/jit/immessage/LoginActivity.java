@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -31,6 +32,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText et2;
     private EditText et1;
     private CheckBox cbox;
+    private CheckBox cbox2;
     public  boolean flag=false;
 
 
@@ -44,8 +46,24 @@ public class LoginActivity extends AppCompatActivity {
         btn3=(Button)findViewById(R.id.login_btn3);
         et1=(EditText)findViewById(R.id.login_et1);
         et2=(EditText)findViewById(R.id.login_et2);
-
         cbox=(CheckBox)findViewById(R.id.login_cbox);
+        cbox2=(CheckBox)findViewById(R.id.login_cbox2);
+        //设置passwd的可见与不可见
+        cbox2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                //注释的地方是第二种方法
+                if (isChecked) {
+                    et2.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+                    //  passwd.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                } else {
+                    et2.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                    //   passwd.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                }
+            }
+        });
+
+        //记住密码
         cbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -69,7 +87,6 @@ public class LoginActivity extends AppCompatActivity {
                 editor.putString("islogin","1");
                 Body1Activity.islogin=true;
                 startActivity(intent);
-                finish();
             }
         });
         btn3.setOnClickListener(new View.OnClickListener() {
@@ -102,15 +119,15 @@ public class LoginActivity extends AppCompatActivity {
                                     editor.commit();
 
                                 }
-                                    Intent intent = new Intent(LoginActivity.this, Body1Activity.class);
-                                    Body1Activity.islogin=true;
+                                Intent intent=new Intent(LoginActivity.this,Body1Activity.class);
+                                Body1Activity.islogin=true;
                                 SharedPreferences.Editor editor = getSharedPreferences("user", Context.MODE_PRIVATE).edit();
                                 editor.putString("islogin","1");
                                 editor.commit();
-                                    startActivity(intent);
+                                Toast.makeText(LoginActivity.this,p1.getObjectId()+","+et2.getText(), Toast.LENGTH_SHORT).show();
+                                startActivity(intent);
                                 finish();
 
-                                Toast.makeText(LoginActivity.this,p1.getObjectId()+","+et2.getText(), Toast.LENGTH_SHORT).show();
                             }
                         }else{
                             Log.i("bmob","登录失败："+e.getMessage()+","+e.getErrorCode());

@@ -95,7 +95,7 @@ public class Info1Activity extends AppCompatActivity {
                 ufo1.getPhoto().uploadblock(new UploadFileListener() {
                     @Override
                     public void done(BmobException e) {
-                        ufo1.insertuinfo(RegisterActivity.p1.getPhone(),et1.getText().toString(),isex,text.getText().toString(),et2.getText().toString(),et3.getText().toString());
+                        ufo1.insertuinfo(Body1Activity.p1.getPhone(),et1.getText().toString(),isex,text.getText().toString(),et2.getText().toString(),et3.getText().toString());
                     }
                 });
                 Intent intent=new Intent(Info1Activity.this,LoginActivity.class);

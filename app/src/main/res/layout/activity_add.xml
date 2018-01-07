@@ -20,7 +20,7 @@
             android:textSize="20dp" />
 
         <Button
-            android:id="@+id/button_backward"
+            android:id="@+id/add_button_backward"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:background="#398dee"

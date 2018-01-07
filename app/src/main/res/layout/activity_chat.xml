@@ -6,6 +6,34 @@
     android:layout_width="match_parent"
     android:background="#d8e0e8">
 
+    <RelativeLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:background="#398dee"
+        android:layout_height="50dp">
+        <TextView
+            android:id="@+id/text_title"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal|center"
+            android:text="标题栏"
+            android:textColor="#ffffffff"
+            android:textSize="20dp" />
+
+        <Button
+            android:id="@+id/chat_button_backward"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="#398dee"
+            android:drawableLeft="@mipmap/chat_back"
+            android:drawablePadding="6dp"
+            android:gravity="center"
+            android:paddingLeft="5dp"
+            android:text="返回"
+            android:textColor="#ffffffff"
+            android:textSize="18dp"/>
+
+    </RelativeLayout>
     <android.support.v7.widget.RecyclerView
         android:id="@+id/chat_body"
         android:layout_width="match_parent"
