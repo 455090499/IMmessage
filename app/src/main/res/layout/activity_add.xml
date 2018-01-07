@@ -1,49 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:orientation="vertical"
-    tools:context="cn.jit.immessage.AddActivity">
- <LinearLayout
-     android:layout_width="match_parent"
-     android:layout_height="wrap_content">
+    android:background="#ffffff"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:background="#398dee"
+        android:layout_height="50dp">
+        <TextView
+            android:id="@+id/text_title"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal|center"
+            android:text="标题栏"
+            android:textColor="#ffffffff"
+            android:textSize="20dp" />
+
+        <Button
+            android:id="@+id/button_backward"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="#398dee"
+            android:drawableLeft="@mipmap/chat_back"
+            android:drawablePadding="6dp"
+            android:gravity="center"
+            android:paddingLeft="5dp"
+            android:text="返回"
+            android:textColor="#ffffffff"
+            android:textSize="18dp"/>
+
+    </RelativeLayout>
      <TextView
          android:gravity="center"
          android:layout_width="match_parent"
          android:layout_height="wrap_content"
-         android:text="添加好友/群组"
-         android:textSize="30dp"
-         android:textColor="@color/colorPrimaryDark"/>
- </LinearLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="10dp"/>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-     <EditText
-         android:layout_width="match_parent"
-         android:layout_height="wrap_content"
-         android:background="@drawable/shape3_button"
-         android:hint="请输入所要添加的账号"/>
-<Button
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:text="搜索"
-    android:textSize="20dp"/>
+         android:layout_marginTop="20dp"
+         android:text="找人/群"
+         android:textSize="20dp"
+         android:textColor="#000000"/>
 
-    </LinearLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:id="@+id/add_tv"
+            android:layout_marginTop="20dp"
+            android:layout_width="300dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="10dp"
+            android:drawableLeft="@mipmap/sousuo"
+            android:background="#E8E8E8"
+            android:hint="请输入所要添加的账号"/>
+        <ImageButton
+            android:id="@+id/add_sousuo"
+            android:layout_marginRight="10dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignBottom="@id/add_tv"
+            android:src="@mipmap/enter"
+            android:background="#ffffff"
+            android:layout_toRightOf="@+id/add_tv"
+            android:layout_alignTop="@+id/add_tv" />
+
+    </RelativeLayout>
+
     <ListView
+        android:id="@+id/add_lt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/add_lt">
+
+        >
     </ListView>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -54,6 +85,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:text="添加"
-            android:textSize="20dp"/>
-</LinearLayout>
+            android:textSize="16sp"
+            android:background="@drawable/shape2_button"/>
+    </LinearLayout>
 </LinearLayout>
