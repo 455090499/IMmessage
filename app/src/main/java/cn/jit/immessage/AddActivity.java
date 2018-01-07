@@ -12,14 +12,13 @@ import java.util.Map;
 
 public class AddActivity extends AppCompatActivity {
     private String[] name = { "王小二"};
-
     private String[] desc = { "15150010"};
-    private ListView lt1;
+    private ListView lv1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
-        lt1 = (ListView) findViewById(R.id.add_lt);
+        lv1 = (ListView) findViewById(R.id.add_lv1);
         List<Map<String, Object>> listems = new ArrayList<Map<String, Object>>();
         for (int i = 0; i < name.length; i++) {
             Map<String, Object> listem = new HashMap<String, Object>();
@@ -33,8 +32,8 @@ public class AddActivity extends AppCompatActivity {
                 R.layout.additem, new String[] { "name", "head", "desc" },
                 new int[] {R.id.name,R.id.head,R.id.desc});
 
-        lt1=(ListView)findViewById(R.id.add_lt);
-        lt1.setAdapter(simplead);
+        lv1=(ListView)findViewById(R.id.add_lv1);
+        lv1.setAdapter(simplead);
 
     }
 }
