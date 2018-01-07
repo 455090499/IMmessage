@@ -33,7 +33,7 @@ public class ChatActivity extends AppCompatActivity  {
         initView();
         initListener();
         initMsgs();
-        back=(Button)findViewById(R.id.toptitle_btn1);
+        back=(Button)findViewById(R.id.chat_btn1);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
