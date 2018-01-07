@@ -6,38 +6,39 @@
     android:layout_height="match_parent"
     tools:context="cn.jit.immessage.Info2Activity"
     android:orientation="vertical">
-    <cn.jit.immessage.TopTitle
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"></cn.jit.immessage.TopTitle>
+    <!--<cn.jit.immessage.TopTitle-->
 
-    <!--<RelativeLayout-->
-        <!--android:orientation="vertical"-->
         <!--android:layout_width="match_parent"-->
-        <!--android:background="#398dee"-->
-        <!--android:layout_height="50dp">-->
-        <!--<TextView-->
-            <!--android:id="@+id/text_title"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:gravity="center_horizontal|center"-->
-            <!--android:text="标题栏"-->
-            <!--android:textColor="#ffffffff"-->
-            <!--android:textSize="20dp" />-->
+        <!--android:layout_height="wrap_content"></cn.jit.immessage.TopTitle>-->
 
-        <!--<Button-->
-            <!--android:id="@+id/button_backward"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:background="#398dee"-->
-            <!--android:drawableLeft="@mipmap/chat_back"-->
-            <!--android:drawablePadding="6dp"-->
-            <!--android:gravity="center"-->
-            <!--android:paddingLeft="5dp"-->
-            <!--android:text="返回"-->
-            <!--android:textColor="#ffffffff"-->
-            <!--android:textSize="18dp"/>-->
+    <RelativeLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:background="#398dee"
+        android:layout_height="50dp">
+        <TextView
 
-    <!--</RelativeLayout>-->
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal|center"
+            android:text="个人信息"
+            android:textColor="#ffffffff"
+            android:textSize="20dp" />
+
+        <Button
+            android:id="@+id/info2_btn1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="#398dee"
+            android:drawableLeft="@mipmap/chat_back"
+            android:drawablePadding="6dp"
+            android:gravity="center"
+            android:paddingLeft="5dp"
+            android:text="返回"
+            android:textColor="#ffffffff"
+            android:textSize="18dp"/>
+
+    </RelativeLayout>
     <LinearLayout
         android:layout_marginTop="20dp"
         android:layout_width="match_parent"
