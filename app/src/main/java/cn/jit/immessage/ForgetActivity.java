@@ -105,7 +105,6 @@ public class ForgetActivity extends AppCompatActivity {
                                                     public void done(List<pp> list, cn.bmob.v3.exception.BmobException e) {
                                                         for (pp p7 : list) {
                                                             p1=new pp();
-                                                            p1.setPhone(et1.getText().toString());
                                                             p1.setPasswd(et2.getText().toString());
                                                             p1.update(p7.getObjectId(), new UpdateListener() {
                                                                 @Override
@@ -114,7 +113,7 @@ public class ForgetActivity extends AppCompatActivity {
                                                                         Toast.makeText(ForgetActivity.this, "密码修改成功！", Toast.LENGTH_SHORT).show();
 
                                                                         //页面的下一步跳转
-                                                                        Intent intent = new Intent(ForgetActivity.this, Info1Activity.class);
+                                                                        Intent intent = new Intent(ForgetActivity.this, LoginActivity.class);
                                                                         startActivity(intent);
                                                                     }else
                                                                         Toast.makeText(ForgetActivity.this, "密码修改成功！", Toast.LENGTH_SHORT).show();
