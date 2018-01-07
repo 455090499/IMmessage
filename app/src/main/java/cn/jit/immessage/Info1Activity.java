@@ -40,7 +40,7 @@ public class Info1Activity extends AppCompatActivity {
     private ImageView im;
     private EditText et2;
     private EditText et3;
-    private String isex = null;
+    private String isex = "";
     public uinfo ufo1;
     public String img_url=null;
     @Override
@@ -98,6 +98,7 @@ public class Info1Activity extends AppCompatActivity {
                     public void done(BmobException e) {
                     }
                 });
+                isex="".equals("")?"男":isex;
                 ufo1.insertuinfo(Body1Activity.p1.getPhone(),et1.getText().toString(),isex,text.getText().toString(),et2.getText().toString(),et3.getText().toString());
                 Intent intent=new Intent(Info1Activity.this,LoginActivity.class);
                 startActivity(intent);
