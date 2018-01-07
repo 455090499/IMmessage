@@ -31,6 +31,7 @@
             android:layout_weight="0.3"
             android:gravity="center"
             android:paddingTop="3dp"
+            android:checked="true"
             android:text="消息"
             android:textColor="#555"
             android:textSize="13sp"

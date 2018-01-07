@@ -73,7 +73,7 @@
             android:layout_width="wrap_content"
             android:layout_height="25dp"
             android:orientation="horizontal"
-            android:layout_marginLeft="50dp"
+
             android:id="@+id/info1_sex">
 
             <RadioButton
@@ -87,6 +87,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="女"
+                android:layout_marginLeft="50dp"
                 android:textSize="18dp"
                 android:id="@+id/info1_rb2"/>
         </RadioGroup>
