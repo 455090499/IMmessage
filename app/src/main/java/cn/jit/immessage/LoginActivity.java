@@ -33,14 +33,15 @@ public class LoginActivity extends AppCompatActivity {
     private EditText et1;
     private CheckBox cbox;
     private CheckBox cbox2;
-    public  boolean flag=false;
-
+    public  boolean isRem=false;
+    private boolean isphonerem=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
         Bmob.initialize(this, "a2994aaba430f692b3d442a44b73a089");
+
         btn1=(Button)findViewById(R.id.login_btn1);
         btn2=(Button)findViewById(R.id.login_btn2);
         btn3=(Button)findViewById(R.id.login_btn3);
@@ -67,26 +68,30 @@ public class LoginActivity extends AppCompatActivity {
         cbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                flag=isChecked;
-
+                SharedPreferences.Editor editor1 = getSharedPreferences("user", Context.MODE_PRIVATE).edit();
+                isphonerem=isChecked;
+                editor1.putString("isprem",isphonerem?"1":"0");
+                editor1.commit();
             }
         });
 
-                SharedPreferences pre = getSharedPreferences("user", MODE_PRIVATE);
-                String content = pre.getString("sms_content", "");
-                String content1 = pre.getString("sms_content1", "");
-                et2.setText("" + content1);
-                et1.setText("" + content);
+        SharedPreferences pre = getSharedPreferences("user", MODE_PRIVATE);
+        String content = pre.getString("sms_content", "");
+        String content1 = pre.getString("sms_content1", "");
+        cbox.setChecked(pre.getString("isprem","0").equals("1"));
+        if(isRem) {
+            et2.setText("" + content1);
+        }
+        if(isphonerem)
+        et1.setText("" + content);
 
 
         btn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(LoginActivity.this,RegisterActivity.class);
-                SharedPreferences.Editor editor = getSharedPreferences("user", MODE_PRIVATE).edit();
-                editor.putString("islogin","1");
-                Body1Activity.islogin=true;
                 startActivity(intent);
+                finish();
             }
         });
         btn3.setOnClickListener(new View.OnClickListener() {
@@ -112,18 +117,14 @@ public class LoginActivity extends AppCompatActivity {
                             if(object.size()==0)
                                 Toast.makeText(LoginActivity.this,"密码错误！", Toast.LENGTH_SHORT).show();
                             for (pp p1 : object) {
-                                if(flag=true) {
-                                    SharedPreferences.Editor editor = getSharedPreferences("user", MODE_PRIVATE).edit();
-                                    editor.putString("sms_content", et1.getText().toString());
+                                SharedPreferences.Editor editor = getSharedPreferences("user", MODE_PRIVATE).edit();
+                                editor.putString("sms_content", et1.getText().toString());
                                     editor.putString("sms_content1", et2.getText().toString());
-                                    editor.commit();
 
-                                }
-                                Intent intent=new Intent(LoginActivity.this,Body1Activity.class);
                                 Body1Activity.islogin=true;
-                                SharedPreferences.Editor editor = getSharedPreferences("user", Context.MODE_PRIVATE).edit();
                                 editor.putString("islogin","1");
                                 editor.commit();
+                                Intent intent=new Intent(LoginActivity.this,Body1Activity.class);
                                 Toast.makeText(LoginActivity.this,p1.getObjectId()+","+et2.getText(), Toast.LENGTH_SHORT).show();
                                 startActivity(intent);
                                 finish();
