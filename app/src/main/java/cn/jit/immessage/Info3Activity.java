@@ -53,6 +53,7 @@ private  TextView text;
             public void onClick(View v) {
                 Intent intent=new Intent(Info3Activity.this,Info2Activity.class);
                 startActivity(intent);
+                finish();
             }
         });
     }
