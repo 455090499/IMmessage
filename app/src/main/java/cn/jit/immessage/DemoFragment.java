@@ -28,11 +28,12 @@ import static android.content.ContentValues.TAG;
 
 public class DemoFragment extends Fragment {
    private ListView listView;
+
     @Nullable
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.body_message, container, false);
         int type = getArguments().getInt("type", 0);
-        listView = (ListView) view.findViewById(R.id.listview);
+        listView = (ListView) view.findViewById(R.id.body_message_lv);
         //textView.setText(type == 0 ? "1st Fragment" : type == 1 ? "2nd Fragment" : type == 2 ? "3rd Fragment" : "4th Fragment");
         if (type == 0)
         {
