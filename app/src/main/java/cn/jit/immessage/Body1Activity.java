@@ -153,6 +153,7 @@ public class Body1Activity extends AppCompatActivity
             Body1Activity.islogin=false;
             SharedPreferences.Editor editor = getSharedPreferences("user", Context.MODE_PRIVATE).edit();
             editor.putString("islogin", "0");
+            editor.putString("isRem","0");
             editor.commit();
             startActivity(intent);
             finish();
