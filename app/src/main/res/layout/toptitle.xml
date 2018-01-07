@@ -5,16 +5,6 @@
    android:orientation="horizontal"
     android:background="#398dee">
 
-    <TextView
-        android:id="@+id/toptitle_tv"
-
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:gravity="center_horizontal|center"
-    android:text="标题栏"
-    android:textColor="#ffffffff"
-    android:textSize="20dp" />
-
     <Button
         android:id="@+id/toptitle_btn1"
         android:layout_width="wrap_content"
@@ -27,15 +17,20 @@
         android:text="返回"
         android:textColor="#ffffffff"
         android:textSize="18dp"/>
-    <Button
-        android:id="@+id/toptitle_btn2"
-        android:layout_width="60dp"
-        android:layout_height="match_parent"
-        android:background="#398dee"
-        android:layout_marginLeft="310dp"
-        android:drawableRight="@mipmap/save"
-        android:textColor="#ffffffff"
-        />
+
+
+    <TextView
+        android:id="@+id/toptitle_tv"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal|center"
+    android:text="标题栏"
+    android:textColor="#ffffffff"
+    android:textSize="20dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
 
 </RelativeLayout>
