@@ -22,6 +22,7 @@ public class ChatActivity extends AppCompatActivity  {
     private MsgAdapter adapter;
     private EditText inputText;
     private Button send;
+    private Button back;
     private RecyclerView msgRecyclerView;
 
     @Override
@@ -32,7 +33,13 @@ public class ChatActivity extends AppCompatActivity  {
         initView();
         initListener();
         initMsgs();
-
+        back=(Button)findViewById(R.id.toptitle_btn1);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         inputText = (EditText) findViewById(R.id.chat_message);
         send = (Button) findViewById(R.id.chat_send);
         msgRecyclerView = (RecyclerView) findViewById(R.id.chat_body);
