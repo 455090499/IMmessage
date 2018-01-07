@@ -42,7 +42,7 @@
 
     </RelativeLayout>
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/chat_body"
+        android:id="@+id/chat_rv1"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1" />
@@ -52,7 +52,7 @@
         android:layout_width="match_parent">
 
         <ImageButton
-            android:id="@+id/chat_plus"
+            android:id="@+id/chat_imbtn1"
             android:layout_width="30dp"
             android:layout_margin="8dp"
             android:layout_height="match_parent"
@@ -60,7 +60,7 @@
             android:layout_weight="0.03" />
 
         <EditText
-            android:id="@+id/chat_message"
+            android:id="@+id/chat_et1"
             android:layout_height="match_parent"
             android:layout_width="0dp"
             android:layout_weight="1"
@@ -68,7 +68,7 @@
             android:textSize="15dp"/>
 
         <Button
-            android:id="@+id/chat_send"
+            android:id="@+id/chat_btn2"
             android:layout_height="wrap_content"
             android:layout_width="60dp"
             android:text="发送" />
@@ -84,24 +84,24 @@
         android:visibility="gone">
 
         <ImageButton
-            android:id="@+id/chat_imageButton1"
+            android:id="@+id/chat_imbtn2"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginLeft="20dp"
             android:background="@mipmap/chatting_pic_icon" />
 
         <ImageButton
-            android:id="@+id/chat_imageButton2"
+            android:id="@+id/chat_imbtn3"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginLeft="20dp"
             android:background="@mipmap/chatting_file_icon"
-            android:layout_toRightOf="@+id/chat_imageButton1"/>
+            android:layout_toRightOf="@+id/chat_imbtn2"/>
         <ImageButton
-            android:id="@+id/chat_imageButton3"
+            android:id="@+id/chat_imbtn4"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:layout_toRightOf="@+id/chat_imageButton2"
+            android:layout_toRightOf="@+id/chat_imbtn3"
             android:layout_marginLeft="20dp"
             android:background="@mipmap/chatting_cam_icon"/>
 

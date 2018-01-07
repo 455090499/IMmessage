@@ -9,16 +9,15 @@
         android:background="#398dee"
         android:layout_height="50dp">
         <TextView
-            android:id="@+id/text_title"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center_horizontal|center"
-            android:text="标题栏"
+            android:text="通知"
             android:textColor="#ffffffff"
             android:textSize="20dp" />
 
         <Button
-            android:id="@+id/notify2_button_backward"
+            android:id="@+id/notify2_btn1"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:background="#398dee"
@@ -38,7 +37,7 @@
         android:layout_marginTop="30dp">
 
         <ImageView
-            android:id="@+id/notify2_image"
+            android:id="@+id/notify2_im"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@mipmap/notify1_item_touxiang"/>
@@ -76,7 +75,7 @@
         android:weightSum="1">
 
         <Button
-            android:id="@+id/notify2_btn1"
+            android:id="@+id/notify2_btn2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="20dp"
@@ -84,7 +83,7 @@
             android:layout_weight="0.50" />
 
         <Button
-            android:id="@+id/notify2_btn2"
+            android:id="@+id/notify2_btn3"
             android:layout_toRightOf="@id/notify2_btn1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

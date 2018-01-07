@@ -11,16 +11,16 @@
         android:background="#398dee"
         android:layout_height="50dp">
         <TextView
-            android:id="@+id/text_title"
+
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center_horizontal|center"
-            android:text="标题栏"
+            android:text="添加"
             android:textColor="#ffffffff"
             android:textSize="20dp" />
 
         <Button
-            android:id="@+id/add_button_backward"
+            android:id="@+id/add_btn1"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:background="#398dee"
@@ -34,6 +34,7 @@
 
     </RelativeLayout>
      <TextView
+
          android:gravity="center"
          android:layout_width="match_parent"
          android:layout_height="wrap_content"
@@ -46,7 +47,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <EditText
-            android:id="@+id/add_tv"
+            android:id="@+id/add_et1"
             android:layout_marginTop="20dp"
             android:layout_width="300dp"
             android:layout_height="40dp"
@@ -55,20 +56,20 @@
             android:background="#E8E8E8"
             android:hint="请输入所要添加的账号"/>
         <ImageButton
-            android:id="@+id/add_sousuo"
+            android:id="@+id/add_imbtn"
             android:layout_marginRight="10dp"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_alignBottom="@id/add_tv"
+            android:layout_alignBottom="@id/add_et1"
             android:src="@mipmap/enter"
             android:background="#ffffff"
-            android:layout_toRightOf="@+id/add_tv"
-            android:layout_alignTop="@+id/add_tv" />
+            android:layout_toRightOf="@+id/add_et1"
+            android:layout_alignTop="@+id/add_et1" />
 
     </RelativeLayout>
 
     <ListView
-        android:id="@+id/add_lt"
+        android:id="@+id/add_lv1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
 
@@ -81,6 +82,7 @@
         android:layout_weight="1"
         android:layout_alignParentBottom="true">
         <Button
+            android:id="@+id/add_btn2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"

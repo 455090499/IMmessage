@@ -5,12 +5,12 @@
     android:layout_height="match_parent">
 
     <LinearLayout
-        android:id="@+id/notify1_item_listview"
+        android:id="@+id/notify1_item_lv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@+id/notify1_item_image"
+            android:id="@+id/notify1_item_im1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@mipmap/notify1_item_touxiang"/>
