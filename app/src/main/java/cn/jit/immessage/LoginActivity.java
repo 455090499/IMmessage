@@ -77,6 +77,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(LoginActivity.this, ForgetActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
         btn1.setOnClickListener(new View.OnClickListener() {

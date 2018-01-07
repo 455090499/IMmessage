@@ -115,6 +115,7 @@ public class ForgetActivity extends AppCompatActivity {
                                                                         //页面的下一步跳转
                                                                         Intent intent = new Intent(ForgetActivity.this, LoginActivity.class);
                                                                         startActivity(intent);
+                                                                        finish();
                                                                     }else
                                                                         Toast.makeText(ForgetActivity.this, "密码修改成功！", Toast.LENGTH_SHORT).show();
 

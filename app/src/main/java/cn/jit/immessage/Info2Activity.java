@@ -18,6 +18,7 @@ public class Info2Activity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent=new Intent(Info2Activity.this,Info3Activity.class);
                 startActivity(intent);
+                finish();
             }
         });
     }

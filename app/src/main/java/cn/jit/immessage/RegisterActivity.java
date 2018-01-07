@@ -99,6 +99,7 @@ public class RegisterActivity extends AppCompatActivity {
                                                 //页面的下一步跳转
                                                 Intent intent = new Intent(RegisterActivity.this, Info1Activity.class);
                                                 startActivity(intent);
+                                                finish();
                                             }
                                             else
                                                 Toast.makeText(RegisterActivity.this, "该手机号已注册！", Toast.LENGTH_SHORT).show();
