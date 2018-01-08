@@ -29,20 +29,26 @@ public class ChatActivity extends AppCompatActivity  {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
+        plus = (ImageButton) findViewById(R.id.chat_imbtn1);
+        layout = (RelativeLayout)findViewById(R.id.layout);
+        inputText = (EditText) findViewById(R.id.chat_et1);
+        back=(Button)findViewById(R.id.chat_btn1);
+        send = (Button) findViewById(R.id.chat_btn2);
+        msgRecyclerView = (RecyclerView) findViewById(R.id.chat_rv1);
 
-        initView();
+
         initListener();
         initMsgs();
-        back=(Button)findViewById(R.id.chat_btn1);
+
+
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
             }
         });
-        inputText = (EditText) findViewById(R.id.chat_message);
-        send = (Button) findViewById(R.id.chat_send);
-        msgRecyclerView = (RecyclerView) findViewById(R.id.chat_body);
+
+
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         msgRecyclerView.setLayoutManager(layoutManager);
         adapter = new MsgAdapter(msgList);
@@ -72,10 +78,7 @@ public class ChatActivity extends AppCompatActivity  {
         msgList.add(msg3);
     }
 
-    private void initView() {
-        plus = (ImageButton) findViewById(R.id.chat_plus);
-        layout = (RelativeLayout)findViewById(R.id.layout);
-    }
+
 
     private void initListener() {
         plus.setOnClickListener(new View.OnClickListener() {
