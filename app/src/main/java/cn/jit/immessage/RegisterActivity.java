@@ -1,6 +1,7 @@
 package cn.jit.immessage;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -48,6 +49,7 @@ public class RegisterActivity extends AppCompatActivity {
                         if(ex==null)
                         {
                             Log.e("bmob", "短信id：" + smsId);//用于查询本次短信发送详情
+                            //button 60s 倒计时
                             button1.setClickable(false);
 //        mbtn.setBackgroundColor(Color.GRAY);
                             Toast.makeText(RegisterActivity.this, "验证码发送成功，请尽快使用", Toast.LENGTH_SHORT).show();
@@ -96,10 +98,14 @@ public class RegisterActivity extends AppCompatActivity {
                                                 //可以注册
                                                 p1=new pp();
                                                 p1.insertpp(et1.getText().toString(),et2.getText().toString());
+                                                SharedPreferences.Editor editor = getSharedPreferences("user", MODE_PRIVATE).edit();
+                                                editor.putString("sms_content", et1.getText().toString());
+                                                editor.commit();
                                                 Toast.makeText(RegisterActivity.this, "注册成功！", Toast.LENGTH_SHORT).show();
                                                 //页面的下一步跳转
                                                 Intent intent = new Intent(RegisterActivity.this, Info1Activity.class);
                                                 startActivity(intent);
+                                                finish();
                                             }
                                             else
                                                 Toast.makeText(RegisterActivity.this, "该手机号已注册！", Toast.LENGTH_SHORT).show();

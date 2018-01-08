@@ -2,6 +2,7 @@ package cn.jit.immessage;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -9,6 +10,7 @@ import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.format.DateFormat;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -96,11 +98,20 @@ public class Info1Activity extends AppCompatActivity {
                 ufo1.getPhoto().uploadblock(new UploadFileListener() {
                     @Override
                     public void done(BmobException e) {
+                        Log.d("1","1");
+                        isex="".equals("")?"男":isex;
+                        SharedPreferences pre = getSharedPreferences("user", MODE_PRIVATE);
+                        ufo1.insertuinfo(pre.getString("sms_content", ""),et1.getText().toString(),isex,text.getText().toString(),et2.getText().toString(),et3.getText().toString());
+
                     }
                 });
-                isex="".equals("")?"男":isex;
-                ufo1.insertuinfo(Body1Activity.p1.getPhone(),et1.getText().toString(),isex,text.getText().toString(),et2.getText().toString(),et3.getText().toString());
-                Intent intent=new Intent(Info1Activity.this,LoginActivity.class);
+                else {
+                    Log.d("2","2");
+                    isex = "".equals("") ? "男" : isex;
+                    SharedPreferences pre = getSharedPreferences("user", MODE_PRIVATE);
+                    ufo1.insertuinfo(pre.getString("sms_content", ""), et1.getText().toString(), isex, text.getText().toString(), et2.getText().toString(), et3.getText().toString());
+                }
+                    Intent intent=new Intent(Info1Activity.this,LoginActivity.class);
                 startActivity(intent);
                 finish();
             }
