@@ -37,6 +37,16 @@
             android:text="返回"
             android:textColor="#ffffffff"
             android:textSize="18dp"/>
+        <Button
+            android:id="@+id/info2_btn2"
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:text="编辑"
+            android:textSize="18dp"
+            android:background="#398dee"
+            android:layout_marginLeft="310dp"
+            android:textColor="#ffffffff"
+            />
 
     </RelativeLayout>
     <LinearLayout
@@ -196,18 +206,5 @@
             android:layout_marginRight="16dp"
             android:textSize="20sp"/>
     </LinearLayout>
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_gravity="center">
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/info2_btn2"
-            android:background="@drawable/shape2_button"
-            android:text="编辑信息"
-            android:textSize="18sp"/>
-    </LinearLayout>
 </LinearLayout>
