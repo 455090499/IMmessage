@@ -16,17 +16,9 @@
         android:layout_width="match_parent"
         android:background="#398dee"
         android:layout_height="50dp">
-        <TextView
-            android:id="@+id/chat_tv1"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center_horizontal|center"
-            android:text="好友昵称"
-            android:textColor="#ffffffff"
-            android:textSize="20dp" />
 
         <Button
-            android:id="@+id/chat_btn1"
+            android:id="@+id/chat2_btn1"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:background="#398dee"
@@ -40,9 +32,32 @@
 
 
 
+        <TextView
+            android:id="@+id/chat2_tv1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal|center"
+            android:text="群聊昵称"
+            android:textColor="#ffffffff"
+            android:textSize="20dp"
+            android:layout_alignBottom="@+id/chat2_btn2"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+        <Button
+            android:id="@+id/chat2_btn2"
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:text="资料"
+            android:textSize="18dp"
+            android:background="@android:color/transparent"
+            android:layout_marginLeft="310dp"
+            android:textColor="#ffffffff"
+            />
+
     </RelativeLayout>
+
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/chat_rv1"
+        android:id="@+id/chat2_rv1"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1" />
@@ -52,7 +67,7 @@
         android:layout_width="match_parent">
 
         <ImageButton
-            android:id="@+id/chat_imbtn1"
+            android:id="@+id/chat2_imbtn1"
             android:layout_width="30dp"
             android:layout_margin="8dp"
             android:layout_height="match_parent"
@@ -60,7 +75,7 @@
             android:layout_weight="0.03" />
 
         <EditText
-            android:id="@+id/chat_et1"
+            android:id="@+id/chat2_et1"
             android:layout_height="match_parent"
             android:layout_width="0dp"
             android:layout_weight="1"
@@ -68,7 +83,7 @@
             android:textSize="15dp"/>
 
         <Button
-            android:id="@+id/chat_btn2"
+            android:id="@+id/chat2_btn3"
             android:layout_height="wrap_content"
             android:layout_width="60dp"
             android:text="发送" />
@@ -84,24 +99,24 @@
         android:visibility="gone">
 
         <ImageButton
-            android:id="@+id/chat_imbtn2"
+            android:id="@+id/chat2_imbtn2"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginLeft="20dp"
             android:background="@mipmap/chatting_pic_icon" />
 
         <ImageButton
-            android:id="@+id/chat_imbtn3"
+            android:id="@+id/chat2_imbtn3"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginLeft="20dp"
             android:background="@mipmap/chatting_file_icon"
-            android:layout_toRightOf="@+id/chat_imbtn2"/>
+            android:layout_toRightOf="@+id/chat2_imbtn2"/>
         <ImageButton
-            android:id="@+id/chat_imbtn4"
+            android:id="@+id/chat2_imbtn4"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:layout_toRightOf="@+id/chat_imbtn3"
+            android:layout_toRightOf="@+id/chat2_imbtn3"
             android:layout_marginLeft="20dp"
             android:background="@mipmap/chatting_cam_icon"/>
 

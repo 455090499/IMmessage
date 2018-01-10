@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:orientation="horizontal"
+    android:background="#398dee">
+
+    <TextView
+        android:id="@+id/toptitle_tv"
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal|center"
+        android:text="编辑"
+        android:textColor="#ffffffff"
+        android:textSize="20dp" />
+
+    <Button
+        android:id="@+id/toptitle_btn1"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:background="#398dee"
+        android:drawableLeft="@mipmap/chat_back"
+        android:drawablePadding="6dp"
+        android:gravity="center"
+        android:paddingLeft="5dp"
+        android:text="返回"
+        android:textColor="#ffffffff"
+        android:textSize="18dp"/>
+    <Button
+        android:id="@+id/toptitle_btn2"
+        android:layout_width="60dp"
+        android:layout_height="match_parent"
+        android:text="保存"
+        android:textSize="18dp"
+        android:background="#398dee"
+        android:layout_marginLeft="310dp"
+
+        android:textColor="#ffffffff"
+        />
+
+
+</RelativeLayout>
+

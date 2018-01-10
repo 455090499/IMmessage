@@ -95,7 +95,7 @@ public class Info1Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(ufo1.getPhoto()!=null)
-                ufo1.getPhoto().uploadblock(new UploadFileListener() {
+                    ufo1.getPhoto().uploadblock(new UploadFileListener() {
                     @Override
                     public void done(BmobException e) {
                         Log.d("1","1");

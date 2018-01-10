@@ -15,7 +15,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center_horizontal|center"
-            android:text="添加"
+            android:text="找人/群"
             android:textColor="#ffffffff"
             android:textSize="20dp" />
 
@@ -33,15 +33,6 @@
             android:textSize="18dp"/>
 
     </RelativeLayout>
-     <TextView
-
-         android:gravity="center"
-         android:layout_width="match_parent"
-         android:layout_height="wrap_content"
-         android:layout_marginTop="20dp"
-         android:text="找人/群"
-         android:textSize="20dp"
-         android:textColor="#000000"/>
 
     <RelativeLayout
         android:layout_width="match_parent"

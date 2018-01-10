@@ -49,6 +49,7 @@ public class LoginActivity extends AppCompatActivity {
         et2=(EditText)findViewById(R.id.login_et2);
         cbox=(CheckBox)findViewById(R.id.login_cbox);
         cbox2=(CheckBox)findViewById(R.id.login_cbox2);
+
         //设置passwd的可见与不可见
         cbox2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -83,7 +84,7 @@ public class LoginActivity extends AppCompatActivity {
             et2.setText("" + content1);
         }
         if(isphonerem)
-        et1.setText("" + content);
+            et1.setText("" + content);
 
 
         btn2.setOnClickListener(new View.OnClickListener() {
@@ -119,7 +120,7 @@ public class LoginActivity extends AppCompatActivity {
                             for (pp p1 : object) {
                                 SharedPreferences.Editor editor = getSharedPreferences("user", MODE_PRIVATE).edit();
                                 editor.putString("sms_content", et1.getText().toString());
-                                    editor.putString("sms_content1", et2.getText().toString());
+                                editor.putString("sms_content1", et2.getText().toString());
 
                                 Body1Activity.islogin=true;
                                 editor.putString("islogin","1");

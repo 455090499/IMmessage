@@ -5,21 +5,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-
+    android:background="@mipmap/register"
     tools:context="cn.jit.immessage.Info1Activity">
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:orientation="horizontal"
-        android:background="#398dee">
+        android:background="@drawable/side_nav_bar2">
 
         <TextView
             android:id="@+id/toptitle_tv"
-
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center_horizontal|center"
-            android:text=""
+            android:text="编辑"
             android:textColor="#ffffffff"
             android:textSize="20dp" />
 
@@ -27,7 +26,7 @@
             android:id="@+id/info3_btn4"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:background="#398dee"
+            android:background="@android:color/transparent"
             android:drawableLeft="@mipmap/chat_back"
             android:drawablePadding="6dp"
             android:gravity="center"
@@ -41,7 +40,7 @@
             android:layout_height="match_parent"
             android:text="保存"
             android:textSize="18dp"
-            android:background="#398dee"
+            android:background="@android:color/transparent"
             android:layout_marginLeft="310dp"
             android:textColor="#ffffffff"
             />
@@ -76,9 +75,9 @@
         android:layout_marginLeft="40dp"
         android:orientation="horizontal">
         <TextView
+
             android:layout_width="80dp"
             android:layout_height="22dp"
-
             android:text="昵称"
             android:textSize="18dp"
             />
@@ -192,23 +191,30 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="40dp"
-        android:orientation="horizontal">
+        android:orientation="vertical">
 
         <TextView
             android:layout_width="80dp"
             android:layout_height="22dp"
             android:text="个人签名"
-
+            android:layout_marginBottom="5dp"
             android:textSize="18dp"
              />
 
         <EditText
             android:id="@+id/info3_et3"
-            android:layout_width="200dp"
-            android:layout_height="32dp"
+            android:layout_width="280dp"
+            android:layout_height="64dp"
             android:paddingLeft="10dp"
             android:layout_marginLeft="3dp"
-            android:background="@drawable/shape3_button"/>
+
+            android:background="@drawable/shape5_button"/>
     </LinearLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="35dp"
+        android:text="(注：未填写的选项默认不更改)"/>
 
 </LinearLayout>
