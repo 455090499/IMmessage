@@ -48,15 +48,20 @@ public class Info2Activity extends AppCompatActivity {
         im = (ImageView) findViewById(R.id.info2_im);
         Button btn1 = (Button) findViewById(R.id.info2_btn1);
         Button btn2 = (Button) findViewById(R.id.info2_btn2);
-
+        //图片设置
         StrictMode.setThreadPolicy(new
                 StrictMode.ThreadPolicy.Builder().detectDiskReads().detectDiskWrites().detectNetwork().penaltyLog().build());
-        StrictMode.setVmPolicy(
-                new StrictMode.VmPolicy.Builder().detectLeakedSqlLiteObjects().detectLeakedClosableObjects().penaltyLog().penaltyDeath().build());
+//        StrictMode.setVmPolicy(
+//                new StrictMode.VmPolicy.Builder().detectLeakedSqlLiteObjects().detectLeakedClosableObjects().penaltyLog().penaltyDeath().build());
 
         SharedPreferences pre = getSharedPreferences("user", MODE_PRIVATE);
         String content = pre.getString("sms_content", "");
 
+        try {
+            Thread.sleep(1000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         BmobQuery<uinfo> bmobQuery = new BmobQuery<>();
         bmobQuery.addWhereEqualTo("phone", content);
         bmobQuery.findObjects(new FindListener<uinfo>() {
