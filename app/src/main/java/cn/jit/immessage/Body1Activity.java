@@ -37,6 +37,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.bmob.v3.Bmob;
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.datatype.BmobFile;
 import cn.bmob.v3.exception.BmobException;
@@ -163,6 +164,7 @@ public class Body1Activity extends AppCompatActivity
             finish();
         }else
         {
+            Bmob.initialize(this, "a2994aaba430f692b3d442a44b73a089");
             p1.setPhone(content1);
             BmobQuery<uinfo> bmobQuery = new BmobQuery<>();
             bmobQuery.addWhereEqualTo("phone", content1);
