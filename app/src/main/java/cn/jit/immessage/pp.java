@@ -35,6 +35,7 @@ public class pp extends BmobObject {
         public void setPasswd(String passwd) {
             this.passwd = passwd;
         }
+
         public void insertpp(String phone,String passwd) {
 
             this.setPhone(phone);

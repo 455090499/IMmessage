@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_info2"
+    android:id="@+id/activity_info4"
 
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="cn.jit.immessage.Info2Activity"
+    tools:context="cn.jit.immessage.Info4Activity"
     android:orientation="vertical">
     <!--<cn.jit.immessage.TopTitle-->
 
@@ -22,12 +22,12 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center_horizontal|center"
-            android:text="个人信息"
+            android:text="好友信息"
             android:textColor="#ffffffff"
             android:textSize="20dp" />
 
         <Button
-            android:id="@+id/info2_btn1"
+            android:id="@+id/info4_btn1"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:background="@android:color/transparent"
@@ -38,16 +38,7 @@
             android:text="返回"
             android:textColor="#ffffffff"
             android:textSize="18dp"/>
-        <Button
-            android:id="@+id/info2_btn2"
-            android:layout_width="60dp"
-            android:layout_height="match_parent"
-            android:text="编辑"
-            android:textSize="18dp"
-            android:background="@android:color/transparent"
-            android:layout_marginLeft="310dp"
-            android:textColor="#ffffffff"
-            />
+
 
     </RelativeLayout>
     <LinearLayout
@@ -69,7 +60,7 @@
             android:layout_weight="1" />
 
         <cn.jit.immessage.Round1ImageViewActivity
-            android:id="@+id/info2_im"
+            android:id="@+id/info4_im"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_gravity="center"
@@ -95,7 +86,7 @@
             android:layout_height="1dp"
             android:layout_weight="1" />
         <TextView
-            android:id="@+id/info2_tv1"
+            android:id="@+id/info4_tv1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -121,7 +112,7 @@
             android:layout_height="1dp"
             android:layout_weight="1" />
         <TextView
-            android:id="@+id/info2_tv2"
+            android:id="@+id/info4_tv2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="16dp"
@@ -147,7 +138,7 @@
             android:layout_height="1dp"
             android:layout_weight="1" />
         <TextView
-            android:id="@+id/info2_tv3"
+            android:id="@+id/info4_tv3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -173,7 +164,7 @@
             android:layout_height="1dp"
             android:layout_weight="1" />
         <TextView
-            android:id="@+id/info2_tv4"
+            android:id="@+id/info4_tv4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -199,7 +190,7 @@
             android:layout_height="1dp"
             android:layout_weight="1" />
         <TextView
-            android:id="@+id/info2_tv5"
+            android:id="@+id/info4_tv5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="666"

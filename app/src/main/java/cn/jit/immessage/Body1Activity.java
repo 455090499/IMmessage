@@ -50,6 +50,7 @@ public class Body1Activity extends AppCompatActivity
     private WeChatRadioGroup gradualRadioGroup;
     private TextView header_tv1;
     private TextView header_tv2;
+    public static String[] ffd = new String[60];  ;
     private ImageView im;
     //获取个人信息页面
     private NavigationView navigationView ;
@@ -69,6 +70,7 @@ public class Body1Activity extends AppCompatActivity
         SharedPreferences pre = getSharedPreferences("user", MODE_PRIVATE);
         String content1 = pre.getString("sms_content", "");
         BmobQuery<uinfo> bmobQuery3 = new BmobQuery<>();
+        p1.setPhone(content1);
         bmobQuery3.addWhereEqualTo("phone", content1);
         bmobQuery3.findObjects(new FindListener<uinfo>() {
             @Override
@@ -161,6 +163,7 @@ public class Body1Activity extends AppCompatActivity
             finish();
         }else
         {
+            p1.setPhone(content1);
             BmobQuery<uinfo> bmobQuery = new BmobQuery<>();
             bmobQuery.addWhereEqualTo("phone", content1);
             bmobQuery.findObjects(new FindListener<uinfo>() {
