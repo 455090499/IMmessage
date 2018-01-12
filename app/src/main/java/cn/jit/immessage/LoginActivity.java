@@ -132,6 +132,7 @@ public class LoginActivity extends AppCompatActivity {
 
                             }
                         }else{
+                            Toast.makeText(LoginActivity.this,"登陆失败，检查网络",Toast.LENGTH_SHORT).show();
                             Log.i("bmob","登录失败："+e.getMessage()+","+e.getErrorCode());
                         }
                     }
