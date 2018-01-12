@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -12,12 +13,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -83,29 +88,62 @@ public class DemoFragment extends Fragment {
                         List<uinfo> list = (List<uinfo>) result.getResults();
 
                             for (uinfo uf1 : list) {
+                                BmobFile bmobFile=uf1.getPhoto();
                                 Map<String, Object> listem = new HashMap<String, Object>();
                                 String name =uf1.getNiconame();
                                 String desc =uf1.getPhone();
+
+                                String url = bmobFile.getFileUrl();
                                 Log.e(TAG, "done:"+name);
                                 listem.put("name", name);
                                 listem.put("desc", desc);
+                                listem.put("head",url);
                                 listems.add(listem);
                             }
 
                             SimpleAdapter simplead = new SimpleAdapter(getActivity(), listems,
                                     R.layout.haoyou, new String[] { "name", "head", "desc" },
-                                    new int[] {R.id.name,R.id.head,R.id.desc});
+                                    new int[] {R.id.name,R.id.head,R.id.desc}){
+                                @Override
+                                public void setViewImage(final ImageView v, final  String value) {
+                                    // TODO Auto-generated method stub
+                                    if(v.getId()==R.id.head)
+                                    {
+                                        new Thread(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                try{
+                                                    //通过图片Url返回Bitmap
+                                                    Bitmap bitmap = getBitmap(value);
+                                                    Log.d("12333","done:"+value);
+                                                    v.setImageBitmap(bitmap);
+                                                }
+                                                catch(Exception e){
+                                                    e.printStackTrace();
+                                                }
+                                            }
+                                        }).start();
+                                    }
+                                    else{super.setViewImage(v, value);}
+                                }
+
+                            };
+
 
 
                             listView.setAdapter(simplead);
+                            simplead.notifyDataSetChanged();
                             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                                 @Override
                                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-
-                                    Intent intent;
-                                    intent = new Intent(getActivity(),ChatActivity.class);
+                                    HashMap<String,String> map=(HashMap<String,String>)listView.getItemAtPosition(position);
+                                    String name=map.get("name");
+                                    Intent intent = new Intent(getActivity(),ChatActivity.class);
+                                    intent.putExtra("name",name);
                                     startActivity(intent);
+
+
+
                                 }
                             });
 
@@ -202,6 +240,24 @@ public class DemoFragment extends Fragment {
         }
 
         return view;
+    }
+    public Bitmap getBitmap(String path) throws IOException {
+        try {
+            URL url = new URL(path);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setConnectTimeout(5000);
+            conn.setRequestMethod("GET");
+            if (conn.getResponseCode() == 200) {
+                InputStream inputStream = conn.getInputStream();
+                Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+                inputStream.close();
+                return bitmap;
+            }
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return null;
     }
 
 }
