@@ -1,5 +1,6 @@
 package cn.jit.immessage;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -9,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +26,8 @@ public class ChatActivity extends AppCompatActivity  {
     private Button send;
     private Button back;
     private RecyclerView msgRecyclerView;
+    private TextView tv1;
+    private ImageButton imbtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +39,27 @@ public class ChatActivity extends AppCompatActivity  {
         back=(Button)findViewById(R.id.chat_btn1);
         send = (Button) findViewById(R.id.chat_btn2);
         msgRecyclerView = (RecyclerView) findViewById(R.id.chat_rv1);
+        tv1=(TextView)findViewById(R.id.chat_tv1);
+        imbtn=(ImageButton)findViewById(R.id.chat_imbtn);
+
+        Intent intent = getIntent();
+        String name = intent.getStringExtra("name");
+        final String desc = intent.getStringExtra("desc");
+        String a1="与";
+        String a2="聊天中...";
+        tv1.setText((a1.concat(name)).concat(a2));
+
+
+        imbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ChatActivity.this,Info4Activity.class);
+                intent.putExtra("desc",desc);
+                startActivity(intent);
+            }
+        });
+
+
 
 
         initListener();
