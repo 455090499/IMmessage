@@ -37,10 +37,11 @@
         <activity android:name=".CreatActivity" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".Splash2Activity" />
-        <activity android:name=".AddActivity"/>
+        <activity android:name=".AddActivity" />
         <activity android:name=".ForgetActivity" />
         <activity android:name=".Info4Activity" />
-        <activity android:name=".Chat2Activity"></activity>
+        <activity android:name=".Chat2Activity" />
+        <activity android:name=".Info5Activity"></activity>
     </application>
 
 </manifest>
