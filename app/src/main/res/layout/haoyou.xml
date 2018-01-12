@@ -5,11 +5,13 @@
     android:layout_height="match_parent"
     android:orientation="horizontal"
     tools:context=".Body1Activity" >
-    <ImageView
+    <cn.jit.immessage.Round1ImageViewActivity
         android:id="@+id/head"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingLeft="10dp" />
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:paddingLeft="10dp"/>
+
+
 
     <LinearLayout
         android:layout_width="match_parent"
