@@ -5,21 +5,20 @@
     <item
         android:id="@+id/body1_settings1"
         android:orderInCategory="100"
-        android:title="搜索好友/群"
-        android:icon="@drawable/ic_menu_slideshow"
+        android:title="  搜索好友/群"
+        android:icon="@mipmap/add_friend"
         app:showAsAction="never">
-
         </item>
 
     <item
         android:id="@+id/body2_settings2"
         android:orderInCategory="100"
-        android:icon="@mipmap/jiahao"
+        android:icon="@mipmap/create_group"
         android:title="创建群组" />
     <item
         android:id="@+id/body3_settings3"
         android:orderInCategory="100"
-        android:icon="@mipmap/jiahao"
-        android:title="拍摄" />
+        android:icon="@drawable/ic_menu_camera"
+        android:title="  拍摄" />
 
 </menu>
