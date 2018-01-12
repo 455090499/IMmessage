@@ -38,6 +38,7 @@
             android:textColor="#ffffffff"
             android:textSize="18dp"/>
         <ImageButton
+            android:id="@+id/chat_imbtn"
             android:layout_width="35dp"
             android:layout_height="25dp"
             android:layout_marginLeft="320dp"
