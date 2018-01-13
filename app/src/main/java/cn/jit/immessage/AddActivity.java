@@ -68,49 +68,133 @@ public class AddActivity extends AppCompatActivity {
         btn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(et1.getText().toString().length() == 11){
+                    BmobQuery<uinfo> bmobQuery5 = new BmobQuery<>();
+                    bmobQuery5.addWhereEqualTo("phone", et1.getText().toString());
+                    bmobQuery5.findObjects(new FindListener<uinfo>() {
+                        @Override
+                        public void done(List<uinfo> list, BmobException e) {
+                            if(list.size()==0)
+                                Toast.makeText(AddActivity.this,"该用户名不存在", Toast.LENGTH_SHORT).show();
+                            else
+                                isfound=true;
+                            for (uinfo u1 : list) {
 
-                BmobQuery<uinfo> bmobQuery5 = new BmobQuery<>();
-                bmobQuery5.addWhereEqualTo("phone", et1.getText().toString());
-                bmobQuery5.findObjects(new FindListener<uinfo>() {
-                    @Override
-                    public void done(List<uinfo> list, BmobException e) {
-                        if(list.size()==0)
-                            Toast.makeText(AddActivity.this,"该用户名不存在", Toast.LENGTH_SHORT).show();
-                        else
-                            isfound=true;
-                        for (uinfo u1 : list) {
 
-//                            BmobFile bmobfile = u1.getPhoto();
-//                            try {
-//                                String url = bmobfile.getFileUrl();
-//                                Log.e("1", url);
-//                                Bitmap bitmap = getBitmap(url);
-//                                im.setImageBitmap(bitmap);
-//                                } catch (IOException e2) {
-//                                    // TODO Auto-generated catch block
-//                                    e2.printStackTrace();
-//                                }
+                                BmobFile bmobFile=u1.getPhoto();
+                                String url = bmobFile.getFileUrl();
+                                String s1="(";
+                                String s2=")";
+                                String[] name = {u1.getNiconame()};
+                                String[] desc = {(s1.concat(u1.getPhone())).concat(s2)};
+                                String[] head={url};
+                                List<Map<String, Object>> listems = new ArrayList<Map<String, Object>>();
+                                for (int i = 0; i < name.length; i++) {
+                                    Map<String, Object> listem = new HashMap<String, Object>();
+                                    //listem.put("head", imageids[i]);
 
-                            String s1="(";
-                            String s2=")";
-                            String[] name = {u1.getNiconame()};
-                            String[] desc = {(s1.concat(u1.getPhone())).concat(s2)};
-                            List<Map<String, Object>> listems = new ArrayList<Map<String, Object>>();
-                            for (int i = 0; i < name.length; i++) {
-                                Map<String, Object> listem = new HashMap<String, Object>();
-                                //listem.put("head", imageids[i]);
+                                    listem.put("name", name[i]);
+                                    listem.put("desc", desc[i]);
+                                    listem.put("head",head[i]);
+                                    listems.add(listem);
+                                }
+                                SimpleAdapter simplead = new SimpleAdapter(AddActivity.this, listems,
+                                        R.layout.addhaoyou, new String[] { "name", "head", "desc" },
+                                        new int[] {R.id.name,R.id.head,R.id.desc}){
+                                    @Override
+                                    public void setViewImage(final ImageView v, final  String value) {
+                                        // TODO Auto-generated method stub
+                                        if(v.getId()==R.id.head)
+                                        {
+                                            new Thread(new Runnable() {
+                                                @Override
+                                                public void run() {
+                                                    try{
+                                                        //通过图片Url返回Bitmap
+                                                        Bitmap bitmap = getBitmap(value);
+                                                        Log.d("12333","done:"+value);
+                                                        v.setImageBitmap(bitmap);
+                                                    }
+                                                    catch(Exception e){
+                                                        e.printStackTrace();
+                                                    }
+                                                }
+                                            }).start();
+                                        }
+                                        else{super.setViewImage(v, value);}
+                                    }
 
-                                listem.put("name", name[i]);
-                                listem.put("desc", desc[i]);
-                                listems.add(listem);
+                                };
+                                lv1.setAdapter(simplead);
+
                             }
-                            SimpleAdapter simplead = new SimpleAdapter(AddActivity.this, listems,
-                                    R.layout.additem, new String[]{"name", "head", "desc"},
-                                    new int[]{R.id.name, R.id.head, R.id.desc});
-                            lv1.setAdapter(simplead);
                         }
-                    }
-                });
+                    });
+                }else{
+                    BmobQuery<ginfo> bmobQuery = new BmobQuery<>();
+                    bmobQuery.addWhereEqualTo("gid", et1.getText().toString());
+                    bmobQuery.findObjects(new FindListener<ginfo>() {
+                        @Override
+                        public void done(List<ginfo> list, BmobException e) {
+                            if (list.size() == 0)
+                                Toast.makeText(AddActivity.this, "该群组不存在", Toast.LENGTH_SHORT).show();
+                            else
+                                isfound = true;
+                            for (ginfo gu1 : list) {
+
+                                BmobFile bmobFile=gu1.getPhoto();
+                                String url = bmobFile.getFileUrl();
+
+                                String s1 = "(";
+                                String s2 = ")";
+                                String[] name = {gu1.getGname()};
+                                String[] desc = {(s1.concat(gu1.getGid())).concat(s2)};
+                                String[] head={url};
+                                List<Map<String, Object>> listems = new ArrayList<Map<String, Object>>();
+                                for (int i = 0; i < name.length; i++) {
+                                    Map<String, Object> listem = new HashMap<String, Object>();
+                                    //listem.put("head", imageids[i]);
+
+                                    listem.put("name", name[i]);
+                                    listem.put("desc", desc[i]);
+                                    listem.put("head",head[i]);
+                                    listems.add(listem);
+                                }
+                                SimpleAdapter simplead = new SimpleAdapter(AddActivity.this, listems,
+                                        R.layout.addhaoyou, new String[] { "name", "head", "desc" },
+                                        new int[] {R.id.name,R.id.head,R.id.desc}){
+                                    @Override
+                                    public void setViewImage(final ImageView v, final  String value) {
+                                        // TODO Auto-generated method stub
+                                        if(v.getId()==R.id.head)
+                                        {
+                                            new Thread(new Runnable() {
+                                                @Override
+                                                public void run() {
+                                                    try{
+                                                        //通过图片Url返回Bitmap
+                                                        Bitmap bitmap = getBitmap(value);
+                                                        Log.d("12333","done:"+value);
+                                                        v.setImageBitmap(bitmap);
+                                                    }
+                                                    catch(Exception e){
+                                                        e.printStackTrace();
+                                                    }
+                                                }
+                                            }).start();
+                                        }
+                                        else{super.setViewImage(v, value);}
+                                    }
+
+                                };
+                                lv1.setAdapter(simplead);
+
+                            }
+                        }
+                    });
+                }
+
+
             }
         });
         btn3.setOnClickListener(new View.OnClickListener() {
