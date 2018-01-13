@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:background="#398dee"
+        android:layout_height="50dp">
+        <TextView
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal|center"
+            android:text="群成员"
+            android:textColor="#ffffffff"
+            android:textSize="20dp" />
+
+        <Button
+            android:id="@+id/showgroupers_btn1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="#398dee"
+            android:drawableLeft="@mipmap/chat_back"
+            android:drawablePadding="6dp"
+            android:gravity="center"
+            android:paddingLeft="5dp"
+            android:text="返回"
+            android:textColor="#ffffffff"
+            android:textSize="18dp"/>
+
+    </RelativeLayout>
+
+
+
+    <ListView
+        android:id="@+id/showgroupers_lv1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        >
+    </ListView>
+
+
+</LinearLayout>

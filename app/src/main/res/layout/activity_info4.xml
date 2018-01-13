@@ -8,9 +8,8 @@
     tools:context="cn.jit.immessage.Info4Activity"
     android:orientation="vertical">
     <!--<cn.jit.immessage.TopTitle-->
-
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"></cn.jit.immessage.TopTitle>-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"></cn.jit.immessage.TopTitle>-->
 
     <RelativeLayout
         android:orientation="vertical"

@@ -14,6 +14,8 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.view.menu.MenuBuilder;
 import android.util.Log;
@@ -140,16 +142,18 @@ public class Body1Activity extends AppCompatActivity
             fragment.setArguments(bundle);
             list.add(fragment);
         }
-        viewPager.setAdapter(new DemoPagerAdapter(getSupportFragmentManager(), list));
+        DemoPagerAdapter demo=new DemoPagerAdapter(getSupportFragmentManager(), list);
+         viewPager.setAdapter(demo);
         gradualRadioGroup.setViewPager(viewPager);
+
 
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
 
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout)
+;
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
@@ -291,20 +295,40 @@ public class Body1Activity extends AppCompatActivity
     }
     class DemoPagerAdapter extends FragmentPagerAdapter {
         List<DemoFragment> mData;
-
+        private  FragmentManager fm;
         public DemoPagerAdapter(FragmentManager fm) {
             super(fm);
         }
 
         public DemoPagerAdapter(FragmentManager fm, List<DemoFragment> data) {
             super(fm);
-            mData = data;
+            this.fm=fm;
+            this.mData = data;
+        }
+        public void setFragments(List<DemoFragment>  mData) {
+            if(this.mData != null){
+                FragmentTransaction ft = fm.beginTransaction();
+                for(Fragment f:this.mData){
+                    ft.remove(f);
+                }
+                ft.commit();
+                ft=null;
+                fm.executePendingTransactions();
+            }
+            this.mData = mData;
+            notifyDataSetChanged();
         }
 
         @Override
         public Fragment getItem(int position) {
             return mData.get(position);
         }
+
+        @Override
+        public int getItemPosition(Object object) {
+            return POSITION_NONE;
+        }
+
 
         @Override
         public int getCount() {

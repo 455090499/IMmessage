@@ -15,12 +15,24 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center_horizontal|center"
-            android:text="找人/群"
+            android:text="拉取好友"
             android:textColor="#ffffffff"
-            android:textSize="20dp" />
+            android:textSize="20dp"
+            android:id="@+id/textView4" />
 
         <Button
-            android:id="@+id/add_btn1"
+            android:id="@+id/addgroup_btn2"
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:text="完成"
+            android:textSize="18dp"
+            android:background="@android:color/transparent"
+            android:layout_marginLeft="310dp"
+            android:textColor="#ffffffff"
+            />
+
+        <Button
+            android:id="@+id/addgroup_btn1"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:background="#398dee"
@@ -30,7 +42,10 @@
             android:paddingLeft="5dp"
             android:text="返回"
             android:textColor="#ffffffff"
-            android:textSize="18dp"/>
+            android:textSize="18dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
 
     </RelativeLayout>
 
@@ -38,7 +53,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <EditText
-            android:id="@+id/add_et1"
+            android:id="@+id/addgroup_et1"
             android:layout_marginTop="20dp"
             android:layout_width="300dp"
             android:layout_height="40dp"
@@ -48,20 +63,20 @@
             android:background="#E8E8E8"
             android:hint="请输入所要添加的账号"/>
         <ImageButton
-            android:id="@+id/add_imbtn"
+            android:id="@+id/addgroup_imbtn"
             android:layout_marginRight="10dp"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_alignBottom="@id/add_et1"
+            android:layout_alignBottom="@id/addgroup_et1"
             android:src="@mipmap/enter"
             android:background="#ffffff"
-            android:layout_toRightOf="@+id/add_et1"
-            android:layout_alignTop="@+id/add_et1" />
+            android:layout_toRightOf="@+id/addgroup_et1"
+            android:layout_alignTop="@+id/addgroup_et1" />
 
     </RelativeLayout>
 
     <ListView
-        android:id="@+id/add_lv1"
+        android:id="@+id/addgroup_lv1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
 
@@ -74,7 +89,7 @@
         android:layout_weight="1"
         android:layout_alignParentBottom="true">
         <Button
-            android:id="@+id/add_btn2"
+            android:id="@+id/addgroup_btn3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"

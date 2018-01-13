@@ -49,10 +49,13 @@ public class DemoFragment extends Fragment {
         View view = inflater.inflate(R.layout.body_message, container, false);
         int type = getArguments().getInt("type", 0);
         listView = (ListView) view.findViewById(R.id.body_message_lv);
+
         //textView.setText(type == 0 ? "1st Fragment" : type == 1 ? "2nd Fragment" : type == 2 ? "3rd Fragment" : "4th Fragment");
         if (type == 0)
         {
+
             Log.e(TAG, "onCreateView: xiaoxi" );
+            Log.d("0000","xiaoxi");
             String[] name = { "李四", "张三"};
             String[] desc = { "怎么不回我信息", "在哪呢"};
             //int[] imageids ={};
@@ -69,11 +72,11 @@ public class DemoFragment extends Fragment {
                    new int[] {R.id.name,R.id.head,R.id.desc});
             listView.setAdapter(simplead);
 
-
-
+            simplead.notifyDataSetChanged();
         }
         if (type == 1)
         {
+            Log.d("1111","haoyou");
             String bql ="select * from uinfo where phone in (select fphone from pfriend where phone = '"+Body1Activity.p1.getPhone()+"')";
             BmobQuery<uinfo> query=new BmobQuery<uinfo>();
 //设置查询的SQL语句
@@ -84,7 +87,6 @@ public class DemoFragment extends Fragment {
                 public void done(BmobQueryResult<uinfo> result, BmobException e) {
                     if(e ==null){
                         List<Map<String, Object>> listems = new ArrayList<Map<String, Object>>();
-
                         List<uinfo> list = (List<uinfo>) result.getResults();
 
                             for (uinfo uf1 : list) {
@@ -92,7 +94,6 @@ public class DemoFragment extends Fragment {
                                 Map<String, Object> listem = new HashMap<String, Object>();
                                 String name =uf1.getNiconame();
                                 String desc =uf1.getPhone();
-
                                 String url = bmobFile.getFileUrl();
                                 Log.e(TAG, "done:"+name);
                                 listem.put("name", name);
@@ -128,9 +129,6 @@ public class DemoFragment extends Fragment {
                                 }
 
                             };
-
-
-
                             listView.setAdapter(simplead);
                             simplead.notifyDataSetChanged();
                             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -141,9 +139,6 @@ public class DemoFragment extends Fragment {
                                     Intent intent = new Intent(getActivity(),ChatActivity.class);
                                     intent.putExtra("name",name);
                                     startActivity(intent);
-
-
-
                                 }
                             });
 
@@ -152,91 +147,88 @@ public class DemoFragment extends Fragment {
                     }
                 }
             });
-
-
-
-
-
-
-
-
-
-//
-//            BmobQuery<pfriend> bmobQuery = new BmobQuery<>();
-//            bmobQuery.addWhereEqualTo("phone",Body1Activity.p1.getPhone());
-//            bmobQuery.findObjects(new FindListener<pfriend>() {
-//                @Override
-//                public void done(List<pfriend> list, BmobException e) {
-//                    int j = 0;
-//                    for (pfriend pf1 : list) {
-//
-//                        Body1Activity.ffd[j++] = pf1.getFphone();
-//                    }
-//                    final List<Map<String, Object>> listems = new ArrayList<Map<String, Object>>();
-//
-//                    for (int i = 0; i < j; i++) {
-//                        BmobQuery<uinfo> bmobQuery = new BmobQuery<>();
-//                        bmobQuery.addWhereEqualTo("phone", Body1Activity.ffd[i]);
-//                        bmobQuery.findObjects(new FindListener<uinfo>() {
-//                            @Override
-//                            public void done(List<uinfo> list, BmobException e) {
-//                                final Map<String, Object> listem = new HashMap<String, Object>();
-//
-//                                for (uinfo uf1 : list) {
-//                                    String name =uf1.getNiconame();
-//                                    String desc =uf1.getPhone();
-//
-//
-//                                        listem.put("name", name);
-//                                        listem.put("desc", desc);
-//                                    listems.add(listem);
-//                                }
-//
-//
-//
-//                            }
-//                        });
-//                    }
-//
-//                    SimpleAdapter simplead = new SimpleAdapter(getActivity(), listems,
-//                            R.layout.haoyou, new String[] { "name", "head", "desc" },
-//                            new int[] {R.id.name,R.id.head,R.id.desc});
-//                    simplead.notifyDataSetChanged();
-//
-//                    listView.setAdapter(simplead);
-//                    listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//                        @Override
-//                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//
-//
-//                            Intent intent;
-//                            intent = new Intent(getActivity(),ChatActivity.class);
-//                            startActivity(intent);
-//                        }
-//                    });
-//
-//                }
-//            });
-
         }
         if (type == 2)
         {
-            //Log.e(TAG, "onCreateView: qunzu");
-            String[] name = { "金科一班群", "金科二班群"};
-            //String[] desc = { "15150010", "15150011"};
-            //int[] imageids ={};
-            List<Map<String, Object>> listems = new ArrayList<Map<String, Object>>();
-            for (int i = 0; i < name.length; i++) {
-                Map<String, Object> listem = new HashMap<String, Object>();
-                //  listem.put("head", imageids[i]);
-                listem.put("name", name[i]);
-              //  listem.put("desc", desc[i]);
-                listems.add(listem);
-            }
-            SimpleAdapter simplead = new SimpleAdapter(getActivity(), listems,
-                    R.layout.qunzu, new String[] { "name", "head", "desc" },
-                    new int[] {R.id.name,R.id.head,R.id.desc});
-            listView.setAdapter(simplead);
+            Log.d("2222","qunzu");
+            String bql ="select * from  ginfo where gid in (select gid from gphone where phone = '"+Body1Activity.p1.getPhone()+"')";
+            BmobQuery<ginfo> query=new BmobQuery<ginfo>();
+            //设置查询的SQL语句
+            query.setSQL(bql);
+            query.doSQLQuery(new SQLQueryListener<ginfo>(){
+
+                @Override
+                public void done(BmobQueryResult<ginfo> result, BmobException e) {
+                    if(e ==null){
+                        List<Map<String, Object>> listems = new ArrayList<Map<String, Object>>();
+                        List<ginfo> list = (List<ginfo>) result.getResults();
+
+                        for (ginfo uf1 : list) {
+                            BmobFile bmobFile=uf1.getPhoto();
+                            Map<String, Object> listem = new HashMap<String, Object>();
+                            String name =uf1.getGname();
+                            String desc =uf1.getGid();
+                            String url = bmobFile.getFileUrl();
+                            Log.e(TAG, "done:"+name);
+                            listem.put("name", name);
+                            listem.put("desc", desc);
+                            listem.put("head",url);
+                            listems.add(listem);
+                        }
+
+                        SimpleAdapter simplead = new SimpleAdapter(getActivity(), listems,
+                                R.layout.qunzu, new String[] { "name", "head", "desc" },
+                                new int[] {R.id.name,R.id.head,R.id.desc}){
+                            @Override
+                            public void setViewImage(final ImageView v, final  String value) {
+                                // TODO Auto-generated method stub
+                                if(v.getId()==R.id.head)
+                                {
+                                    new Thread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            try{
+                                                //通过图片Url返回Bitmap
+                                                Bitmap bitmap = getBitmap(value);
+                                                Log.d("12333","done:"+value);
+                                                v.setImageBitmap(bitmap);
+                                            }
+                                            catch(Exception e){
+                                                e.printStackTrace();
+                                            }
+                                        }
+                                    }).start();
+                                }
+                                else{super.setViewImage(v, value);}
+                            }
+
+                        };
+
+                        listView.setAdapter(simplead);
+                        simplead.notifyDataSetChanged();
+
+
+                        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                HashMap<String,String> map=(HashMap<String,String>)listView.getItemAtPosition(position);
+                                String name=map.get("name");
+                                String desc=map.get("desc");
+                                Intent intent = new Intent(getActivity(),Chat2Activity.class);
+                                intent.putExtra("name",name);
+                                intent.putExtra("desc",desc);
+                                startActivity(intent);
+
+
+
+                            }
+                        });
+
+                    }else{
+                        Log.i("smile", "错误码："+e.getErrorCode()+"，错误描述："+e.getMessage());
+                    }
+                }
+            });
         }
 
         return view;

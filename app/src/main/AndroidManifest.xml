@@ -28,10 +28,13 @@
         </activity>
         <activity android:name=".SplashActivity" />
         <activity android:name=".ChatActivity" />
+        <activity android:name=".Chat2Activity" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".Info1Activity" />
         <activity android:name=".Info3Activity" />
         <activity android:name=".Info2Activity" />
+        <activity android:name=".Info4Activity" />
+        <activity android:name=".Info5Activity" />
         <activity android:name=".Notify1Activity" />
         <activity android:name=".Notify2Activity" />
         <activity android:name=".CreatActivity" />
@@ -39,9 +42,8 @@
         <activity android:name=".Splash2Activity" />
         <activity android:name=".AddActivity" />
         <activity android:name=".ForgetActivity" />
-        <activity android:name=".Info4Activity" />
-        <activity android:name=".Chat2Activity" />
-        <activity android:name=".Info5Activity"></activity>
+        <activity android:name=".AddgroupActivity" />
+        <activity android:name=".Showgroupers"></activity>
     </application>
 
 </manifest>
