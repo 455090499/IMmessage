@@ -15,6 +15,8 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import qiu.niorgai.StatusBarCompat;
+
 public class ChatActivity extends AppCompatActivity  {
 
     private ImageButton plus;
@@ -33,6 +35,13 @@ public class ChatActivity extends AppCompatActivity  {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
+
+
+        //透明状态栏
+        StatusBarCompat.translucentStatusBar(ChatActivity.this);
+        //SDK >= 21时, 取消状态栏的阴影
+        StatusBarCompat.translucentStatusBar(ChatActivity.this,true);
+
         plus = (ImageButton) findViewById(R.id.chat_imbtn1);
         layout = (RelativeLayout)findViewById(R.id.layout);
         inputText = (EditText) findViewById(R.id.chat_et1);
@@ -45,9 +54,7 @@ public class ChatActivity extends AppCompatActivity  {
         Intent intent = getIntent();
         String name = intent.getStringExtra("name");
         final String desc = intent.getStringExtra("desc");
-        String a1="与";
-        String a2="聊天中...";
-        tv1.setText((a1.concat(name)).concat(a2));
+        tv1.setText(name+"");
 
 
         imbtn.setOnClickListener(new View.OnClickListener() {

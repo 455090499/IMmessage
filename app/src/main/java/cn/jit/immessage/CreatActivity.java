@@ -15,12 +15,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import java.io.File;
 
 import cn.bmob.v3.datatype.BmobFile;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.UploadFileListener;
+import qiu.niorgai.StatusBarCompat;
 
 public class CreatActivity extends AppCompatActivity {
     private Button button1;
@@ -35,6 +37,12 @@ public class CreatActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_creat);
+
+        //透明状态栏
+        StatusBarCompat.translucentStatusBar(CreatActivity.this);
+        //SDK >= 21时, 取消状态栏的阴影
+        StatusBarCompat.translucentStatusBar(CreatActivity.this,true);
+
         img=(ImageView)findViewById(R.id.create_im);
         button1=(Button)findViewById(R.id.create_btn1);
         button2=(Button)findViewById(R.id.create_btn2);
@@ -56,30 +64,36 @@ public class CreatActivity extends AppCompatActivity {
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(ginfo1.getPhoto()!=null)
-                    ginfo1.getPhoto().uploadblock(new UploadFileListener() {
-                        @Override
-                        public void done(BmobException e) {
-                            SharedPreferences pre = getSharedPreferences("user", MODE_PRIVATE);
-                            ginfo1.insertginfo(pre.getString("sms_content", ""),et1.getText().toString(),et2.getText().toString());
-                            gphone.insertgphone(et1.getText().toString(),pre.getString("sms_content", ""));
+                if (!et2.getText().toString().equals("") && et1.getText().toString().length() == 8) {
+                    if (ginfo1.getPhoto() != null)
+                        ginfo1.getPhoto().uploadblock(new UploadFileListener() {
+                            @Override
+                            public void done(BmobException e) {
+                                SharedPreferences pre = getSharedPreferences("user", MODE_PRIVATE);
+                                ginfo1.insertginfo(pre.getString("sms_content", ""), et1.getText().toString(), et2.getText().toString());
+                                gphone.insertgphone(et1.getText().toString(), pre.getString("sms_content", ""));
+                                Intent intent = new Intent(CreatActivity.this, AddgroupActivity.class);
+                                String name = et1.getText().toString();
+                                intent.putExtra("name", name);
+                                startActivity(intent);
+                                finish();
 
+                            }
+                        });
+                    else {
+                        Toast.makeText(CreatActivity.this, "请添加头像", Toast.LENGTH_SHORT).show();
+//                    SharedPreferences pre = getSharedPreferences("user", MODE_PRIVATE);
+//                    ginfo1.insertginfo(pre.getString("sms_content", ""), et1.getText().toString(),et2.getText().toString());
+//                    gphone.insertgphone(et1.getText().toString(),pre.getString("sms_content", ""));
 
-                        }
-                    });
-                else {
+                    }
 
-                    SharedPreferences pre = getSharedPreferences("user", MODE_PRIVATE);
-                    ginfo1.insertginfo(pre.getString("sms_content", ""), et1.getText().toString(),et2.getText().toString());
-                    gphone.insertgphone(et1.getText().toString(),pre.getString("sms_content", ""));
-
+                }else{
+                    Toast.makeText(CreatActivity.this, "请按要求填写信息", Toast.LENGTH_SHORT).show();
                 }
-                Intent intent=new Intent(CreatActivity.this,AddgroupActivity.class);
-                String name=et1.getText().toString();
-                intent.putExtra("name",name);
-                startActivity(intent);
-                finish();
             }
+
+
         });
     }
     protected void onActivityResult(int requestCode,int resultCode,Intent data) {

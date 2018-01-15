@@ -101,7 +101,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent=new Intent(LoginActivity.this,RegisterActivity.class);
                 startActivity(intent);
-                finish();
+
             }
         });
         btn3.setOnClickListener(new View.OnClickListener() {
@@ -109,7 +109,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(LoginActivity.this, ForgetActivity.class);
                 startActivity(intent);
-                finish();
+
             }
         });
         btn1.setOnClickListener(new View.OnClickListener() {

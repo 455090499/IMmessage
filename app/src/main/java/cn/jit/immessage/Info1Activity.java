@@ -111,13 +111,20 @@ public class Info1Activity extends AppCompatActivity {
                     SharedPreferences pre = getSharedPreferences("user", MODE_PRIVATE);
                     ufo1.insertuinfo(pre.getString("sms_content", ""), et1.getText().toString(), isex, text.getText().toString(), et2.getText().toString(), et3.getText().toString());
                 }
-                    Intent intent=new Intent(Info1Activity.this,LoginActivity.class);
-                startActivity(intent);
+//                    Intent intent=new Intent(Info1Activity.this,LoginActivity.class);
+//                startActivity(intent);
                 finish();
             }
         });
+
     }
-    protected void onActivityResult(int requestCode,int resultCode,Intent data) {
+
+    @Override
+    public void onBackPressed() {
+        Toast.makeText(Info1Activity.this,"请把信息填写完成",Toast.LENGTH_SHORT).show();
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode,resultCode,data);
         if (data != null) {
             Uri selectedImage = data.getData();

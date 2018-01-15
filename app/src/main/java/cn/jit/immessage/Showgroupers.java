@@ -27,6 +27,7 @@ import cn.bmob.v3.datatype.BmobFile;
 import cn.bmob.v3.datatype.BmobQueryResult;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.SQLQueryListener;
+import qiu.niorgai.StatusBarCompat;
 
 import static android.content.ContentValues.TAG;
 
@@ -38,6 +39,12 @@ public class Showgroupers extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_showgroupers);
+
+        //透明状态栏
+        StatusBarCompat.translucentStatusBar(Showgroupers.this);
+        //SDK >= 21时, 取消状态栏的阴影
+        StatusBarCompat.translucentStatusBar(Showgroupers.this,true);
+
         lv1=(ListView)findViewById(R.id.showgroupers_lv1);
         btn1=(Button)findViewById(R.id.showgroupers_btn1);
         btn2=(Button)findViewById(R.id.showgroupers_btn2);

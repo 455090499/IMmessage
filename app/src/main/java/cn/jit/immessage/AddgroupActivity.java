@@ -28,9 +28,10 @@ import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.datatype.BmobFile;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.FindListener;
+import qiu.niorgai.StatusBarCompat;
 
 public class AddgroupActivity extends AppCompatActivity {
-    private Button button1;
+
     private Button button2;
     private Button button3;
     private EditText et1;
@@ -41,18 +42,18 @@ public class AddgroupActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_addgroup);
+
+        //透明状态栏
+        StatusBarCompat.translucentStatusBar(AddgroupActivity.this);
+        //SDK >= 21时, 取消状态栏的阴影
+        StatusBarCompat.translucentStatusBar(AddgroupActivity.this,true);
+
         lv1 = (ListView) findViewById(R.id.addgroup_lv1);
         et1=(EditText)findViewById(R.id.addgroup_et1);
         im=(ImageButton)findViewById(R.id.addgroup_imbtn);
-        button1=(Button)findViewById(R.id.addgroup_btn1);
         button2=(Button)findViewById(R.id.addgroup_btn2);
         button3=(Button)findViewById(R.id.addgroup_btn3);
-        button1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -49,10 +49,14 @@ import java.util.List;
 import cn.bmob.v3.Bmob;
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.datatype.BmobFile;
+import cn.bmob.v3.datatype.BmobQueryResult;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.FindListener;
+import cn.bmob.v3.listener.SQLQueryListener;
 import io.github.leibnik.wechatradiobar.WeChatRadioGroup;
 import qiu.niorgai.StatusBarCompat;
+
+import static java.lang.Thread.sleep;
 
 public class Body1Activity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -76,7 +80,7 @@ public class Body1Activity extends AppCompatActivity
     protected void onResume() {
 
         try {
-            Thread.sleep(1000L);
+            sleep(1000L);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -106,6 +110,7 @@ public class Body1Activity extends AppCompatActivity
                 }
             }
         });
+
         super.onResume();
 
     }
@@ -145,18 +150,7 @@ public class Body1Activity extends AppCompatActivity
 
 
 
-        List<DemoFragment> list = new ArrayList<>();
-        for (int i = 0; i < 3; i++) {
-            DemoFragment fragment = new DemoFragment();
-            Bundle bundle = new Bundle();
-            bundle.putInt("type",i);
-            fragment.setArguments(bundle);
-            list.add(fragment);
-        }
-        DemoPagerAdapter demo=new DemoPagerAdapter(getSupportFragmentManager(), list);
-         viewPager.setAdapter(demo);
 
-        gradualRadioGroup.setViewPager(viewPager);
 
 
 
@@ -203,6 +197,128 @@ public class Body1Activity extends AppCompatActivity
                     }
                 }
             });
+//            List<DemoFragment> lista = new ArrayList<>();
+
+//            for (int i = 0; i < 3; i++) {
+//            List<DemoFragment> lista = new ArrayList<>();
+//                DemoFragment fragment0 = new DemoFragment();
+//                Bundle bundle = new Bundle();
+//                bundle.putInt("type",0);
+//               bundle.putInt("count",i);
+//                bundle.putStringArrayList("name",i);
+//                bundle.putStringArrayList("desc",i);
+//                bundle.putStringArrayList("head",i);
+//
+//                fragment0.setArguments(bundle);
+//                lista.add(fragment0);
+
+
+            String bql ="select * from uinfo where phone in (select fphone from pfriend where phone = '"+Body1Activity.p1.getPhone()+"')";
+            BmobQuery<uinfo> query=new BmobQuery<uinfo>();
+            query.setSQL(bql);
+            query.doSQLQuery(new SQLQueryListener<uinfo>(){
+
+                @Override
+                public void done(BmobQueryResult<uinfo> result, BmobException e) {
+                    if(e ==null){
+                        final List<DemoFragment> lista = new ArrayList<>();
+
+
+
+                        List<uinfo> list = (List<uinfo>) result.getResults();
+                        DemoFragment fragment1 = new DemoFragment();
+                        Bundle bundle1 = new Bundle();
+                        bundle1.putInt("type",1);
+                        bundle1.putInt("count",list.size());
+                        String[] name=new String[list.size()];
+                        String[] desc=new String[list.size()];
+                        String[] head=new String[list.size()];
+                        int i=0;
+                        for (uinfo uf1 : list) {
+
+                            name[i]=uf1.getNiconame();
+                            desc[i]=uf1.getPhone();
+                            head[i]=uf1.getPhoto().getFileUrl();
+                            Log.d("aaa",head[i]);
+                            i++;
+                        }
+                        bundle1.putStringArray("name",name);
+                        bundle1.putStringArray("desc",desc);
+                        bundle1.putStringArray("head",head);
+
+                        fragment1.setArguments(bundle1);
+                        lista.add(fragment1);
+
+
+                        String bq2 ="select * from  ginfo where gid in (select gid from gphone where phone = '"+Body1Activity.p1.getPhone()+"')";
+                        BmobQuery<ginfo> query=new BmobQuery<ginfo>();
+                        query.setSQL(bq2);
+                        query.doSQLQuery(new SQLQueryListener<ginfo>(){
+
+                            @Override
+                            public void done(BmobQueryResult<ginfo> result, BmobException e) {
+                                if(e ==null){
+                                    List<ginfo> list = (List<ginfo>) result.getResults();
+                                    DemoFragment fragment2 = new DemoFragment();
+                                    Bundle bundle2 = new Bundle();
+                                    bundle2.putInt("type",2);
+                                    bundle2.putInt("count",list.size());
+                                    String[] name2=new String[list.size()];
+                                    String[] desc2=new String[list.size()];
+                                    String[] head2=new String[list.size()];
+                                    int i=0;
+                                    for (ginfo uf1 : list) {
+                                        name2[i]=uf1.getGname();
+                                        desc2[i]=uf1.getGid();
+                                        head2[i]=uf1.getPhoto().getFileUrl();
+                                        i++;
+                                    }
+                                    bundle2.putStringArray("name",name2);
+                                    bundle2.putStringArray("desc",desc2);
+                                    bundle2.putStringArray("head",head2);
+
+                                    fragment2.setArguments(bundle2);
+                                    lista.add(fragment2);
+                                    DemoFragment fragment0 = new DemoFragment();
+                                    Bundle bundle = new Bundle();
+                                    bundle.putInt("type",0);
+//                bundle.putInt("count",i);
+//                bundle.putStringArrayList("name",i);
+//                bundle.putStringArrayList("desc",i);
+//                bundle.putStringArrayList("head",i);
+//
+                                    fragment0.setArguments(bundle);
+                                    lista.add(fragment0);
+                                    DemoPagerAdapter demo=new DemoPagerAdapter(getSupportFragmentManager(), lista);
+                                    viewPager.setAdapter(demo);
+
+                                    gradualRadioGroup.setViewPager(viewPager);
+                                }else{
+                                    Log.i("smile", "错误码："+e.getErrorCode()+"，错误描述："+e.getMessage());
+                                }
+                            }
+                        });
+
+
+
+
+//                bundle.putInt("count",i);
+//                bundle.putStringArrayList("name",i);
+//                bundle.putStringArrayList("desc",i);
+//                bundle.putStringArrayList("head",i);
+//
+
+                    }else{
+                        Log.i("smile", "错误码："+e.getErrorCode()+"，错误描述："+e.getMessage());
+                    }
+                }
+            });
+
+
+
+
+
+
         }
     }
 
@@ -215,7 +331,7 @@ public class Body1Activity extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+
         }
     }
 

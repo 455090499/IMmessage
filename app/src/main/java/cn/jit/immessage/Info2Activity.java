@@ -27,6 +27,7 @@ import cn.bmob.v3.datatype.BmobFile;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.DownloadFileListener;
 import cn.bmob.v3.listener.FindListener;
+import qiu.niorgai.StatusBarCompat;
 
 public class Info2Activity extends AppCompatActivity {
     private TextView tv1;
@@ -40,6 +41,12 @@ public class Info2Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_info2);
+
+        //透明状态栏
+        StatusBarCompat.translucentStatusBar(Info2Activity.this);
+        //SDK >= 21时, 取消状态栏的阴影
+        StatusBarCompat.translucentStatusBar(Info2Activity.this,true);
+
         tv1 = (TextView) findViewById(R.id.info2_tv1);
         tv2 = (TextView) findViewById(R.id.info2_tv2);
         tv3 = (TextView) findViewById(R.id.info2_tv3);

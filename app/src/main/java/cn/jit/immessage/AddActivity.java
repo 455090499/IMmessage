@@ -93,13 +93,74 @@ public class AddActivity extends AppCompatActivity {
                                 isfound=true;
                             for (uinfo u1 : list) {
 
-
                                 BmobFile bmobFile=u1.getPhoto();
                                 String url = bmobFile.getFileUrl();
                                 String s1="(";
                                 String s2=")";
                                 String[] name = {u1.getNiconame()};
                                 String[] desc = {(s1.concat(u1.getPhone())).concat(s2)};
+                                String[] head={url};
+                                List<Map<String, Object>> listems = new ArrayList<Map<String, Object>>();
+                                for (int i = 0; i < name.length; i++) {
+                                    Map<String, Object> listem = new HashMap<String, Object>();
+                                    //listem.put("head", imageids[i]);
+                                    listem.put("name", name[i]);
+                                    listem.put("desc", desc[i]);
+                                    listem.put("head",head[i]);
+                                    listems.add(listem);
+                                }
+                                SimpleAdapter simplead = new SimpleAdapter(AddActivity.this, listems,
+                                        R.layout.addhaoyou, new String[] { "name", "head", "desc" },
+                                        new int[] {R.id.name,R.id.head,R.id.desc}){
+                                    @Override
+                                    public void setViewImage(final ImageView v, final  String value) {
+                                        // TODO Auto-generated method stub
+                                        if(v.getId()==R.id.head)
+                                        {
+                                            new Thread(new Runnable() {
+                                                @Override
+                                                public void run() {
+                                                    try{
+                                                        //通过图片Url返回Bitmap
+                                                        Bitmap bitmap = getBitmap(value);
+                                                        Log.d("12333","done:"+value);
+                                                        v.setImageBitmap(bitmap);
+                                                    }
+                                                    catch(Exception e){
+                                                        e.printStackTrace();
+                                                    }
+                                                }
+                                            }).start();
+                                        }
+                                        else{super.setViewImage(v, value);}
+                                    }
+
+                                };
+                                lv1.setAdapter(simplead);
+
+                            }
+                        }
+                    });
+                }else if(et1.getText().toString().length() == 8){
+
+                    BmobQuery<ginfo> bmobQuery = new BmobQuery<>();
+                    bmobQuery.addWhereEqualTo("gid", et1.getText().toString());
+                    bmobQuery.findObjects(new FindListener<ginfo>() {
+                        @Override
+                        public void done(List<ginfo> list, BmobException e) {
+                            if (list.size() == 0)
+                                Toast.makeText(AddActivity.this, "该群组不存在", Toast.LENGTH_SHORT).show();
+                            else
+                                isfound = true;
+                            for (ginfo gu1 : list) {
+
+                                BmobFile bmobFile=gu1.getPhoto();
+                                String url = bmobFile.getFileUrl();
+
+                                String s1 = "(";
+                                String s2 = ")";
+                                String[] name = {gu1.getGname()};
+                                String[] desc = {s1+gu1.getGid()+s2};
                                 String[] head={url};
                                 List<Map<String, Object>> listems = new ArrayList<Map<String, Object>>();
                                 for (int i = 0; i < name.length; i++) {
@@ -144,67 +205,7 @@ public class AddActivity extends AppCompatActivity {
                         }
                     });
                 }else{
-                    BmobQuery<ginfo> bmobQuery = new BmobQuery<>();
-                    bmobQuery.addWhereEqualTo("gid", et1.getText().toString());
-                    bmobQuery.findObjects(new FindListener<ginfo>() {
-                        @Override
-                        public void done(List<ginfo> list, BmobException e) {
-                            if (list.size() == 0)
-                                Toast.makeText(AddActivity.this, "该群组不存在", Toast.LENGTH_SHORT).show();
-                            else
-                                isfound = true;
-                            for (ginfo gu1 : list) {
-
-                                BmobFile bmobFile=gu1.getPhoto();
-                                String url = bmobFile.getFileUrl();
-
-                                String s1 = "(";
-                                String s2 = ")";
-                                String[] name = {gu1.getGname()};
-                                String[] desc = {(s1.concat(gu1.getGid())).concat(s2)};
-                                String[] head={url};
-                                List<Map<String, Object>> listems = new ArrayList<Map<String, Object>>();
-                                for (int i = 0; i < name.length; i++) {
-                                    Map<String, Object> listem = new HashMap<String, Object>();
-                                    //listem.put("head", imageids[i]);
-
-                                    listem.put("name", name[i]);
-                                    listem.put("desc", desc[i]);
-                                    listem.put("head",head[i]);
-                                    listems.add(listem);
-                                }
-                                SimpleAdapter simplead = new SimpleAdapter(AddActivity.this, listems,
-                                        R.layout.addhaoyou, new String[] { "name", "head", "desc" },
-                                        new int[] {R.id.name,R.id.head,R.id.desc}){
-                                    @Override
-                                    public void setViewImage(final ImageView v, final  String value) {
-                                        // TODO Auto-generated method stub
-                                        if(v.getId()==R.id.head)
-                                        {
-                                            new Thread(new Runnable() {
-                                                @Override
-                                                public void run() {
-                                                    try{
-                                                        //通过图片Url返回Bitmap
-                                                        Bitmap bitmap = getBitmap(value);
-                                                        Log.d("12333","done:"+value);
-                                                        v.setImageBitmap(bitmap);
-                                                    }
-                                                    catch(Exception e){
-                                                        e.printStackTrace();
-                                                    }
-                                                }
-                                            }).start();
-                                        }
-                                        else{super.setViewImage(v, value);}
-                                    }
-
-                                };
-                                lv1.setAdapter(simplead);
-
-                            }
-                        }
-                    });
+                    Toast.makeText(AddActivity.this, "请输入正确的用户名或群组号", Toast.LENGTH_SHORT).show();
                 }
 
 

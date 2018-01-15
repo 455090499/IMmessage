@@ -31,6 +31,7 @@ import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.SQLQueryListener;
 import cn.bmob.v3.listener.UpdateListener;
+import qiu.niorgai.StatusBarCompat;
 
 import static android.content.ContentValues.TAG;
 
@@ -42,16 +43,22 @@ public class Info5Activity extends AppCompatActivity {
     private TextView tv2;
     private TextView tv3;
     private TextView tv4;
-    private ImageButton imgbtn;
+    private ImageButton imbtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_info5);
 
+        //透明状态栏
+        StatusBarCompat.translucentStatusBar(Info5Activity.this);
+        //SDK >= 21时, 取消状态栏的阴影
+        StatusBarCompat.translucentStatusBar(Info5Activity.this,true);
+
+
         btn1 = (Button) findViewById(R.id.info5_btn1);
         btn2 = (Button) findViewById(R.id.info5_btn2);
-        imgbtn = (ImageButton) findViewById(R.id.info5_imbtn);
+        imbtn = (ImageButton) findViewById(R.id.info5_imbtn);
         img = (ImageView) findViewById(R.id.info5_im);
         //   tv1=(TextView)findViewById(R.id.info5_tv1);
         tv2 = (TextView) findViewById(R.id.info5_tv2);
@@ -175,18 +182,19 @@ public class Info5Activity extends AppCompatActivity {
                     Intent intent1=new Intent(Info5Activity.this,Body1Activity.class);
                     startActivity(intent1);
                 }
-                imgbtn.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent1 = new Intent(Info5Activity.this, Showgroupers.class);
-                        intent1.putExtra("gid", tv4.getText().toString());
-                        startActivity(intent1);
 
-                    }
-                });
 
             }
 
+        });
+        imbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent1 = new Intent(Info5Activity.this, Showgroupers.class);
+                intent1.putExtra("gid", tv4.getText().toString());
+                startActivity(intent1);
+
+            }
         });
 
     }

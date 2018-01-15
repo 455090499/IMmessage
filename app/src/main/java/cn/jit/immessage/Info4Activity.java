@@ -23,6 +23,7 @@ import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.datatype.BmobFile;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.FindListener;
+import qiu.niorgai.StatusBarCompat;
 
 public class Info4Activity extends AppCompatActivity {
     private Button btn;
@@ -38,6 +39,13 @@ public class Info4Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_info4);
+
+
+        //透明状态栏
+        StatusBarCompat.translucentStatusBar(Info4Activity.this);
+        //SDK >= 21时, 取消状态栏的阴影
+        StatusBarCompat.translucentStatusBar(Info4Activity.this,true);
+
         tv1 = (TextView) findViewById(R.id.info4_tv1);
         tv2 = (TextView) findViewById(R.id.info4_tv2);
         tv3 = (TextView) findViewById(R.id.info4_tv3);
@@ -48,7 +56,6 @@ public class Info4Activity extends AppCompatActivity {
 
         Intent intent = getIntent();
         String desc = intent.getStringExtra("desc");
-        Toast.makeText(Info4Activity.this,desc,Toast.LENGTH_SHORT).show();
 
         BmobQuery<uinfo> bmobQuery = new BmobQuery<>();
         bmobQuery.addWhereEqualTo("phone", desc);

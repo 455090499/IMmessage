@@ -9,6 +9,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import qiu.niorgai.StatusBarCompat;
+
 public class Chat2Activity extends AppCompatActivity {
     private Button btn1;
     private Button btn2;
@@ -18,6 +20,12 @@ public class Chat2Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat2);
+
+        //透明状态栏
+        StatusBarCompat.translucentStatusBar(Chat2Activity.this);
+        //SDK >= 21时, 取消状态栏的阴影
+        StatusBarCompat.translucentStatusBar(Chat2Activity.this,true);
+
         btn1=(Button)findViewById(R.id.chat2_btn1);
         btn2=(Button)findViewById(R.id.chat2_btn2);
         tv1=(TextView) findViewById(R.id.chat2_tv1);

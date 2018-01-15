@@ -31,6 +31,7 @@ import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.UpdateListener;
 import cn.bmob.v3.listener.UploadFileListener;
+import qiu.niorgai.StatusBarCompat;
 
 import static cn.jit.immessage.Body1Activity.rff;
 
@@ -42,10 +43,9 @@ public class Info3Activity extends AppCompatActivity {
     private String isex ="";
     private RadioButton rb1;
     private RadioButton rb2;
-    private Button btn1;
-    private Button btn2;
     private Button btn3;
     private Button btn4;
+    private ImageView im;
     private uinfo ufo2=new uinfo();
     private boolean fphoto=false;
 
@@ -53,8 +53,13 @@ public class Info3Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_info3);
-        btn1=(Button)findViewById(R.id.info3_btn1);
-        btn2=(Button)findViewById(R.id.info3_btn2);
+
+        //透明状态栏
+        StatusBarCompat.translucentStatusBar(Info3Activity.this);
+        //SDK >= 21时, 取消状态栏的阴影
+        StatusBarCompat.translucentStatusBar(Info3Activity.this,true);
+
+        im=(ImageView)findViewById(R.id.info3_im);
         btn3=(Button)findViewById(R.id.info3_btn3);
         btn4=(Button)findViewById(R.id.info3_btn4);
         edt1=(EditText)findViewById(R.id.info3_et1);
@@ -73,7 +78,7 @@ public class Info3Activity extends AppCompatActivity {
             }
         });
 
-        btn1.setOnClickListener(new View.OnClickListener() {
+        im.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 fphoto=true;
@@ -81,7 +86,7 @@ public class Info3Activity extends AppCompatActivity {
                 startActivityForResult(i,2);
             }
         });
-        btn2.setOnClickListener(new View.OnClickListener() {
+        text.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 final Calendar c = Calendar.getInstance();
