@@ -1,5 +1,6 @@
 package cn.jit.immessage;
 
+import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -43,12 +44,16 @@ import static android.content.ContentValues.TAG;
 
 public class DemoFragment extends Fragment {
    private ListView listView;
+    String[] toolbar=new String[]{"消息","好友","群组"};
+
 
     @Nullable
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.body_message, container, false);
         int type = getArguments().getInt("type", 0);
         listView = (ListView) view.findViewById(R.id.body_message_lv);
+
+
 
         //textView.setText(type == 0 ? "1st Fragment" : type == 1 ? "2nd Fragment" : type == 2 ? "3rd Fragment" : "4th Fragment");
         if (type == 0)
@@ -70,12 +75,15 @@ public class DemoFragment extends Fragment {
            SimpleAdapter simplead = new SimpleAdapter(getActivity(), listems,
                    R.layout.xiaoxi, new String[] { "name", "head", "desc" },
                    new int[] {R.id.name,R.id.head,R.id.desc});
+
             listView.setAdapter(simplead);
+            //Body1Activity.tv.setText(toolbar[0]);
 
             simplead.notifyDataSetChanged();
         }
         if (type == 1)
         {
+
             Log.d("1111","haoyou");
             String bql ="select * from uinfo where phone in (select fphone from pfriend where phone = '"+Body1Activity.p1.getPhone()+"')";
             BmobQuery<uinfo> query=new BmobQuery<uinfo>();
@@ -130,6 +138,8 @@ public class DemoFragment extends Fragment {
 
                             };
                             listView.setAdapter(simplead);
+                        //Body1Activity.tv.setText(toolbar[1]);
+
                             simplead.notifyDataSetChanged();
                             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                                 @Override
@@ -150,6 +160,7 @@ public class DemoFragment extends Fragment {
         }
         if (type == 2)
         {
+
             Log.d("2222","qunzu");
             String bql ="select * from  ginfo where gid in (select gid from gphone where phone = '"+Body1Activity.p1.getPhone()+"')";
             BmobQuery<ginfo> query=new BmobQuery<ginfo>();
@@ -205,6 +216,7 @@ public class DemoFragment extends Fragment {
                         };
 
                         listView.setAdapter(simplead);
+                        //Body1Activity.tv.setText(toolbar[2]);
                         simplead.notifyDataSetChanged();
 
 

@@ -64,7 +64,13 @@ public class AddgroupActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = getIntent();
                 String name = intent.getStringExtra("name");
-                gphone.insertgphone(name,et1.getText().toString());
+                String gid=intent.getStringExtra("gid");
+                if(name!=null){
+                    gphone.insertgphone(name,et1.getText().toString());
+                }else if(gid!=null){
+                    gphone.insertgphone(gid,et1.getText().toString());
+                }
+
             }
         });
         im.setOnClickListener(new View.OnClickListener() {

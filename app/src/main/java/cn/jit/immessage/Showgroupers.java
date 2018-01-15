@@ -32,6 +32,7 @@ import static android.content.ContentValues.TAG;
 
 public class Showgroupers extends AppCompatActivity {
     private Button btn1;
+    private Button btn2;
     private ListView lv1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,14 +40,27 @@ public class Showgroupers extends AppCompatActivity {
         setContentView(R.layout.activity_showgroupers);
         lv1=(ListView)findViewById(R.id.showgroupers_lv1);
         btn1=(Button)findViewById(R.id.showgroupers_btn1);
+        btn2=(Button)findViewById(R.id.showgroupers_btn2);
+        Intent intent = getIntent();
+        final String  gid= intent.getStringExtra("gid");
+
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
             }
         });
-        Intent intent = getIntent();
-        String  gid= intent.getStringExtra("gid");
+        btn2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(Showgroupers.this,AddgroupActivity.class);
+                intent.putExtra("gid",gid);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+
 
 
         String bql ="select * from  uinfo where phone in (select phone from gphone where gid = '"+gid+"')";

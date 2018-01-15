@@ -43,4 +43,8 @@ dependencies {
     compile 'com.android.support:design:24.2.1'
     compile 'com.github.leibnik:WechatRadioBar:1.2'
     testCompile 'junit:junit:4.12'
+    compile ('com.github.niorgai:StatusBarCompat:2.1.4', {
+        exclude group: 'com.android.support'
+    })
+
 }

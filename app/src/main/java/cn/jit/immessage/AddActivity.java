@@ -3,8 +3,11 @@ package cn.jit.immessage;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.media.Image;
+import android.os.Build;
 import android.os.StrictMode;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -54,6 +57,16 @@ public class AddActivity extends AppCompatActivity {
         et1=(EditText)findViewById(R.id.add_et1);
         lv1 = (ListView) findViewById(R.id.add_lv1);
         im=(ImageView)findViewById(R.id.head);
+
+        if (Build.VERSION.SDK_INT >= 21) {
+            View decorView = getWindow().getDecorView();
+            int option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                    | View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
+            decorView.setSystemUiVisibility(option);
+            getWindow().setStatusBarColor(Color.TRANSPARENT);
+        }
+
+
 
         //图片设置
         StrictMode.setThreadPolicy(new

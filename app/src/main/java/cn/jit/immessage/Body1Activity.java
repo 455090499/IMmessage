@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -17,6 +19,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBar;
 import android.support.v7.view.menu.MenuBuilder;
 import android.util.Log;
 import android.view.View;
@@ -28,6 +31,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -47,6 +52,7 @@ import cn.bmob.v3.datatype.BmobFile;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.FindListener;
 import io.github.leibnik.wechatradiobar.WeChatRadioGroup;
+import qiu.niorgai.StatusBarCompat;
 
 public class Body1Activity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -57,8 +63,10 @@ public class Body1Activity extends AppCompatActivity
     private TextView header_tv2;
     public static String[] ffd = new String[60];  ;
     private ImageView im;
+    public static TextView tv;
     //获取个人信息页面
     private NavigationView navigationView ;
+
 
     static boolean islogin=false;
     pp p2=new pp();
@@ -108,6 +116,17 @@ public class Body1Activity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_body1);
 
+        //透明状态栏
+        StatusBarCompat.translucentStatusBar(Body1Activity.this);
+        //SDK >= 21时, 取消状态栏的阴影
+        StatusBarCompat.translucentStatusBar(Body1Activity.this,true);
+
+
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        tv=(TextView)findViewById(R.id.toolbar_text);
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         gradualRadioGroup = (WeChatRadioGroup) findViewById(R.id.radiogroup);
         navigationView= (NavigationView) findViewById(R.id.nav_view);
@@ -116,21 +135,13 @@ public class Body1Activity extends AppCompatActivity
         header_tv2=(TextView) headerLayout.findViewById(R.id.header_tv2);
         im=(ImageView)headerLayout.findViewById(R.id.imageView);
 
-       // View headerLayout = navigationView.getHeaderView(0);
-
-
-
-
         //图片设置
         StrictMode.setThreadPolicy(new
                 StrictMode.ThreadPolicy.Builder().detectDiskReads().detectDiskWrites().detectNetwork().penaltyLog().build());
-//        StrictMode.setVmPolicy(
-//                new StrictMode.VmPolicy.Builder().detectLeakedSqlLiteObjects().detectLeakedClosableObjects().penaltyLog().penaltyDeath().build());
 
         //获取login的登陆手机号
         SharedPreferences pre = getSharedPreferences("user", MODE_PRIVATE);
         String content1 = pre.getString("sms_content", "");
-
 
 
 
@@ -144,12 +155,9 @@ public class Body1Activity extends AppCompatActivity
         }
         DemoPagerAdapter demo=new DemoPagerAdapter(getSupportFragmentManager(), list);
          viewPager.setAdapter(demo);
+
         gradualRadioGroup.setViewPager(viewPager);
 
-
-
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout)
@@ -293,7 +301,7 @@ public class Body1Activity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-    class DemoPagerAdapter extends FragmentPagerAdapter {
+    class DemoPagerAdapter extends FragmentStatePagerAdapter {
         List<DemoFragment> mData;
         private  FragmentManager fm;
         public DemoPagerAdapter(FragmentManager fm) {
@@ -305,22 +313,11 @@ public class Body1Activity extends AppCompatActivity
             this.fm=fm;
             this.mData = data;
         }
-        public void setFragments(List<DemoFragment>  mData) {
-            if(this.mData != null){
-                FragmentTransaction ft = fm.beginTransaction();
-                for(Fragment f:this.mData){
-                    ft.remove(f);
-                }
-                ft.commit();
-                ft=null;
-                fm.executePendingTransactions();
-            }
-            this.mData = mData;
-            notifyDataSetChanged();
-        }
-
         @Override
         public Fragment getItem(int position) {
+
+           Log.d("88888","position="+position);
+
             return mData.get(position);
         }
 
@@ -329,11 +326,13 @@ public class Body1Activity extends AppCompatActivity
             return POSITION_NONE;
         }
 
-
         @Override
         public int getCount() {
+            Log.d("77777","mData.size()="+mData.size());
             return mData.size();
         }
+
+
     }
     public Bitmap getBitmap(String path) throws IOException {
         try {

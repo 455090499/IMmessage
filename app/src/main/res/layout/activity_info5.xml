@@ -171,6 +171,14 @@
             android:layout_marginTop="6dp"
             android:background="@mipmap/info5_groupers"/>
     </LinearLayout>
-
+    <Button
+        android:id="@+id/info5_btn2"
+        android:layout_width="100dp"
+        android:layout_height="35dp"
+        android:text="退出该群"
+        android:textSize="16dp"
+        android:layout_gravity="center"
+        android:background="@drawable/shape3_button"
+        android:layout_marginTop="30dp"/>
 
 </LinearLayout>

@@ -31,6 +31,16 @@
             android:text="返回"
             android:textColor="#ffffffff"
             android:textSize="18dp"/>
+        <Button
+            android:id="@+id/showgroupers_btn2"
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:text="邀请"
+            android:textSize="18dp"
+            android:background="@android:color/transparent"
+            android:layout_marginLeft="310dp"
+            android:textColor="#ffffffff"
+            />
 
     </RelativeLayout>
 
