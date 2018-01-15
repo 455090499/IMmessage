@@ -14,23 +14,37 @@
     <RelativeLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:background="#398dee"
-        android:layout_height="50dp">
-
+        android:background="@drawable/side_nav_bar2"
+        android:layout_height="70dp">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:orientation="vertical"
+        >
         <Button
             android:id="@+id/chat2_btn1"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:background="#398dee"
+            android:background="@android:color/transparent"
             android:drawableLeft="@mipmap/chat_back"
             android:drawablePadding="6dp"
             android:gravity="center"
-            android:paddingLeft="5dp"
-            android:text="返回"
+            android:paddingLeft="15dp"
             android:textColor="#ffffffff"
-            android:textSize="18dp"/>
+            android:textSize="18sp"/>
 
 
+        <Button
+            android:id="@+id/chat2_btn2"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_centerVertical="true"
+            android:background="@mipmap/chat_group"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:layout_marginEnd="10dp"
+            />
 
         <TextView
             android:id="@+id/chat2_tv1"
@@ -40,20 +54,10 @@
             android:text="群聊昵称"
             android:textColor="#ffffffff"
             android:textSize="20dp"
-            android:layout_alignBottom="@+id/chat2_btn2"
+            android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
-        <Button
-            android:id="@+id/chat2_btn2"
-            android:layout_width="60dp"
-            android:layout_height="match_parent"
-            android:text="资料"
-            android:textSize="18dp"
-            android:background="@android:color/transparent"
-            android:layout_marginLeft="310dp"
-            android:textColor="#ffffffff"
-            />
-
+    </RelativeLayout>
     </RelativeLayout>
 
     <android.support.v7.widget.RecyclerView
@@ -72,7 +76,7 @@
             android:layout_margin="8dp"
             android:layout_height="match_parent"
             android:background="@mipmap/chatting_plus_btn_icon"
-            android:layout_weight="0.03" />
+            />
 
         <EditText
             android:id="@+id/chat2_et1"

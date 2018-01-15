@@ -5,45 +5,51 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@mipmap/register"
     tools:context="cn.jit.immessage.Info1Activity">
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <RelativeLayout
+
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:orientation="horizontal"
-        android:background="@drawable/side_nav_bar2">
+        android:background="@drawable/side_nav_bar2"
+        android:layout_height="70dp">
 
-        <TextView
-            android:id="@+id/toptitle_tv"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center_horizontal|center"
-            android:text="编辑"
-            android:textColor="#ffffffff"
-            android:textSize="20dp" />
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:orientation="vertical"
+            >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal|center"
+                android:text="编辑"
+                android:textColor="#ffffffff"
+                android:textSize="18sp"
+                android:id="@+id/textView6" />
 
-        <Button
-            android:id="@+id/info3_btn4"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:background="@android:color/transparent"
-            android:drawableLeft="@mipmap/chat_back"
-            android:drawablePadding="6dp"
-            android:gravity="center"
-            android:paddingLeft="5dp"
-            android:text="返回"
-            android:textColor="#ffffffff"
-            android:textSize="18dp"/>
-        <Button
-            android:id="@+id/info3_btn3"
-            android:layout_width="60dp"
-            android:layout_height="match_parent"
-            android:text="保存"
-            android:textSize="18dp"
-            android:background="@android:color/transparent"
-            android:layout_marginLeft="310dp"
-            android:textColor="#ffffffff"
-            />
+            <Button
+                android:id="@+id/info3_btn4"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@android:color/transparent"
+                android:drawableLeft="@mipmap/chat_back"
+                android:gravity="center"
+                android:paddingLeft="15dp"
+                android:textColor="#ffffffff"
+                android:textSize="18sp"/>
+            <Button
+                android:id="@+id/info3_btn3"
+                android:layout_width="60dp"
+                android:layout_height="match_parent"
+                android:text="保存"
+                android:textSize="18sp"
+                android:background="@android:color/transparent"
+                android:layout_marginLeft="310dp"
+                android:textColor="#ffffffff"
+                />
+        </RelativeLayout>
+
+
 
 
     </RelativeLayout>
@@ -58,15 +64,15 @@
         android:layout_gravity="center"
         />
 
-    <Button
-        android:id="@+id/info3_btn1"
-        android:text="选择头像"
-        android:layout_width="70dp"
-        android:layout_height="30dp"
-        android:background="@drawable/shape_button"
-        android:layout_gravity="center"
-        android:layout_marginBottom="22dp"
-        />
+    <!--<Button-->
+        <!--android:id="@+id/info3_btn1"-->
+        <!--android:text="选择头像"-->
+        <!--android:layout_width="70dp"-->
+        <!--android:layout_height="30dp"-->
+        <!--android:background="@drawable/shape_button"-->
+        <!--android:layout_gravity="center"-->
+        <!--android:layout_marginBottom="22dp"-->
+        <!--/>-->
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -79,7 +85,7 @@
             android:layout_width="80dp"
             android:layout_height="22dp"
             android:text="昵称"
-            android:textSize="18dp"
+            android:textSize="16sp"
             />
         <EditText
             android:id="@+id/info3_et1"
@@ -105,20 +111,19 @@
             android:layout_height="22dp"
             android:text="性别"
 
-            android:textSize="18dp"/>
+            android:textSize="16sp"/>
         <RadioGroup
 
             android:layout_width="wrap_content"
             android:layout_height="25dp"
             android:orientation="horizontal"
-
             android:id="@+id/info3_sex">
 
             <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="男"
-                android:textSize="18dp"
+                android:textSize="16sp"
                 android:id="@+id/info3_rb1"/>
 
             <RadioButton
@@ -126,7 +131,7 @@
                 android:layout_height="wrap_content"
                 android:text="女"
                 android:layout_marginLeft="50dp"
-                android:textSize="18dp"
+                android:textSize="16sp"
                 android:id="@+id/info3_rb2"/>
         </RadioGroup>
 
@@ -142,7 +147,7 @@
             android:layout_height="25dp"
 
             android:text="出生日期"
-            android:textSize="18dp"
+            android:textSize="16sp"
             />
 
         <TextView
@@ -151,15 +156,16 @@
             android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="3dp"
-            android:textSize="17dp"/>
+            android:text="2000-01-04"
+            android:textSize="17sp"/>
 
-        <Button
-            android:id="@+id/info3_btn2"
-            android:text="设置时间"
-            android:layout_width="75dp"
-            android:layout_height="28dp"
-            android:background="@drawable/shape3_button"
-            />
+        <!--<Button-->
+            <!--android:id="@+id/info3_btn2"-->
+            <!--android:text="设置时间"-->
+            <!--android:layout_width="75dp"-->
+            <!--android:layout_height="28dp"-->
+            <!--android:background="@drawable/shape3_button"-->
+            <!--/>-->
 
     </LinearLayout>
     <LinearLayout
@@ -174,7 +180,7 @@
             android:layout_height="22dp"
             android:text="邮箱地址"
 
-            android:textSize="18dp"
+            android:textSize="16sp"
             />
 
         <EditText
@@ -191,24 +197,24 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="40dp"
-        android:orientation="vertical">
+        android:orientation="horizontal">
 
         <TextView
             android:layout_width="80dp"
             android:layout_height="22dp"
             android:text="个人签名"
             android:layout_marginBottom="5dp"
-            android:textSize="18dp"
+            android:textSize="16sp"
              />
 
         <EditText
             android:id="@+id/info3_et3"
-            android:layout_width="280dp"
-            android:layout_height="64dp"
+            android:layout_width="200dp"
+            android:layout_height="32dp"
             android:paddingLeft="10dp"
             android:layout_marginLeft="3dp"
-
-            android:background="@drawable/shape5_button"/>
+            android:background="@drawable/shape3_button"
+            />
     </LinearLayout>
     <TextView
         android:layout_width="match_parent"

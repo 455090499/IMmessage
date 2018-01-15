@@ -6,7 +6,9 @@
     <ListView
         android:id="@+id/body_message_lv"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+
+        >
     </ListView>
 
 

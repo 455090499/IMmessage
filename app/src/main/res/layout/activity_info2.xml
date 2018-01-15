@@ -13,45 +13,55 @@
         <!--android:layout_height="wrap_content"></cn.jit.immessage.TopTitle>-->
 
     <RelativeLayout
-        android:orientation="vertical"
+
         android:layout_width="match_parent"
         android:background="@drawable/side_nav_bar2"
-        android:layout_height="50dp">
-        <TextView
+        android:layout_height="70dp">
 
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center_horizontal|center"
-            android:text="个人信息"
-            android:textColor="#ffffffff"
-            android:textSize="20dp" />
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:orientation="vertical"
+            >
+            <TextView
 
-        <Button
-            android:id="@+id/info2_btn1"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:background="@android:color/transparent"
-            android:drawableLeft="@mipmap/chat_back"
-            android:drawablePadding="6dp"
-            android:gravity="center"
-            android:paddingLeft="5dp"
-            android:text="返回"
-            android:textColor="#ffffffff"
-            android:textSize="18dp"/>
-        <Button
-            android:id="@+id/info2_btn2"
-            android:layout_width="60dp"
-            android:layout_height="match_parent"
-            android:text="编辑"
-            android:textSize="18dp"
-            android:background="@android:color/transparent"
-            android:layout_marginLeft="310dp"
-            android:textColor="#ffffffff"
-            />
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal|center"
+                android:text="个人信息"
+                android:textColor="#ffffffff"
+                android:textSize="18sp"
+                android:id="@+id/textView6" />
+
+            <Button
+                android:id="@+id/info2_btn1"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@android:color/transparent"
+                android:drawableLeft="@mipmap/chat_back"
+                android:gravity="center"
+                android:paddingLeft="15dp"
+                android:textColor="#ffffffff"
+                android:textSize="18sp"/>
+            <Button
+                android:id="@+id/info2_btn2"
+                android:layout_width="60dp"
+                android:layout_height="match_parent"
+                android:text="编辑"
+                android:textSize="18sp"
+                android:background="@android:color/transparent"
+                android:layout_marginLeft="310dp"
+                android:textColor="#ffffffff"
+                />
+        </RelativeLayout>
+
+
+
 
     </RelativeLayout>
+
     <LinearLayout
-        android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:background="#ffffff">
@@ -59,7 +69,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
+            android:textSize="16sp"
             android:paddingLeft="16dp"
             android:layout_gravity="center"
             android:textColor="#000000"
@@ -70,8 +80,8 @@
 
         <cn.jit.immessage.Round1ImageViewActivity
             android:id="@+id/info2_im"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
             android:layout_gravity="center"
             android:layout_marginRight="16dp"
             android:src="@mipmap/touxiang1"
@@ -90,7 +100,7 @@
             android:layout_gravity="center"
             android:layout_marginLeft="16dp"
             android:textColor="#000000"
-            android:textSize="20sp" />
+            android:textSize="16sp" />
         <View  android:layout_width="wrap_content"
             android:layout_height="1dp"
             android:layout_weight="1" />
@@ -101,7 +111,7 @@
             android:layout_gravity="center"
             android:layout_marginRight="16dp"
             android:text="Mrs Huang"
-            android:textSize="20sp"/>
+            android:textSize="17sp"/>
     </LinearLayout>
 
     <LinearLayout
@@ -116,10 +126,11 @@
             android:layout_gravity="center"
             android:textColor="#000000"
             android:layout_marginLeft="16dp"
-            android:textSize="20sp" />
+            android:textSize="16sp" />
         <View  android:layout_width="wrap_content"
             android:layout_height="1dp"
             android:layout_weight="1" />
+
         <TextView
             android:id="@+id/info2_tv2"
             android:layout_width="wrap_content"
@@ -127,7 +138,7 @@
             android:layout_marginRight="16dp"
             android:layout_gravity="center"
             android:text="1997-07-07"
-            android:textSize="20sp"/>
+            android:textSize="17sp"/>
     </LinearLayout>
 
     <LinearLayout
@@ -142,7 +153,7 @@
             android:textColor="#000000"
             android:layout_marginLeft="16dp"
             android:layout_gravity="center"
-            android:textSize="20sp" />
+            android:textSize="16sp" />
         <View  android:layout_width="wrap_content"
             android:layout_height="1dp"
             android:layout_weight="1" />
@@ -153,7 +164,7 @@
             android:layout_gravity="center"
             android:layout_marginRight="16dp"
             android:text="男"
-            android:textSize="20sp"/>
+            android:textSize="17sp"/>
     </LinearLayout>
 
     <LinearLayout
@@ -161,6 +172,7 @@
         android:layout_height="50dp"
         android:layout_marginTop="0.4dp"
         android:background="#ffffff">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -168,7 +180,9 @@
             android:textColor="#000000"
             android:layout_gravity="center"
             android:layout_marginLeft="16dp"
-            android:textSize="20sp" />
+            android:textSize="16sp"
+            android:id="@+id/textView5" />
+
         <View  android:layout_width="wrap_content"
             android:layout_height="1dp"
             android:layout_weight="1" />
@@ -179,7 +193,7 @@
             android:layout_gravity="center"
             android:layout_marginRight="16dp"
             android:text="123456789@qq.com"
-            android:textSize="20sp"/>
+            android:textSize="17sp"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="wrap_content"
@@ -194,7 +208,7 @@
             android:layout_gravity="center"
             android:textColor="#000000"
             android:layout_marginLeft="16dp"
-            android:textSize="20sp" />
+            android:textSize="16sp" />
         <View  android:layout_width="wrap_content"
             android:layout_height="1dp"
             android:layout_weight="1" />
@@ -205,7 +219,7 @@
             android:text="666"
             android:layout_gravity="center"
             android:layout_marginRight="16dp"
-            android:textSize="20sp"/>
+            android:textSize="17sp"/>
     </LinearLayout>
 
 </LinearLayout>

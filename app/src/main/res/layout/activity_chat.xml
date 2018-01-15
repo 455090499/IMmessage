@@ -14,8 +14,14 @@
     <RelativeLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:background="#398dee"
-        android:layout_height="50dp">
+        android:background="@drawable/side_nav_bar2"
+        android:layout_height="70dp">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:orientation="vertical"
+        >
         <TextView
             android:id="@+id/chat_tv1"
             android:layout_width="match_parent"
@@ -23,29 +29,32 @@
             android:gravity="center_horizontal|center"
             android:text="好友昵称"
             android:textColor="#ffffffff"
-            android:textSize="16dp" />
+            android:textSize="18sp" />
 
         <Button
             android:id="@+id/chat_btn1"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:background="#398dee"
+            android:background="@android:color/transparent"
             android:drawableLeft="@mipmap/chat_back"
-            android:drawablePadding="6dp"
             android:gravity="center"
-            android:paddingLeft="5dp"
-            android:text="返回"
+            android:paddingLeft="15dp"
             android:textColor="#ffffffff"
-            android:textSize="18dp"/>
+            android:textSize="18sp"/>
+
         <ImageButton
             android:id="@+id/chat_imbtn"
             android:layout_width="35dp"
-            android:layout_height="25dp"
-            android:layout_marginLeft="320dp"
-            android:layout_marginTop="13dp"
-            android:background="@mipmap/haoyou"/>
+            android:layout_height="35dp"
+            android:layout_gravity="center"
+            android:background="@mipmap/chat_friend"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:layout_marginEnd="10dp" />
 
 
+    </RelativeLayout>
 
     </RelativeLayout>
     <android.support.v7.widget.RecyclerView
@@ -64,7 +73,7 @@
             android:layout_margin="8dp"
             android:layout_height="match_parent"
             android:background="@mipmap/chatting_plus_btn_icon"
-            android:layout_weight="0.03" />
+             />
 
         <EditText
             android:id="@+id/chat_et1"

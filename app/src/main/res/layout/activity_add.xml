@@ -8,44 +8,55 @@
     <RelativeLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:background="#398dee"
-        android:layout_height="50dp">
-        <TextView
+        android:background="@drawable/side_nav_bar2"
+        android:layout_height="70dp">
 
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center_horizontal|center"
-            android:text="找人/群"
-            android:textColor="#ffffffff"
-            android:textSize="20dp" />
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:orientation="vertical"
+            >
+            <TextView
 
-        <Button
-            android:id="@+id/add_btn1"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:background="#398dee"
-            android:drawableLeft="@mipmap/chat_back"
-            android:drawablePadding="6dp"
-            android:gravity="center"
-            android:paddingLeft="5dp"
-            android:text="返回"
-            android:textColor="#ffffffff"
-            android:textSize="18dp"/>
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal|center"
+                android:text="找人/群"
+                android:textColor="#ffffffff"
+                android:textSize="18sp"
+                />
+
+            <Button
+                android:id="@+id/add_btn1"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@android:color/transparent"
+                android:drawableLeft="@mipmap/chat_back"
+                android:gravity="center"
+                android:paddingLeft="15dp"
+                android:textColor="#ffffffff"
+                android:textSize="18sp"/>
+
+        </RelativeLayout>
+
 
     </RelativeLayout>
+
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <EditText
             android:id="@+id/add_et1"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:layout_width="300dp"
-            android:layout_height="40dp"
+            android:layout_height="30dp"
             android:layout_marginLeft="10dp"
             android:drawableLeft="@mipmap/sousuo"
             android:maxLines="1"
             android:background="#E8E8E8"
+            android:textSize="15sp"
             android:hint="请输入所要添加的账号"/>
         <ImageButton
             android:id="@+id/add_imbtn"
@@ -82,4 +93,11 @@
             android:textSize="16sp"
             android:background="@drawable/shape2_button"/>
     </LinearLayout>
+
+
+
+
+
+
+
 </LinearLayout>
