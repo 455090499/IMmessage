@@ -1,25 +1,55 @@
 package cn.jit.immessage;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.view.KeyEvent;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import qiu.niorgai.StatusBarCompat;
+
+import static cn.jit.immessage.Body1Activity.socketContent;
 
 public class Chat2Activity extends AppCompatActivity {
     private Button btn1;
     private Button btn2;
+    private Button btn3;
     private TextView tv1;
+    private EditText et1;
+    private MsgAdapter adapter;
+    boolean visibility_Flag = false;
+    private List<Msg> msgList = new ArrayList<>();
+    private RecyclerView msgRecyclerView;
+    private RelativeLayout layout;
     private String desc;
+    private ImageButton imbtn1;
+
+    String sendphone;
+    String groupphone;
+    public static Handler mhandler;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat2);
+
+        SharedPreferences pre = getSharedPreferences("user", MODE_PRIVATE);
+        String content1 = pre.getString("sms_content", "");
+        sendphone = content1;
 
         //透明状态栏
         StatusBarCompat.translucentStatusBar(Chat2Activity.this);
@@ -28,13 +58,38 @@ public class Chat2Activity extends AppCompatActivity {
 
         btn1=(Button)findViewById(R.id.chat2_btn1);
         btn2=(Button)findViewById(R.id.chat2_btn2);
+        btn3=(Button)findViewById(R.id.chat2_btn3);
+        et1=(EditText)findViewById(R.id.chat2_et1);
+        layout = (RelativeLayout)findViewById(R.id.layout1);
+        msgRecyclerView = (RecyclerView) findViewById(R.id.chat2_rv1);
+        imbtn1=(ImageButton)findViewById(R.id.chat2_imbtn1);
         tv1=(TextView) findViewById(R.id.chat2_tv1);
+
 
         Intent intent = getIntent();
         String name = intent.getStringExtra("name");
         desc = intent.getStringExtra("desc");
-        Toast.makeText(Chat2Activity.this,name,Toast.LENGTH_SHORT).show();
+        groupphone = desc;
+        Body1Activity.flag = 2;
+        socketContent = sendphone + "," + "0" + "," + "alive" + groupphone + "\n";
         tv1.setText(name);
+
+        mhandler = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                if (msg.what == 0) {
+                    Mes bb = new Mes((String) msg.obj);
+                    if (!bb.getSend().equals(sendphone)) {
+                        if (bb.getRecv().equals(groupphone)) {
+                            Msg msg1 = new Msg(bb.getText(), Msg.TYPE_RECEIVCED);
+                            msgList.add(msg1);
+                        }
+                    }
+                }
+            }
+        };
+
+        initListener();
 
 
         btn1.setOnClickListener(new View.OnClickListener() {
@@ -52,7 +107,68 @@ public class Chat2Activity extends AppCompatActivity {
             }
         });
 
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        msgRecyclerView.setLayoutManager(layoutManager);
+        adapter = new MsgAdapter(msgList);
+        msgRecyclerView.setAdapter(adapter);
+        btn3.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                String content = et1.getText().toString();
+                if(!"".equals(content)) {
+                    Message mesg = new Message();
+                    mesg.what = 1;
+                    mesg.obj = new Mes(sendphone, groupphone, et1.getText().toString());
+                    Body1Activity.bodyThread.revHandler.sendMessage(mesg);
+
+                    Msg msg = new Msg(content, Msg.TYPE_SENT);
+                    msgList.add(msg);
+                    adapter.notifyItemChanged(msgList.size() - 1);
+                    msgRecyclerView.scrollToPosition(msgList.size() - 1);
+                    et1.setText("");
+                }
+            }
+        });
+
+        et1.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                String content = et1.getText().toString();
+                if(!"".equals(content)) {
+                    Message mesg = new Message();
+                    mesg.what = 1;
+                    mesg.obj = new Mes(sendphone, groupphone, et1.getText().toString());
+                    Body1Activity.bodyThread.revHandler.sendMessage(mesg);
+
+                    Msg msg = new Msg(content, Msg.TYPE_SENT);
+                    msgList.add(msg);
+                    adapter.notifyItemChanged(msgList.size() - 1);
+                    msgRecyclerView.scrollToPosition(msgList.size() - 1);
+                    et1.setText("");
+                }
+                return true;
+            }
+        });
+
     }
+
+    private void initListener() {
+        imbtn1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(visibility_Flag) {
+                    layout.setVisibility(View.VISIBLE);
+                    visibility_Flag = false;
+                } else {
+                    layout.setVisibility(View.GONE);
+                    visibility_Flag = true;
+                }
+            }
+        });
+    }
+
+
 }
 
 

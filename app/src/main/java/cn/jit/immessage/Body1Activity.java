@@ -10,6 +10,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
+import android.os.Message;
 import android.os.StrictMode;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -71,10 +72,15 @@ public class Body1Activity extends AppCompatActivity
     //获取个人信息页面
     private NavigationView navigationView ;
 
-
     static boolean islogin=false;
     pp p2=new pp();
-    static pp p1=new pp();
+    static pp p1;
+
+    private Handler mHandler;
+    public static BodyThread bodyThread;
+    public static String socketContent;
+    public static int flag = 0;
+    String sendphone;
 
     @Override
     protected void onResume() {
@@ -112,6 +118,8 @@ public class Body1Activity extends AppCompatActivity
         });
 
         super.onResume();
+        flag = 0;
+        socketContent = sendphone + "," + "0" + "," + "alive" + "\n";
 
     }
 
@@ -120,6 +128,9 @@ public class Body1Activity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_body1);
+
+        p1 = new pp();
+
 
         //透明状态栏
         StatusBarCompat.translucentStatusBar(Body1Activity.this);
@@ -148,6 +159,8 @@ public class Body1Activity extends AppCompatActivity
         SharedPreferences pre = getSharedPreferences("user", MODE_PRIVATE);
         String content1 = pre.getString("sms_content", "");
 
+        sendphone = content1;
+        socketContent = sendphone + "," + "0" + "," + "alive" + "\n";
 
 
 
@@ -314,12 +327,33 @@ public class Body1Activity extends AppCompatActivity
                 }
             });
 
-
-
-
-
-
         }
+        mHandler = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                if (msg.what == 0) {
+                    Mes bb = new Mes((String) msg.obj);
+                    if (!bb.getRecv().equals("0")) {
+                        if (bb.getSend().equals("0")) {
+                            if (bb.getText().length() == 11)
+                                Toast.makeText(Body1Activity.this, bb.getText() + "请求添加好友", Toast.LENGTH_SHORT).show();
+                            else {
+                                String[] array = bb.getText().split("/");
+                                Toast.makeText(Body1Activity.this, array[1] + "请求加群" + array[0], Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                        else
+                            Toast.makeText(Body1Activity.this, bb.getSend() + "发来消息", Toast.LENGTH_SHORT).show();
+                    }
+                }
+                super.handleMessage(msg);
+            }
+        };
+
+        bodyThread = new BodyThread(mHandler);
+        bodyThread.setSendphone(sendphone);
+        new Thread(bodyThread).start();
+
     }
 
 
@@ -404,6 +438,7 @@ public class Body1Activity extends AppCompatActivity
             editor.putString("isRem","0");
             editor.commit();
             startActivity(intent);
+            bodyThread.Socketclose();
             finish();
         } else if (id == R.id.nav_share) {
 

@@ -1,10 +1,14 @@
 package cn.jit.immessage;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,6 +20,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import qiu.niorgai.StatusBarCompat;
+
+import static cn.jit.immessage.Body1Activity.socketContent;
 
 public class ChatActivity extends AppCompatActivity  {
 
@@ -30,12 +36,18 @@ public class ChatActivity extends AppCompatActivity  {
     private RecyclerView msgRecyclerView;
     private TextView tv1;
     private ImageButton imbtn;
+    public static Handler mhandler;
 
+    String sendphone;
+    String recvphone;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
 
+        SharedPreferences pre = getSharedPreferences("user", MODE_PRIVATE);
+        String content1 = pre.getString("sms_content", "");
+        sendphone = content1;
 
         //透明状态栏
         StatusBarCompat.translucentStatusBar(ChatActivity.this);
@@ -54,8 +66,24 @@ public class ChatActivity extends AppCompatActivity  {
         Intent intent = getIntent();
         String name = intent.getStringExtra("name");
         final String desc = intent.getStringExtra("desc");
+        recvphone = desc;
+        Body1Activity.flag = 1;
+        socketContent = sendphone + "," + "0" + "," + "alive" + recvphone + "\n";
+
         tv1.setText(name+"");
 
+        mhandler = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                if (msg.what == 0) {
+                    Mes bb = new Mes((String) msg.obj);
+                    if (bb.getRecv().equals(sendphone)) {
+                        Msg msg1 = new Msg(bb.getText(),Msg.TYPE_RECEIVCED);
+                        msgList.add(msg1);
+                    }
+                }
+            }
+        };
 
         imbtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,11 +94,7 @@ public class ChatActivity extends AppCompatActivity  {
             }
         });
 
-
-
-
         initListener();
-        initMsgs();
 
 
         back.setOnClickListener(new View.OnClickListener() {
@@ -91,6 +115,11 @@ public class ChatActivity extends AppCompatActivity  {
             public void onClick(View v) {
                 String content = inputText.getText().toString();
                 if(!"".equals(content)) {
+                    Message mesg = new Message();
+                    mesg.what = 1;
+                    mesg.obj = new Mes(sendphone, recvphone, inputText.getText().toString());
+                    Body1Activity.bodyThread.revHandler.sendMessage(mesg);
+
                     Msg msg = new Msg(content, Msg.TYPE_SENT);
                     msgList.add(msg);
                     adapter.notifyItemChanged(msgList.size() - 1);
@@ -99,17 +128,27 @@ public class ChatActivity extends AppCompatActivity  {
                 }
             }
         });
-    }
 
-    private void initMsgs() {
-        Msg msg1 = new Msg("hello!",Msg.TYPE_RECEIVCED);
-        msgList.add(msg1);
-        Msg msg2 = new Msg("hello,who",Msg.TYPE_SENT);
-        msgList.add(msg2);
-        Msg msg3 = new Msg("this id mark",Msg.TYPE_RECEIVCED);
-        msgList.add(msg3);
-    }
+        inputText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                String content = inputText.getText().toString();
+                if(!"".equals(content)) {
+                    Message mesg = new Message();
+                    mesg.what = 1;
+                    mesg.obj = new Mes(sendphone, recvphone, inputText.getText().toString());
+                    Body1Activity.bodyThread.revHandler.sendMessage(mesg);
 
+                    Msg msg = new Msg(content, Msg.TYPE_SENT);
+                    msgList.add(msg);
+                    adapter.notifyItemChanged(msgList.size() - 1);
+                    msgRecyclerView.scrollToPosition(msgList.size() - 1);
+                    inputText.setText("");
+                }
+                return true;
+            }
+        });
+    }
 
 
     private void initListener() {
