@@ -102,6 +102,8 @@ public class Chat2Activity extends AppCompatActivity {
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent in = new Intent(Chat2Activity.this,Body1Activity.class);
+                startActivity(in);
                 finish();
             }
         });

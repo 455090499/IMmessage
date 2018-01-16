@@ -1,8 +1,10 @@
 package cn.jit.immessage;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -33,7 +35,7 @@ import qiu.niorgai.StatusBarCompat;
 public class AddgroupActivity extends AppCompatActivity {
 
     private Button button2;
-    private Button button3;
+//    private Button button3;
     private EditText et1;
     private ImageButton im;
     private ListView lv1;
@@ -52,28 +54,31 @@ public class AddgroupActivity extends AppCompatActivity {
         et1=(EditText)findViewById(R.id.addgroup_et1);
         im=(ImageButton)findViewById(R.id.addgroup_imbtn);
         button2=(Button)findViewById(R.id.addgroup_btn2);
-        button3=(Button)findViewById(R.id.addgroup_btn3);
+//        button3=(Button)findViewById(R.id.add_item_btn);
 
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                Intent in = new Intent(AddgroupActivity.this,Body1Activity.class);
+                startActivity(in);
                 finish();
             }
         });
-        button3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = getIntent();
-                String name = intent.getStringExtra("name");
-                String gid=intent.getStringExtra("gid");
-                if(name!=null){
-                    gphone.insertgphone(name,et1.getText().toString());
-                }else if(gid!=null){
-                    gphone.insertgphone(gid,et1.getText().toString());
-                }
-
-            }
-        });
+//        button3.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = getIntent();
+//                String name = intent.getStringExtra("name");
+//                String gid=intent.getStringExtra("gid");
+//                if(name!=null){
+//                    gphone.insertgphone(name,et1.getText().toString());
+//                }else if(gid!=null){
+//                    gphone.insertgphone(gid,et1.getText().toString());
+//                }
+//
+//            }
+//        });
         im.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -107,12 +112,12 @@ public class AddgroupActivity extends AppCompatActivity {
                                     listems.add(listem);
                                 }
                                 SimpleAdapter simplead = new SimpleAdapter(AddgroupActivity.this, listems,
-                                        R.layout.addhaoyou, new String[] { "name", "head", "desc" },
-                                        new int[] {R.id.name,R.id.head,R.id.desc}){
+                                        R.layout.additem, new String[] { "name", "head", "desc" },
+                                        new int[] {R.id.add_item_name,R.id.add_item_imag,R.id.add_item_desc}){
                                     @Override
                                     public void setViewImage(final ImageView v, final  String value) {
                                         // TODO Auto-generated method stub
-                                        if(v.getId()==R.id.head)
+                                        if(v.getId()==R.id.add_item_imag)
                                         {
                                             new Thread(new Runnable() {
                                                 @Override
@@ -122,6 +127,20 @@ public class AddgroupActivity extends AppCompatActivity {
                                                         Bitmap bitmap = getBitmap(value);
                                                         Log.d("12333","done:"+value);
                                                         v.setImageBitmap(bitmap);
+                                                        ((Button) findViewById(R.id.add_item_btn)).setOnClickListener(new View.OnClickListener() {
+                                                            @Override
+                                                            public void onClick(View v) {
+                                                                Toast.makeText(AddgroupActivity.this, "添加成功", Toast.LENGTH_LONG).show();
+                                                                Intent intent = getIntent();
+                                                                String name = intent.getStringExtra("name");
+                                                                String gid=intent.getStringExtra("gid");
+                                                                if(name!=null){
+                                                                    gphone.insertgphone(name,et1.getText().toString());
+                                                                }else if(gid!=null){
+                                                                    gphone.insertgphone(gid,et1.getText().toString());
+                                                                }
+                                                            }
+                                                        });
                                                     }
                                                     catch(Exception e){
                                                         e.printStackTrace();

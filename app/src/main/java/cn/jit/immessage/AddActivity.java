@@ -1,5 +1,6 @@
 package cn.jit.immessage;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -89,6 +90,10 @@ public class AddActivity extends AppCompatActivity {
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(isfound) {
+                    Intent in = new Intent(AddActivity.this,Body1Activity.class);
+                    startActivity(in);
+                }
                 finish();
             }
         });
@@ -122,7 +127,7 @@ public class AddActivity extends AppCompatActivity {
 
                                     listem.put("name", name[i]);
                                     listem.put("desc", desc[i]);
-                                    listem.put("head",head[i]);
+                                     listem.put("head",head[i]);
                                     listems.add(listem);
                                 }
                                 SimpleAdapter simplead = new SimpleAdapter(AddActivity.this, listems,
