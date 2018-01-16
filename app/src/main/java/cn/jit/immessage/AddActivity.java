@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.media.Image;
 import android.os.Build;
+import android.os.Message;
 import android.os.StrictMode;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -50,6 +51,11 @@ public class AddActivity extends AppCompatActivity {
     private boolean isfound=false;
     pfriend pfriend=new pfriend();
     gphone gphone=new gphone();
+
+    String sendphone;
+    String recvphone;
+    String groupphone;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,6 +67,10 @@ public class AddActivity extends AppCompatActivity {
         et1=(EditText)findViewById(R.id.add_et1);
         lv1 = (ListView) findViewById(R.id.add_lv1);
         im=(ImageView)findViewById(R.id.head);
+
+        SharedPreferences pre = getSharedPreferences("user", MODE_PRIVATE);
+        String content1 = pre.getString("sms_content", "");
+        sendphone = content1;
 
         if (Build.VERSION.SDK_INT >= 21) {
             View decorView = getWindow().getDecorView();
@@ -97,7 +107,7 @@ public class AddActivity extends AppCompatActivity {
                                 isfound=true;
                             for (uinfo u1 : list) {
 
-
+                                recvphone = u1.getPhone();
                                 BmobFile bmobFile=u1.getPhoto();
                                 String url = bmobFile.getFileUrl();
                                 String s1="(";
@@ -157,6 +167,10 @@ public class AddActivity extends AppCompatActivity {
                                                                 Toast.makeText(AddActivity.this, "添加成功", Toast.LENGTH_LONG).show();
                                                                 SharedPreferences pre = getSharedPreferences("user", MODE_PRIVATE);
                                                                 if(isfound) {
+                                                                    Message msg = new Message();
+                                                                    msg.what = 1;
+                                                                    msg.obj = new Mes(sendphone, "0", recvphone);
+                                                                    Body1Activity.bodyThread.revHandler.sendMessage(msg);
                                                                     pfriend.insertpfriend(pre.getString("sms_content", ""), et1.getText().toString());
                                                                 }
                                                             }
@@ -196,6 +210,8 @@ public class AddActivity extends AppCompatActivity {
                                 BmobFile bmobFile=gu1.getPhoto();
                                 String url = bmobFile.getFileUrl();
 
+                                recvphone = gu1.getPhone();
+                                groupphone = gu1.getGid();
                                 String s1 = "(";
                                 String s2 = ")";
                                 String[] name = {gu1.getGname()};
@@ -233,6 +249,10 @@ public class AddActivity extends AppCompatActivity {
                                                                 Toast.makeText(AddActivity.this, "添加成功", Toast.LENGTH_LONG).show();
                                                                 SharedPreferences pre = getSharedPreferences("user", MODE_PRIVATE);
                                                                 if(isfound) {
+                                                                    Message msg = new Message();
+                                                                    msg.what = 1;
+                                                                    msg.obj = new Mes(sendphone, "0", groupphone + "/" + recvphone);
+                                                                    Body1Activity.bodyThread.revHandler.sendMessage(msg);
                                                                     gphone.insertgphone(et1.getText().toString(),pre.getString("sms_content", "") );
                                                                 }
                                                             }
