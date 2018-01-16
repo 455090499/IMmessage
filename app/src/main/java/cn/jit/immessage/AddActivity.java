@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.media.Image;
 import android.os.Build;
+import android.os.Message;
 import android.os.StrictMode;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -14,6 +15,9 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -46,6 +50,12 @@ public class AddActivity extends AppCompatActivity {
     private ImageView im;
     private boolean isfound=false;
     pfriend pfriend=new pfriend();
+    gphone gphone=new gphone();
+
+    String sendphone;
+    String recvphone;
+    String groupphone;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,10 +63,14 @@ public class AddActivity extends AppCompatActivity {
 
         btn1=(Button)findViewById(R.id.add_btn1);
         btn2=(ImageButton)findViewById(R.id.add_imbtn);
-        btn3=(Button)findViewById(R.id.add_btn2);
+//        btn3=(Button)findViewById(R.id.add_item_btn);
         et1=(EditText)findViewById(R.id.add_et1);
         lv1 = (ListView) findViewById(R.id.add_lv1);
         im=(ImageView)findViewById(R.id.head);
+
+        SharedPreferences pre = getSharedPreferences("user", MODE_PRIVATE);
+        String content1 = pre.getString("sms_content", "");
+        sendphone = content1;
 
         if (Build.VERSION.SDK_INT >= 21) {
             View decorView = getWindow().getDecorView();
@@ -93,6 +107,7 @@ public class AddActivity extends AppCompatActivity {
                                 isfound=true;
                             for (uinfo u1 : list) {
 
+                                recvphone = u1.getPhone();
                                 BmobFile bmobFile=u1.getPhoto();
                                 String url = bmobFile.getFileUrl();
                                 String s1="(";
@@ -104,18 +119,39 @@ public class AddActivity extends AppCompatActivity {
                                 for (int i = 0; i < name.length; i++) {
                                     Map<String, Object> listem = new HashMap<String, Object>();
                                     //listem.put("head", imageids[i]);
+
                                     listem.put("name", name[i]);
                                     listem.put("desc", desc[i]);
                                     listem.put("head",head[i]);
                                     listems.add(listem);
                                 }
                                 SimpleAdapter simplead = new SimpleAdapter(AddActivity.this, listems,
-                                        R.layout.addhaoyou, new String[] { "name", "head", "desc" },
-                                        new int[] {R.id.name,R.id.head,R.id.desc}){
+                                        R.layout.additem, new String[] { "name", "head", "desc"},
+                                        new int[] {R.id.add_item_name,R.id.add_item_imag,R.id.add_item_desc}){
+
+
+//                                    @Override
+//                                    public View getView(int position, View convertView, ViewGroup parent) {
+//
+//                                        notifyDataSetChanged();
+//                                        btn3=(Button) convertView.findViewById(R.id.add_item_btn);
+//                                        final View view=super.getView(position, convertView, parent);
+//                                        btn3.setOnClickListener(new View.OnClickListener() {
+//                                            @Override
+//                                            public void onClick(View v) {
+//                                                SharedPreferences pre = getSharedPreferences("user", MODE_PRIVATE);
+//                                                if(isfound){
+//                                                    pfriend.insertpfriend(pre.getString("sms_content", ""),et1.getText().toString());
+//                                                    Toast.makeText(AddActivity.this, "添加成功", Toast.LENGTH_LONG).show() ;
+//                                                }
+//                                            }
+//                                        });
+//                                        return view;
+//                                    }
                                     @Override
                                     public void setViewImage(final ImageView v, final  String value) {
                                         // TODO Auto-generated method stub
-                                        if(v.getId()==R.id.head)
+                                        if(v.getId()==R.id.add_item_imag)
                                         {
                                             new Thread(new Runnable() {
                                                 @Override
@@ -125,6 +161,20 @@ public class AddActivity extends AppCompatActivity {
                                                         Bitmap bitmap = getBitmap(value);
                                                         Log.d("12333","done:"+value);
                                                         v.setImageBitmap(bitmap);
+                                                        ((Button) findViewById(R.id.add_item_btn)).setOnClickListener(new View.OnClickListener() {
+                                                            @Override
+                                                            public void onClick(View v) {
+                                                                Toast.makeText(AddActivity.this, "添加成功", Toast.LENGTH_LONG).show();
+                                                                SharedPreferences pre = getSharedPreferences("user", MODE_PRIVATE);
+                                                                if(isfound) {
+                                                                    Message msg = new Message();
+                                                                    msg.what = 1;
+                                                                    msg.obj = new Mes(sendphone, "0", recvphone);
+                                                                    Body1Activity.bodyThread.revHandler.sendMessage(msg);
+                                                                    pfriend.insertpfriend(pre.getString("sms_content", ""), et1.getText().toString());
+                                                                }
+                                                            }
+                                                        });
                                                     }
                                                     catch(Exception e){
                                                         e.printStackTrace();
@@ -135,14 +185,17 @@ public class AddActivity extends AppCompatActivity {
                                         else{super.setViewImage(v, value);}
                                     }
 
+
+
+
                                 };
                                 lv1.setAdapter(simplead);
+
 
                             }
                         }
                     });
-                }else if(et1.getText().toString().length() == 8){
-
+                }else{
                     BmobQuery<ginfo> bmobQuery = new BmobQuery<>();
                     bmobQuery.addWhereEqualTo("gid", et1.getText().toString());
                     bmobQuery.findObjects(new FindListener<ginfo>() {
@@ -156,12 +209,13 @@ public class AddActivity extends AppCompatActivity {
 
                                 BmobFile bmobFile=gu1.getPhoto();
                                 String url = bmobFile.getFileUrl();
-                                String gphone=gu1.getPhone();
 
+                                recvphone = gu1.getPhone();
+                                groupphone = gu1.getGid();
                                 String s1 = "(";
                                 String s2 = ")";
                                 String[] name = {gu1.getGname()};
-                                String[] desc = {s1+gu1.getGid()+s2};
+                                String[] desc = {(s1.concat(gu1.getGid())).concat(s2)};
                                 String[] head={url};
                                 List<Map<String, Object>> listems = new ArrayList<Map<String, Object>>();
                                 for (int i = 0; i < name.length; i++) {
@@ -174,12 +228,12 @@ public class AddActivity extends AppCompatActivity {
                                     listems.add(listem);
                                 }
                                 SimpleAdapter simplead = new SimpleAdapter(AddActivity.this, listems,
-                                        R.layout.addhaoyou, new String[] { "name", "head", "desc" },
-                                        new int[] {R.id.name,R.id.head,R.id.desc}){
+                                        R.layout.additem, new String[] { "name", "head", "desc" },
+                                        new int[] {R.id.add_item_name,R.id.add_item_imag,R.id.add_item_desc}){
                                     @Override
                                     public void setViewImage(final ImageView v, final  String value) {
                                         // TODO Auto-generated method stub
-                                        if(v.getId()==R.id.head)
+                                        if(v.getId()==R.id.add_item_imag)
                                         {
                                             new Thread(new Runnable() {
                                                 @Override
@@ -189,6 +243,20 @@ public class AddActivity extends AppCompatActivity {
                                                         Bitmap bitmap = getBitmap(value);
                                                         Log.d("12333","done:"+value);
                                                         v.setImageBitmap(bitmap);
+                                                        ((Button) findViewById(R.id.add_item_btn)).setOnClickListener(new View.OnClickListener() {
+                                                            @Override
+                                                            public void onClick(View v) {
+                                                                Toast.makeText(AddActivity.this, "添加成功", Toast.LENGTH_LONG).show();
+                                                                SharedPreferences pre = getSharedPreferences("user", MODE_PRIVATE);
+                                                                if(isfound) {
+                                                                    Message msg = new Message();
+                                                                    msg.what = 1;
+                                                                    msg.obj = new Mes(sendphone, "0", groupphone + "/" + recvphone);
+                                                                    Body1Activity.bodyThread.revHandler.sendMessage(msg);
+                                                                    gphone.insertgphone(et1.getText().toString(),pre.getString("sms_content", "") );
+                                                                }
+                                                            }
+                                                        });
                                                     }
                                                     catch(Exception e){
                                                         e.printStackTrace();
@@ -205,26 +273,24 @@ public class AddActivity extends AppCompatActivity {
                             }
                         }
                     });
-                }else{
-                    Toast.makeText(AddActivity.this, "请输入正确的用户名或群组号", Toast.LENGTH_SHORT).show();
                 }
 
 
             }
         });
-        btn3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SharedPreferences pre = getSharedPreferences("user", MODE_PRIVATE);
-                if(isfound){
-
-                    pfriend.insertpfriend(pre.getString("sms_content", ""),et1.getText().toString());
-                }
-
-
-
-            }
-        });
+//        btn3=(Button) findViewById(R.id.add_item_btn);
+//        btn3.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                SharedPreferences pre = getSharedPreferences("user", MODE_PRIVATE);
+//                if(isfound){
+//                    pfriend.insertpfriend(pre.getString("sms_content", ""),et1.getText().toString());
+//                }
+//
+//
+//
+//            }
+//        });
         et1.addTextChangedListener(new TextWatcher() {
 
 
