@@ -2,18 +2,23 @@ package cn.jit.immessage;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Rect;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.DisplayMetrics;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.ViewTreeObserver;
+import android.view.WindowManager;
 import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -65,6 +70,8 @@ public class Chat2Activity extends AppCompatActivity {
         imbtn1=(ImageButton)findViewById(R.id.chat2_imbtn1);
         tv1=(TextView) findViewById(R.id.chat2_tv1);
 
+        //EditText悬浮
+        resetSendMsgRl();
 
         Intent intent = getIntent();
         String name = intent.getStringExtra("name");
@@ -166,6 +173,36 @@ public class Chat2Activity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    //EditText悬浮
+    private void resetSendMsgRl(){
+
+        final View decorView=getWindow().getDecorView();
+        decorView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+
+            final LinearLayout rlContent = (LinearLayout) findViewById(R.id.chat2_layout);
+
+            @Override
+            public void onGlobalLayout() {
+                Rect rect=new Rect();
+                decorView.getWindowVisibleDisplayFrame(rect);
+                int screenHeight = getScreenHeight();
+                int heightDifference = screenHeight - rect.bottom;//计算软键盘占有的高度  = 屏幕高度 - 视图可见高度
+                LinearLayout.LayoutParams layoutParams= (LinearLayout.LayoutParams) rlContent.getLayoutParams();
+                layoutParams.setMargins(0,0,0,heightDifference);//设置rlContent的marginBottom的值为软键盘占有的高度即可
+                rlContent.requestLayout();
+            }
+        });
+    }
+
+
+    private int getScreenHeight(){
+        WindowManager manager = this.getWindowManager();
+        DisplayMetrics outMetrics = new DisplayMetrics();
+        manager.getDefaultDisplay().getMetrics(outMetrics);
+        int height = outMetrics.heightPixels;
+        return  height;
     }
 
 

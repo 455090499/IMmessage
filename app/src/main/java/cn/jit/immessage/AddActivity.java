@@ -156,6 +156,7 @@ public class AddActivity extends AppCompatActivity {
 
                                 BmobFile bmobFile=gu1.getPhoto();
                                 String url = bmobFile.getFileUrl();
+                                String gphone=gu1.getPhone();
 
                                 String s1 = "(";
                                 String s2 = ")";
@@ -216,6 +217,7 @@ public class AddActivity extends AppCompatActivity {
             public void onClick(View v) {
                 SharedPreferences pre = getSharedPreferences("user", MODE_PRIVATE);
                 if(isfound){
+
                     pfriend.insertpfriend(pre.getString("sms_content", ""),et1.getText().toString());
                 }
 

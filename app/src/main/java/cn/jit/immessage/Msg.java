@@ -8,13 +8,22 @@ public class Msg {
     public static final int TYPE_SENT = 1;
     private String content;
     private int type;
+    private String url;
 
     public Msg(String content, int type) {
         this.content = content;
         this.type = type;
     }
+    public Msg(String content, int type,String url) {
+        this.content = content;
+        this.type = type;
+        this.url=url;
+    }
     public String getContent() {
         return content;
+    }
+    public String getUrl() {
+        return url;
     }
     public int getType() {
         return  type;
