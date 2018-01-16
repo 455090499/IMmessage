@@ -6,11 +6,6 @@
     android:layout_width="match_parent"
     android:background="#d8e0e8">
 
-    <!--<cn.jit.immessage.TopTitle-->
-
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"></cn.jit.immessage.TopTitle>-->
-
     <RelativeLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -64,8 +59,18 @@
         android:layout_weight="1" />
 
     <LinearLayout
+        android:id="@+id/chat_layout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_width="match_parent">
+        android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        >
 
         <ImageButton
             android:id="@+id/chat_imbtn1"
@@ -122,5 +127,5 @@
             android:background="@mipmap/chatting_cam_icon"/>
 
     </RelativeLayout>
-
+    </LinearLayout>
 </LinearLayout>
