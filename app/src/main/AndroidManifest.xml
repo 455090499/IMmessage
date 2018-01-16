@@ -43,7 +43,12 @@
         <activity android:name=".AddActivity" />
         <activity android:name=".ForgetActivity" />
         <activity android:name=".AddgroupActivity" />
-        <activity android:name=".Showgroupers"></activity>
+        <activity android:name=".Showgroupers" />
+
+        <service
+            android:name=".BodyService"
+            android:enabled="true"
+            android:exported="true"></service>
     </application>
 
 </manifest>

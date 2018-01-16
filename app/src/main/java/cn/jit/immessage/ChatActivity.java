@@ -124,7 +124,7 @@ public class ChatActivity extends AppCompatActivity  {
                                     mesg.what = 1;
                                     mesg.obj = new Mes(sendphone, recvphone, inputText.getText().toString());
 
-                                    Body1Activity.bodyThread.revHandler.sendMessage(mesg);
+                                    BodyService.bodyThread.revHandler.sendMessage(mesg);
 
 
 
@@ -144,7 +144,7 @@ public class ChatActivity extends AppCompatActivity  {
                                     Message mesg = new Message();
                                     mesg.what = 1;
                                     mesg.obj = new Mes(sendphone, recvphone, inputText.getText().toString());
-                                    Body1Activity.bodyThread.revHandler.sendMessage(mesg);
+                                    BodyService.bodyThread.revHandler.sendMessage(mesg);
 
 
                                     Msg msg = new Msg(content, Msg.TYPE_SENT,url[0]);

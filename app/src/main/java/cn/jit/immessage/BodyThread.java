@@ -22,15 +22,15 @@ public class BodyThread implements Runnable {
     private Thread thread;
     public Handler revHandler;
 
-    String sendphone;
-
-    public void setSendphone(String sendphone) {
-        this.sendphone = sendphone;
-    }
-
-    public BodyThread(Handler handler) {
-        mHandler = handler;
-    }
+//    String sendphone;
+//
+//    public void setSendphone(String sendphone) {
+//        this.sendphone = sendphone;
+//    }
+//
+//    public BodyThread(Handler handler) {
+//        mHandler = handler;
+//    }
 
     @Override
     public void run() {
@@ -71,7 +71,7 @@ public class BodyThread implements Runnable {
                             msg.what = 0;
                             msg.obj = content;
                             if (Body1Activity.flag == 0)
-                                mHandler.sendMessage(msg);
+                                Body1Activity.mhandler.sendMessage(msg);
                             else if (Body1Activity.flag ==1)
                                 ChatActivity.mhandler.sendMessage(msg);
                             else if (Body1Activity.flag ==2)

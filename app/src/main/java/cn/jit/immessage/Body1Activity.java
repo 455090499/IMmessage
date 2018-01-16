@@ -76,8 +76,8 @@ public class Body1Activity extends AppCompatActivity
     pp p2=new pp();
     static pp p1;
 
-    private Handler mHandler;
-    public static BodyThread bodyThread;
+    public static Handler mhandler;
+//    public static BodyThread bodyThread;
     public static String socketContent;
     public static int flag = 0;
     String sendphone;
@@ -239,6 +239,8 @@ public class Body1Activity extends AppCompatActivity
 
         p1 = new pp();
 
+        Intent service = new Intent(Body1Activity.this, BodyService.class);
+        startService(service);
 
         //透明状态栏
         StatusBarCompat.translucentStatusBar(Body1Activity.this);
@@ -334,7 +336,7 @@ public class Body1Activity extends AppCompatActivity
 //                lista.add(fragment0);
 
         }
-        mHandler = new Handler() {
+        mhandler = new Handler() {
             @Override
             public void handleMessage(Message msg) {
                 if (msg.what == 0) {
@@ -356,9 +358,9 @@ public class Body1Activity extends AppCompatActivity
             }
         };
 
-        bodyThread = new BodyThread(mHandler);
-        bodyThread.setSendphone(sendphone);
-        new Thread(bodyThread).start();
+//        bodyThread = new BodyThread(mHandler);
+//        bodyThread.setSendphone(sendphone);
+//        new Thread(bodyThread).start();
 
     }
 
@@ -444,7 +446,9 @@ public class Body1Activity extends AppCompatActivity
             editor.putString("isRem","0");
             editor.commit();
             startActivity(intent);
-            bodyThread.Socketclose();
+            BodyService.bodyThread.Socketclose();
+            Intent service = new Intent(Body1Activity.this, BodyService.class);
+            stopService(service);
             finish();
         } else if (id == R.id.nav_share) {
 

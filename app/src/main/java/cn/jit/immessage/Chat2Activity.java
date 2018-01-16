@@ -129,7 +129,7 @@ public class Chat2Activity extends AppCompatActivity {
                     Message mesg = new Message();
                     mesg.what = 1;
                     mesg.obj = new Mes(sendphone, groupphone, et1.getText().toString());
-                    Body1Activity.bodyThread.revHandler.sendMessage(mesg);
+                    BodyService.bodyThread.revHandler.sendMessage(mesg);
 
                     Msg msg = new Msg(content, Msg.TYPE_SENT);
                     msgList.add(msg);
@@ -148,7 +148,7 @@ public class Chat2Activity extends AppCompatActivity {
                     Message mesg = new Message();
                     mesg.what = 1;
                     mesg.obj = new Mes(sendphone, groupphone, et1.getText().toString());
-                    Body1Activity.bodyThread.revHandler.sendMessage(mesg);
+                    BodyService.bodyThread.revHandler.sendMessage(mesg);
 
                     Msg msg = new Msg(content, Msg.TYPE_SENT);
                     msgList.add(msg);

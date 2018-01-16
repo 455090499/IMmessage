@@ -175,7 +175,7 @@ public class AddActivity extends AppCompatActivity {
                                                                     Message msg = new Message();
                                                                     msg.what = 1;
                                                                     msg.obj = new Mes(sendphone, "0", recvphone);
-                                                                    Body1Activity.bodyThread.revHandler.sendMessage(msg);
+                                                                    BodyService.bodyThread.revHandler.sendMessage(msg);
                                                                     pfriend.insertpfriend(pre.getString("sms_content", ""), et1.getText().toString());
                                                                 }
                                                             }
@@ -257,7 +257,7 @@ public class AddActivity extends AppCompatActivity {
                                                                     Message msg = new Message();
                                                                     msg.what = 1;
                                                                     msg.obj = new Mes(sendphone, "0", groupphone + "/" + recvphone);
-                                                                    Body1Activity.bodyThread.revHandler.sendMessage(msg);
+                                                                    BodyService.bodyThread.revHandler.sendMessage(msg);
                                                                     gphone.insertgphone(et1.getText().toString(),pre.getString("sms_content", "") );
                                                                 }
                                                             }
