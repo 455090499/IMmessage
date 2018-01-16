@@ -79,20 +79,7 @@
         >
     </ListView>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:layout_alignParentBottom="true">
-        <Button
-            android:id="@+id/add_btn2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:text="添加"
-            android:textSize="16sp"
-            android:background="@drawable/shape2_button"/>
-    </LinearLayout>
+
 
 
 
