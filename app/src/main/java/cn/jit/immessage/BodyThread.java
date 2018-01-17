@@ -15,7 +15,7 @@ import static cn.jit.immessage.Body1Activity.socketContent;
 
 
 public class BodyThread implements Runnable {
-    private Socket mSocket;
+    private Socket mSocket = null;
     private BufferedReader mBufferedReader = null;
     private OutputStream mOutputStream = null;
     private Handler mHandler;
@@ -105,7 +105,8 @@ public class BodyThread implements Runnable {
 
     public void Socketclose() {
         try {
-            mSocket.close();
+            if (mSocket != null)
+                mSocket.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
