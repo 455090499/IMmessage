@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewTreeObserver;
@@ -26,6 +27,10 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.bmob.v3.BmobQuery;
+import cn.bmob.v3.datatype.BmobQueryResult;
+import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.SQLQueryListener;
 import qiu.niorgai.StatusBarCompat;
 
 import static cn.jit.immessage.Body1Activity.socketContent;
@@ -81,17 +86,75 @@ public class Chat2Activity extends AppCompatActivity {
         socketContent = sendphone + "," + "0" + "," + "alive" + groupphone + "\n";
         tv1.setText(name);
 
+        String bql = "select * from uinfo where phone='" + sendphone+ "'";
+        BmobQuery<uinfo> query = new BmobQuery<uinfo>();
+        query.setSQL(bql);
+        query.doSQLQuery(new SQLQueryListener<uinfo>() {
+            @Override
+            public void done(BmobQueryResult<uinfo> result, BmobException e) {
+                if (e == null) {
+                    List<uinfo> list = (List<uinfo>) result.getResults();
+                    for (uinfo uf1 : list) {
+                        final String url1 = uf1.getPhoto().getFileUrl();
+
+                        btn3.setOnClickListener(new View.OnClickListener(){
+                            @Override
+                            public void onClick(View v) {
+                                String content = et1.getText().toString();
+                                if(!"".equals(content)) {
+                                    Message mesg = new Message();
+                                    mesg.what = 1;
+                                    mesg.obj = new Mes(sendphone, groupphone, et1.getText().toString());
+                                    BodyService.bodyThread.revHandler.sendMessage(mesg);
+
+                                    Msg msg = new Msg(content, Msg.TYPE_SENT,url1);
+                                    msgList.add(msg);
+                                    adapter.notifyItemChanged(msgList.size() - 1);
+                                    msgRecyclerView.scrollToPosition(msgList.size() - 1);
+                                    et1.setText("");
+                                }
+                            }
+                        });
+
+                    }
+                }
+            }
+        });
+
+
         mhandler = new Handler() {
             @Override
             public void handleMessage(Message msg) {
                 if (msg.what == 0) {
-                    Mes bb = new Mes((String) msg.obj);
-                    if (!bb.getSend().equals(sendphone)) {
-                        if (bb.getRecv().equals(groupphone)) {
-                            Msg msg1 = new Msg(bb.getText(), Msg.TYPE_RECEIVCED);
-                            msgList.add(msg1);
+                    final Mes bb = new Mes((String) msg.obj);
+                    String recv_phone=bb.getSend();
+                String bql = "select * from uinfo where phone='" + recv_phone+ "'";
+                BmobQuery<uinfo> query = new BmobQuery<uinfo>();
+                //设置查询的SQL语句
+                query.setSQL(bql);
+                query.doSQLQuery(new SQLQueryListener<uinfo>() {
+
+                    @Override
+                    public void done(BmobQueryResult<uinfo> result, BmobException e) {
+                        if (e == null) {
+                            List<uinfo> list = (List<uinfo>) result.getResults();
+                            for (uinfo uf1 : list) {
+                                final String url2 = uf1.getPhoto().getFileUrl();
+                                if (!bb.getSend().equals(sendphone)) {
+                                    if (bb.getRecv().equals(groupphone)) {
+                                        Msg msg1 = new Msg(bb.getText(), Msg.TYPE_RECEIVCED,url2);
+                                        msgList.add(msg1);
+                                    }
+                                }
+
+                            }
                         }
+
                     }
+                });
+
+
+
                 }
             }
         };
@@ -120,25 +183,7 @@ public class Chat2Activity extends AppCompatActivity {
         msgRecyclerView.setLayoutManager(layoutManager);
         adapter = new MsgAdapter(msgList);
         msgRecyclerView.setAdapter(adapter);
-        btn3.setOnClickListener(new View.OnClickListener(){
 
-            @Override
-            public void onClick(View v) {
-                String content = et1.getText().toString();
-                if(!"".equals(content)) {
-                    Message mesg = new Message();
-                    mesg.what = 1;
-                    mesg.obj = new Mes(sendphone, groupphone, et1.getText().toString());
-                    BodyService.bodyThread.revHandler.sendMessage(mesg);
-
-                    Msg msg = new Msg(content, Msg.TYPE_SENT);
-                    msgList.add(msg);
-                    adapter.notifyItemChanged(msgList.size() - 1);
-                    msgRecyclerView.scrollToPosition(msgList.size() - 1);
-                    et1.setText("");
-                }
-            }
-        });
 
         et1.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
