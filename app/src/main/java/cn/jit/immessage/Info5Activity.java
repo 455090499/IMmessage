@@ -1,5 +1,7 @@
 package cn.jit.immessage;
 
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -100,93 +102,195 @@ public class Info5Activity extends AppCompatActivity {
                 finish();
             }
         });
+
+
         btn2.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
-                SharedPreferences pre = getSharedPreferences("user", MODE_PRIVATE);
-                String content = pre.getString("sms_content", "");
-                if (content.equals(tv2.getText().toString())) {
-                    BmobQuery<gphone> bmobQuery = new BmobQuery<>();
-                    bmobQuery.addWhereEqualTo("gid", tv4.getText().toString());
-                    bmobQuery.findObjects(new FindListener<gphone>() {
-                        @Override
-                        public void done(List<gphone> list, BmobException e) {
-                            for (gphone u1 : list) {
-                                u1.delete(new UpdateListener() {
+                new CommomDialog(Info5Activity.this, R.style.dialog, "您确定退出该群？", new CommomDialog.OnCloseListener() {
+                    @Override
+                    public void onClick(Dialog dialog,boolean confirm) {
+                        if(confirm){
+                            SharedPreferences pre = getSharedPreferences("user", MODE_PRIVATE);
+                            String content = pre.getString("sms_content", "");
+                            if (content.equals(tv2.getText().toString())) {
+                                BmobQuery<gphone> bmobQuery = new BmobQuery<>();
+                                bmobQuery.addWhereEqualTo("gid", tv4.getText().toString());
+                                bmobQuery.findObjects(new FindListener<gphone>() {
                                     @Override
-                                    public void done(BmobException e) {
-                                        if (e == null) {
-                                            Toast.makeText(Info5Activity.this, "删除gphone成功", Toast.LENGTH_SHORT).show();
-                                        } else {
-                                            Toast.makeText(Info5Activity.this, "删除gphone失败", Toast.LENGTH_SHORT).show();
+                                    public void done(List<gphone> list, BmobException e) {
+                                        for (gphone u1 : list) {
+                                            u1.delete(new UpdateListener() {
+                                                @Override
+                                                public void done(BmobException e) {
+                                                    if (e == null) {
+                                                        Toast.makeText(Info5Activity.this, "删除gphone成功", Toast.LENGTH_SHORT).show();
+                                                    } else {
+                                                        Toast.makeText(Info5Activity.this, "删除gphone失败", Toast.LENGTH_SHORT).show();
 
+                                                    }
+                                                }
+                                            });
                                         }
                                     }
                                 });
-                            }
-                        }
-                    });
-                    BmobQuery<ginfo> bmobQuery1 = new BmobQuery<>();
-                    bmobQuery1.addWhereEqualTo("phone", content);
-                    bmobQuery1.findObjects(new FindListener<ginfo>() {
-                        @Override
-                        public void done(List<ginfo> list, BmobException e) {
-                            for (ginfo u1 : list) {
-                                u1.delete(new UpdateListener() {
+                                BmobQuery<ginfo> bmobQuery1 = new BmobQuery<>();
+                                bmobQuery1.addWhereEqualTo("phone", content);
+                                bmobQuery1.addWhereEqualTo("gid",tv4.getText().toString());
+                                bmobQuery1.findObjects(new FindListener<ginfo>() {
                                     @Override
-                                    public void done(BmobException e) {
-                                        if (e == null) {
-                                            Toast.makeText(Info5Activity.this, "删除ginfo成功", Toast.LENGTH_SHORT).show();
-                                        } else {
-                                            Toast.makeText(Info5Activity.this, "删除ginfo失败", Toast.LENGTH_SHORT).show();
+                                    public void done(List<ginfo> list, BmobException e) {
+                                        for (ginfo u1 : list) {
+                                            u1.delete(new UpdateListener() {
+                                                @Override
+                                                public void done(BmobException e) {
+                                                    if (e == null) {
+                                                        Toast.makeText(Info5Activity.this, "删除ginfo成功", Toast.LENGTH_SHORT).show();
+                                                    } else {
+                                                        Toast.makeText(Info5Activity.this, "删除ginfo失败", Toast.LENGTH_SHORT).show();
 
+                                                    }
+                                                }
+                                            });
                                         }
                                     }
                                 });
-                            }
-                        }
-                    });
-                    Intent intent1=new Intent(Info5Activity.this,Body1Activity.class);
-                    startActivity(intent1);
+                                Intent intent1=new Intent(Info5Activity.this,Body1Activity.class);
+                                startActivity(intent1);
 
-                } else {
+                            } else {
 
-                    String bql = "select * from gphone where gid='" + tv4.getText().toString() + "'and phone='" + Body1Activity.p1.getPhone() + "'";
-                    BmobQuery<gphone> query = new BmobQuery<gphone>();
-                    //设置查询的SQL语句
-                    query.setSQL(bql);
-                    query.doSQLQuery(new SQLQueryListener<gphone>() {
+                                String bql = "select * from gphone where gid='" + tv4.getText().toString() + "'and phone='" + Body1Activity.p1.getPhone() + "'";
+                                BmobQuery<gphone> query = new BmobQuery<gphone>();
+                                //设置查询的SQL语句
+                                query.setSQL(bql);
+                                query.doSQLQuery(new SQLQueryListener<gphone>() {
 
-                        @Override
-                        public void done(BmobQueryResult<gphone> result, BmobException e) {
-                            if (e == null) {
-                                List<gphone> list = (List<gphone>) result.getResults();
-                                for (gphone uf1 : list) {
-                                    uf1.delete(new UpdateListener() {
-                                        @Override
-                                        public void done(BmobException e) {
-                                            if (e == null) {
-                                                Toast.makeText(Info5Activity.this, "删除成员成功", Toast.LENGTH_SHORT).show();
-                                            } else {
-                                                Toast.makeText(Info5Activity.this, "删除成员失败", Toast.LENGTH_SHORT).show();
+                                    @Override
+                                    public void done(BmobQueryResult<gphone> result, BmobException e) {
+                                        if (e == null) {
+                                            List<gphone> list = (List<gphone>) result.getResults();
+                                            for (gphone uf1 : list) {
+                                                uf1.delete(new UpdateListener() {
+                                                    @Override
+                                                    public void done(BmobException e) {
+                                                        if (e == null) {
+                                                            Toast.makeText(Info5Activity.this, "删除成员成功", Toast.LENGTH_SHORT).show();
+                                                        } else {
+                                                            Toast.makeText(Info5Activity.this, "删除成员失败", Toast.LENGTH_SHORT).show();
+                                                        }
+                                                    }
+                                                });
                                             }
+
+
                                         }
-                                    });
-                                }
 
-
+                                    }
+                                });
+                                Intent intent1=new Intent(Info5Activity.this,Body1Activity.class);
+                                startActivity(intent1);
                             }
 
+
+                        }else{
+                            dialog.dismiss();
                         }
-                    });
-                    Intent intent1=new Intent(Info5Activity.this,Body1Activity.class);
-                    startActivity(intent1);
-                }
 
-
+                    }
+                }).setTitle("提示").show();
             }
-
         });
+
+
+
+//            @Override
+//            public void onClick(View v) {
+//                SharedPreferences pre = getSharedPreferences("user", MODE_PRIVATE);
+//                String content = pre.getString("sms_content", "");
+//                if (content.equals(tv2.getText().toString())) {
+//                    BmobQuery<gphone> bmobQuery = new BmobQuery<>();
+//                    bmobQuery.addWhereEqualTo("gid", tv4.getText().toString());
+//                    bmobQuery.findObjects(new FindListener<gphone>() {
+//                        @Override
+//                        public void done(List<gphone> list, BmobException e) {
+//                            for (gphone u1 : list) {
+//                                u1.delete(new UpdateListener() {
+//                                    @Override
+//                                    public void done(BmobException e) {
+//                                        if (e == null) {
+//                                            Toast.makeText(Info5Activity.this, "删除gphone成功", Toast.LENGTH_SHORT).show();
+//                                        } else {
+//                                            Toast.makeText(Info5Activity.this, "删除gphone失败", Toast.LENGTH_SHORT).show();
+//
+//                                        }
+//                                    }
+//                                });
+//                            }
+//                        }
+//                    });
+//                    BmobQuery<ginfo> bmobQuery1 = new BmobQuery<>();
+//                    bmobQuery1.addWhereEqualTo("phone", content);
+//                    bmobQuery1.findObjects(new FindListener<ginfo>() {
+//                        @Override
+//                        public void done(List<ginfo> list, BmobException e) {
+//                            for (ginfo u1 : list) {
+//                                u1.delete(new UpdateListener() {
+//                                    @Override
+//                                    public void done(BmobException e) {
+//                                        if (e == null) {
+//                                            Toast.makeText(Info5Activity.this, "删除ginfo成功", Toast.LENGTH_SHORT).show();
+//                                        } else {
+//                                            Toast.makeText(Info5Activity.this, "删除ginfo失败", Toast.LENGTH_SHORT).show();
+//
+//                                        }
+//                                    }
+//                                });
+//                            }
+//                        }
+//                    });
+//                    Intent intent1=new Intent(Info5Activity.this,Body1Activity.class);
+//                    startActivity(intent1);
+//
+//                } else {
+//
+//                    String bql = "select * from gphone where gid='" + tv4.getText().toString() + "'and phone='" + Body1Activity.p1.getPhone() + "'";
+//                    BmobQuery<gphone> query = new BmobQuery<gphone>();
+//                    //设置查询的SQL语句
+//                    query.setSQL(bql);
+//                    query.doSQLQuery(new SQLQueryListener<gphone>() {
+//
+//                        @Override
+//                        public void done(BmobQueryResult<gphone> result, BmobException e) {
+//                            if (e == null) {
+//                                List<gphone> list = (List<gphone>) result.getResults();
+//                                for (gphone uf1 : list) {
+//                                    uf1.delete(new UpdateListener() {
+//                                        @Override
+//                                        public void done(BmobException e) {
+//                                            if (e == null) {
+//                                                Toast.makeText(Info5Activity.this, "删除成员成功", Toast.LENGTH_SHORT).show();
+//                                            } else {
+//                                                Toast.makeText(Info5Activity.this, "删除成员失败", Toast.LENGTH_SHORT).show();
+//                                            }
+//                                        }
+//                                    });
+//                                }
+//
+//
+//                            }
+//
+//                        }
+//                    });
+//                    Intent intent1=new Intent(Info5Activity.this,Body1Activity.class);
+//                    startActivity(intent1);
+//                }
+//
+//
+//            }
+
+//        });
         imbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -547,11 +547,11 @@ public class Body1Activity extends AppCompatActivity
     }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
+    protected void onStop() {
         SharedPreferences.Editor editor1 = getSharedPreferences("isService", Context.MODE_PRIVATE).edit();
         editor1.putString("isService", "1");
         editor1.commit();
+        super.onStop();
     }
 }
 

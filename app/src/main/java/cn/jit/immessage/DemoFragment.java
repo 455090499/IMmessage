@@ -168,7 +168,7 @@ public class DemoFragment extends Fragment {
             }
 
             SimpleAdapter simplead = new SimpleAdapter(getActivity(), listems,
-                    R.layout.qunzu, new String[] { "name", "head", "desc" },
+                    R.layout.haoyou, new String[] { "name", "head", "desc" },
                     new int[] {R.id.name,R.id.head,R.id.desc}){
                 @Override
                 public void setViewImage(final ImageView v, final  String value) {

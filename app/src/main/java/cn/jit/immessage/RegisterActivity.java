@@ -87,51 +87,51 @@ public class RegisterActivity extends AppCompatActivity {
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent intent=new Intent(RegisterActivity.this,Info1Activity.class);
-//                startActivity(intent);
-                BmobSMS.verifySmsCode(RegisterActivity.this,et1.getText().toString(), et4.getText().toString(), new VerifySMSCodeListener() {
-
-                    @Override
-                    public void done(BmobException ex) {
-                        // TODO Auto-generated method stub
-                        if(ex==null){//短信验证码已验证成功
-                            Log.i("bmob", "验证通过");
-                            if(et2.getText().toString().equals(et3.getText().toString())) {
-                                BmobQuery<pp> bmobQuery = new BmobQuery<>();
-                                bmobQuery.addWhereEqualTo("phone", et1.getText());
-                                bmobQuery.findObjects(new FindListener<pp>() {
-                                    @Override
-                                    public void done(List<pp> object, cn.bmob.v3.exception.BmobException e) {
-                                        if (e == null) {
-                                            if (object.size() == 0){
-                                                //可以注册
-                                                p1=new pp();
-                                                p1.insertpp(et1.getText().toString(),et2.getText().toString());
-                                                SharedPreferences.Editor editor = getSharedPreferences("user", MODE_PRIVATE).edit();
-                                                editor.putString("sms_content", et1.getText().toString());
-                                                editor.commit();
-                                                Toast.makeText(RegisterActivity.this, "注册成功！", Toast.LENGTH_SHORT).show();
-                                                //页面的下一步跳转
-                                                Intent intent = new Intent(RegisterActivity.this, Info1Activity.class);
-                                                startActivity(intent);
-                                                finish();
-                                            }
-                                            else
-                                                Toast.makeText(RegisterActivity.this, "该手机号已注册！", Toast.LENGTH_SHORT).show();
-                                        } else {
-                                            Log.i("bmob", "系统异常：" + e.getMessage() + "," + e.getErrorCode());
-                                        }
-                                    }
-                                });
-                            }else
-                                Toast.makeText(RegisterActivity.this, "两次密码不相同！", Toast.LENGTH_SHORT).show();
-                        }else{
-                            Log.i("bmob", "验证失败：code ="+ex.getErrorCode()+",msg = "+ex.getLocalizedMessage());
-                            Toast.makeText(RegisterActivity.this,"验证码错误",Toast.LENGTH_SHORT).show();
-                        }
-
-                    }
-                });
+                Intent intent=new Intent(RegisterActivity.this,Info1Activity.class);
+                startActivity(intent);
+//                BmobSMS.verifySmsCode(RegisterActivity.this,et1.getText().toString(), et4.getText().toString(), new VerifySMSCodeListener() {
+//
+//                    @Override
+//                    public void done(BmobException ex) {
+//                        // TODO Auto-generated method stub
+//                        if(ex==null){//短信验证码已验证成功
+//                            Log.i("bmob", "验证通过");
+//                            if(et2.getText().toString().equals(et3.getText().toString())) {
+//                                BmobQuery<pp> bmobQuery = new BmobQuery<>();
+//                                bmobQuery.addWhereEqualTo("phone", et1.getText());
+//                                bmobQuery.findObjects(new FindListener<pp>() {
+//                                    @Override
+//                                    public void done(List<pp> object, cn.bmob.v3.exception.BmobException e) {
+//                                        if (e == null) {
+//                                            if (object.size() == 0){
+//                                                //可以注册
+//                                                p1=new pp();
+//                                                p1.insertpp(et1.getText().toString(),et2.getText().toString());
+//                                                SharedPreferences.Editor editor = getSharedPreferences("user", MODE_PRIVATE).edit();
+//                                                editor.putString("sms_content", et1.getText().toString());
+//                                                editor.commit();
+//                                                Toast.makeText(RegisterActivity.this, "注册成功！", Toast.LENGTH_SHORT).show();
+//                                                //页面的下一步跳转
+//                                                Intent intent = new Intent(RegisterActivity.this, Info1Activity.class);
+//                                                startActivity(intent);
+//                                                finish();
+//                                            }
+//                                            else
+//                                                Toast.makeText(RegisterActivity.this, "该手机号已注册！", Toast.LENGTH_SHORT).show();
+//                                        } else {
+//                                            Log.i("bmob", "系统异常：" + e.getMessage() + "," + e.getErrorCode());
+//                                        }
+//                                    }
+//                                });
+//                            }else
+//                                Toast.makeText(RegisterActivity.this, "两次密码不相同！", Toast.LENGTH_SHORT).show();
+//                        }else{
+//                            Log.i("bmob", "验证失败：code ="+ex.getErrorCode()+",msg = "+ex.getLocalizedMessage());
+//                            Toast.makeText(RegisterActivity.this,"验证码错误",Toast.LENGTH_SHORT).show();
+//                        }
+//
+//                    }
+//                });
 
             }
         });

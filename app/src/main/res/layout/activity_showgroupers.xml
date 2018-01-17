@@ -54,7 +54,6 @@
 
     </RelativeLayout>
 
-    android:id="@+id/showgroupers_btn2"
 
     <ListView
         android:id="@+id/showgroupers_lv1"

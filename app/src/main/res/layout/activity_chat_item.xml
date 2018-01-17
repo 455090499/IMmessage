@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:textSize="15sp"
             android:background="@mipmap/chatfrom_bg_normal"
-            android:layout_gravity="center"/>
+            android:gravity="center_vertical"/>
     </LinearLayout>
 
     <LinearLayout
@@ -39,7 +39,7 @@
             android:layout_height="wrap_content"
             android:textSize="15sp"
             android:background="@mipmap/chatto_bg_normal"
-            android:layout_gravity="center" />
+            android:gravity="center_vertical" />
 
         <cn.jit.immessage.Round1ImageViewActivity
             android:id="@+id/chat_item_right_imag"
