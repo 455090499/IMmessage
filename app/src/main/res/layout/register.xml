@@ -5,10 +5,10 @@
     android:orientation="vertical">
 
     <ImageView
-        android:layout_width="110dp"
-        android:layout_height="110dp"
+        android:layout_width="95dp"
+        android:layout_height="95dp"
         android:layout_gravity="center"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="50dp"
         android:layout_marginBottom="20dp"
         android:src="@mipmap/logo"/>
 
@@ -85,12 +85,13 @@
 
         <Button
             android:id="@+id/register_btn2"
-            android:layout_width="wrap_content"
-            android:layout_height="60dp"
+            android:layout_width="250dp"
+            android:layout_height="35dp"
             android:text="下一步"
-            android:background="@android:color/transparent"
+            android:textColor="#ffffffff"
+            android:background="@drawable/shape6_button"
             android:textSize="18dp"
-            android:layout_marginTop="20dp"/>
+            android:layout_marginTop="30dp"/>
     </LinearLayout>
 
 </LinearLayout>

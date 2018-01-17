@@ -23,7 +23,9 @@ import cn.bmob.v3.Bmob;
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.FindListener;
+import cn.bmob.v3.listener.LogInListener;
 import cn.bmob.v3.listener.SaveListener;
+import qiu.niorgai.StatusBarCompat;
 
 import static cn.bmob.v3.Bmob.getApplicationContext;
 
@@ -42,6 +44,12 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
+
+        //透明状态栏
+        StatusBarCompat.translucentStatusBar(LoginActivity.this);
+        //SDK >= 21时, 取消状态栏的阴影
+        //StatusBarCompat.translucentStatusBar(LoginActivity.this,true);
+
         Bmob.initialize(this, "a2994aaba430f692b3d442a44b73a089");
         if (Build.VERSION.SDK_INT >= 21) {
             View decorView = getWindow().getDecorView();

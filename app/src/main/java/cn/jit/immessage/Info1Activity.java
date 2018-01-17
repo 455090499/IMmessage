@@ -30,11 +30,12 @@ import java.util.List;
 import cn.bmob.v3.datatype.BmobFile;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.UploadFileListener;
+import qiu.niorgai.StatusBarCompat;
 
 public class Info1Activity extends AppCompatActivity {
     private Button button2;
     private Button button3;
-    private Button button1;
+//    private Button button1;
     private TextView text;
     private EditText et1;
     private RadioButton rb1;
@@ -49,10 +50,16 @@ public class Info1Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_info1);
+
+        //透明状态栏
+        StatusBarCompat.translucentStatusBar(Info1Activity.this);
+        //SDK >= 21时, 取消状态栏的阴影
+        //StatusBarCompat.translucentStatusBar(LoginActivity.this,true);
+
         ufo1 = new uinfo();
         im=(ImageView)findViewById(R.id.info1_im);
         button2=(Button)findViewById(R.id.info1_btn2);
-        button1=(Button)findViewById(R.id.info1_btn1);
+//        button1=(Button)findViewById(R.id.info1_btn1);
         button3=(Button)findViewById(R.id.info1_btn3);
         text=(TextView)findViewById(R.id.info1_tv1);
         et1=(EditText) findViewById(R.id.info1_et1);
@@ -74,7 +81,7 @@ public class Info1Activity extends AppCompatActivity {
                 dialog.show();
             }
         });
-        button1.setOnClickListener(new View.OnClickListener() {
+        im.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);

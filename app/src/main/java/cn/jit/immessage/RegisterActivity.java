@@ -21,6 +21,7 @@ import cn.bmob.sms.listener.RequestSMSCodeListener;
 import cn.bmob.sms.listener.VerifySMSCodeListener;
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.listener.FindListener;
+import qiu.niorgai.StatusBarCompat;
 
 import static cn.jit.immessage.Body1Activity.p1;
 
@@ -36,13 +37,12 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register);
-        if (Build.VERSION.SDK_INT >= 21) {
-            View decorView = getWindow().getDecorView();
-            int option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                    | View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
-            decorView.setSystemUiVisibility(option);
-            getWindow().setStatusBarColor(Color.TRANSPARENT);
-        }
+
+        //透明状态栏
+        StatusBarCompat.translucentStatusBar(RegisterActivity.this);
+        //SDK >= 21时, 取消状态栏的阴影
+        //StatusBarCompat.translucentStatusBar(LoginActivity.this,true);
+
         BmobSMS.initialize(this, "52c7b2c9b75c6bea231965db8248157a");
         et1=(EditText)findViewById(R.id.register_et1);
         et2=(EditText)findViewById(R.id.register_et2);

@@ -5,29 +5,28 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@mipmap/register"
     tools:context="cn.jit.immessage.Info1Activity">
 
     <cn.jit.immessage.Round1ImageViewActivity
         android:id="@+id/info1_im"
-        android:layout_width="110dp"
-        android:layout_height="110dp"
-        android:layout_marginTop="30dp"
+        android:layout_width="95dp"
+        android:layout_height="95dp"
+        android:layout_marginTop="40dp"
         android:layout_marginBottom="20dp"
-       android:src="@mipmap/logo"
+        android:src="@mipmap/logo"
         android:layout_gravity="center"
         />
 
-    <Button
-        android:id="@+id/info1_btn1"
-        android:text="选择头像"
-        android:layout_width="70dp"
-        android:layout_height="30dp"
-        android:background="@drawable/shape_button"
+    <!--<Button-->
+        <!--android:id="@+id/info1_btn1"-->
+        <!--android:text="选择头像"-->
+        <!--android:layout_width="70dp"-->
+        <!--android:layout_height="30dp"-->
+        <!--android:background="@drawable/shape_button"-->
 
-        android:layout_gravity="center"
-        android:layout_marginBottom="22dp"
-        />
+        <!--android:layout_gravity="center"-->
+        <!--android:layout_marginBottom="22dp"-->
+        <!--/>-->
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -38,14 +37,13 @@
         <TextView
             android:layout_width="80dp"
             android:layout_height="22dp"
-
             android:text="昵称"
-            android:textSize="18dp"
+            android:textSize="16dp"
             />
         <EditText
             android:id="@+id/info1_et1"
             android:layout_width="200dp"
-            android:layout_height="32dp"
+            android:layout_height="30dp"
             android:maxLines="1"
             android:layout_marginLeft="3dp"
             android:paddingLeft="10dp"
@@ -68,7 +66,7 @@
             android:layout_height="22dp"
             android:text="性别"
 
-            android:textSize="18dp"/>
+            android:textSize="16dp"/>
         <RadioGroup
 
             android:layout_width="wrap_content"
@@ -81,7 +79,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="男"
-                android:textSize="18dp"
+                android:textSize="17dp"
                 android:id="@+id/info1_rb1"/>
 
             <RadioButton
@@ -89,7 +87,7 @@
                 android:layout_height="wrap_content"
                 android:text="女"
                 android:layout_marginLeft="50dp"
-                android:textSize="18dp"
+                android:textSize="17dp"
                 android:id="@+id/info1_rb2"/>
         </RadioGroup>
 
@@ -105,7 +103,7 @@
             android:layout_height="25dp"
 
             android:text="出生日期"
-            android:textSize="18dp"
+            android:textSize="16dp"
             />
 
         <TextView
@@ -137,13 +135,13 @@
             android:layout_height="22dp"
             android:text="邮箱地址"
 
-            android:textSize="18dp"
+            android:textSize="16dp"
             android:id="@+id/textView" />
 
         <EditText
             android:id="@+id/info1_et2"
             android:layout_width="200dp"
-            android:layout_height="32dp"
+            android:layout_height="30dp"
             android:paddingLeft="10dp"
             android:layout_marginLeft="3dp"
             android:background="@drawable/shape3_button"
@@ -161,24 +159,25 @@
             android:layout_height="22dp"
             android:text="个人签名"
 
-            android:textSize="18dp"
+            android:textSize="16dp"
             android:id="@+id/textView2" />
 
         <EditText
             android:id="@+id/info1_et3"
             android:layout_width="200dp"
-            android:layout_height="32dp"
+            android:layout_height="30dp"
             android:paddingLeft="10dp"
             android:layout_marginLeft="3dp"
             android:background="@drawable/shape3_button"/>
     </LinearLayout>
     <Button
         android:id="@+id/info1_btn3"
-        android:layout_width="100dp"
+        android:layout_width="250dp"
         android:layout_height="35dp"
         android:text="注册"
         android:textSize="16dp"
+        android:textColor="#ffffffff"
         android:layout_gravity="center"
-        android:background="@drawable/shape3_button"
+        android:background="@drawable/shape6_button"
         android:layout_marginTop="30dp"/>
 </LinearLayout>
