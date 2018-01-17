@@ -68,6 +68,7 @@ public class Body1Activity extends AppCompatActivity
     private TextView header_tv2;
     public static String[] ffd = new String[60];  ;
     private ImageView im;
+    private boolean isService=false;
     public static TextView tv;
     //获取个人信息页面
     private NavigationView navigationView ;
@@ -239,8 +240,7 @@ public class Body1Activity extends AppCompatActivity
 
         p1 = new pp();
 
-        Intent service = new Intent(Body1Activity.this, BodyService.class);
-        startService(service);
+
 
         //透明状态栏
         StatusBarCompat.translucentStatusBar(Body1Activity.this);
@@ -295,6 +295,15 @@ public class Body1Activity extends AppCompatActivity
             finish();
         }else
         {
+            SharedPreferences isservice = getSharedPreferences("isService", MODE_PRIVATE);
+            isService = "0".equals(isservice.getString("isService", "1").toString());
+            if(!isService) {
+                Intent service = new Intent(Body1Activity.this, BodyService.class);
+                startService(service);
+                SharedPreferences.Editor editor = getSharedPreferences("isService", Context.MODE_PRIVATE).edit();
+                editor.putString("isService", "0");
+                editor.commit();
+            }
             Bmob.initialize(this, "a2994aaba430f692b3d442a44b73a089");
             p1.setPhone(content1);
             BmobQuery<uinfo> bmobQuery = new BmobQuery<>();
@@ -445,6 +454,9 @@ public class Body1Activity extends AppCompatActivity
             editor.putString("islogin", "0");
             editor.putString("isRem","0");
             editor.commit();
+            SharedPreferences.Editor editor1 = getSharedPreferences("isService", Context.MODE_PRIVATE).edit();
+            editor1.putString("isService", "1");
+            editor1.commit();
             startActivity(intent);
             BodyService.bodyThread.Socketclose();
             Intent service = new Intent(Body1Activity.this, BodyService.class);
@@ -534,6 +546,13 @@ public class Body1Activity extends AppCompatActivity
         return super.onPrepareOptionsPanel(view, menu);
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        SharedPreferences.Editor editor1 = getSharedPreferences("isService", Context.MODE_PRIVATE).edit();
+        editor1.putString("isService", "1");
+        editor1.commit();
+    }
 }
 
 
