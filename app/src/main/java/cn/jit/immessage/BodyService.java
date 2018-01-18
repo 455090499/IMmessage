@@ -22,4 +22,10 @@ public class BodyService extends Service {
         new Thread(bodyThread).start();
         return super.onStartCommand(intent, flags, startId);
     }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        bodyThread.Socketclose();
+    }
 }

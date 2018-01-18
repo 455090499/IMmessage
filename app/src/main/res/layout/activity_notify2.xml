@@ -36,11 +36,14 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp">
 
-        <ImageView
+
+        <cn.jit.immessage.Round1ImageViewActivity
             android:id="@+id/notify2_im"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/notify1_item_touxiang"/>
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginLeft="5dp"
+            android:src="@mipmap/notify1_item_touxiang"
+            />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -48,17 +51,20 @@
             android:layout_marginLeft="20dp"
             android:orientation="vertical">
 
-            <EditText
+            <TextView
                 android:id="@+id/notify2_et1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="20dp"
-                android:text="111111"/>
-            <EditText
+                android:text="111111" />
+
+
+
+            <TextView
                 android:id="@+id/notify2_et2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="15dp"
+                android:textSize="10dp"
                 android:text="2222"/>
         </LinearLayout>
 

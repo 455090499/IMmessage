@@ -46,7 +46,6 @@ public class AddActivity extends AppCompatActivity {
     private ListView lv1;
     private Button btn1;
     private ImageButton btn2;
-    private Button btn3;
     private EditText et1;
     private ImageView im;
     private boolean isfound=false;
@@ -64,13 +63,13 @@ public class AddActivity extends AppCompatActivity {
 
         btn1=(Button)findViewById(R.id.add_btn1);
         btn2=(ImageButton)findViewById(R.id.add_imbtn);
-//        btn3=(Button)findViewById(R.id.add_item_btn);
+
         et1=(EditText)findViewById(R.id.add_et1);
         lv1 = (ListView) findViewById(R.id.add_lv1);
         im=(ImageView)findViewById(R.id.head);
 
         SharedPreferences pre = getSharedPreferences("user", MODE_PRIVATE);
-        String content1 = pre.getString("sms_content", "");
+        final String content1 = pre.getString("sms_content", "");
         sendphone = content1;
 
         if (Build.VERSION.SDK_INT >= 21) {
@@ -101,6 +100,16 @@ public class AddActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(et1.getText().toString().length() == 11){
+//                    BmobQuery<uinfo> bmobQuery6 = new BmobQuery<>();
+//                    bmobQuery6.addWhereEqualTo("phone", et1.getText().toString());
+//                    bmobQuery6.findObjects(new FindListener<uinfo>() {
+//                        @Override
+//                        public void done(List<uinfo> list, BmobException e) {
+//
+//
+//                        }
+//                    });
+
                     BmobQuery<uinfo> bmobQuery5 = new BmobQuery<>();
                     bmobQuery5.addWhereEqualTo("phone", et1.getText().toString());
                     bmobQuery5.findObjects(new FindListener<uinfo>() {
@@ -115,6 +124,7 @@ public class AddActivity extends AppCompatActivity {
                                 recvphone = u1.getPhone();
                                 BmobFile bmobFile=u1.getPhoto();
                                 String url = bmobFile.getFileUrl();
+                                Body1Activity.inform1.insertinform(et1.getText().toString(),content1,"",url);
                                 String s1="(";
                                 String s2=")";
                                 String[] name = {u1.getNiconame()};
@@ -134,25 +144,6 @@ public class AddActivity extends AppCompatActivity {
                                         R.layout.additem, new String[] { "name", "head", "desc"},
                                         new int[] {R.id.add_item_name,R.id.add_item_imag,R.id.add_item_desc}){
 
-
-//                                    @Override
-//                                    public View getView(int position, View convertView, ViewGroup parent) {
-//
-//                                        notifyDataSetChanged();
-//                                        btn3=(Button) convertView.findViewById(R.id.add_item_btn);
-//                                        final View view=super.getView(position, convertView, parent);
-//                                        btn3.setOnClickListener(new View.OnClickListener() {
-//                                            @Override
-//                                            public void onClick(View v) {
-//                                                SharedPreferences pre = getSharedPreferences("user", MODE_PRIVATE);
-//                                                if(isfound){
-//                                                    pfriend.insertpfriend(pre.getString("sms_content", ""),et1.getText().toString());
-//                                                    Toast.makeText(AddActivity.this, "添加成功", Toast.LENGTH_LONG).show() ;
-//                                                }
-//                                            }
-//                                        });
-//                                        return view;
-//                                    }
                                     @Override
                                     public void setViewImage(final ImageView v, final  String value) {
                                         // TODO Auto-generated method stub
@@ -217,6 +208,7 @@ public class AddActivity extends AppCompatActivity {
 
                                 recvphone = gu1.getPhone();
                                 groupphone = gu1.getGid();
+                                Body1Activity.inform1.insertinform(recvphone,content1,et1.getText().toString(),url);
                                 String s1 = "(";
                                 String s2 = ")";
                                 String[] name = {gu1.getGname()};
@@ -258,7 +250,7 @@ public class AddActivity extends AppCompatActivity {
                                                                     msg.what = 1;
                                                                     msg.obj = new Mes(sendphone, "0", groupphone + "/" + recvphone);
                                                                     BodyService.bodyThread.revHandler.sendMessage(msg);
-                                                                    gphone.insertgphone(et1.getText().toString(),pre.getString("sms_content", "") );
+                                                                    //gphone.insertgphone(et1.getText().toString(),pre.getString("sms_content", "") );
                                                                 }
                                                             }
                                                         });
@@ -283,19 +275,7 @@ public class AddActivity extends AppCompatActivity {
 
             }
         });
-//        btn3=(Button) findViewById(R.id.add_item_btn);
-//        btn3.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                SharedPreferences pre = getSharedPreferences("user", MODE_PRIVATE);
-//                if(isfound){
-//                    pfriend.insertpfriend(pre.getString("sms_content", ""),et1.getText().toString());
-//                }
-//
-//
-//
-//            }
-//        });
+
         et1.addTextChangedListener(new TextWatcher() {
 
 

@@ -1,6 +1,7 @@
 package cn.jit.immessage;
 
 import android.app.ActionBar;
+import android.app.Notification;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -55,30 +56,83 @@ public class DemoFragment extends Fragment {
 
 
 
-        //textView.setText(type == 0 ? "1st Fragment" : type == 1 ? "2nd Fragment" : type == 2 ? "3rd Fragment" : "4th Fragment");
         if (type == 0)
         {
-            Log.e(TAG, "onCreateView: xiaoxi" );
-            Log.d("0000","xiaoxi");
-            String[] name = { "李四", "张三"};
-            String[] desc = { "怎么不回我信息", "在哪呢"};
-            //int[] imageids ={};
+//            Log.e(TAG, "onCreateView: xiaoxi" );
+//            Log.d("0000","xiaoxi");
+//            String[] name = { "李四", "张三"};
+//            String[] desc = { "怎么不回我信息", "在哪呢"};
+//            List<Map<String, Object>> listems = new ArrayList<Map<String, Object>>();
+//            for (int i = 0; i < name.length; i++) {
+//                Map<String, Object> listem = new HashMap<String, Object>();
+//                listem.put("name", name[i]);
+//                listem.put("desc", desc[i]);
+//                listems.add(listem);
+//            }
+//           SimpleAdapter simplead = new SimpleAdapter(getActivity(), listems,
+//                   R.layout.xiaoxi, new String[] { "name", "head", "desc" },
+//                   new int[] {R.id.name,R.id.head,R.id.desc});
+//            listView.setAdapter(simplead);
+//            simplead.notifyDataSetChanged();
             List<Map<String, Object>> listems = new ArrayList<Map<String, Object>>();
-            for (int i = 0; i < name.length; i++) {
+            Log.e(TAG, "done:112");
+            for(int i=0;i<getArguments().getInt("count");i++) {
                 Map<String, Object> listem = new HashMap<String, Object>();
-              //  listem.put("head", imageids[i]);
-                listem.put("name", name[i]);
-                listem.put("desc", desc[i]);
+                listem.put("name", getArguments().getStringArray("name")[i]);
+                System.out.println(getArguments().getStringArray("name")[i]);
+                listem.put("desc", getArguments().getStringArray("desc")[i].equals("")?"请求添加你为好友":"请求加入群"+getArguments().getStringArray("desc")[i]);
+                listem.put("head", getArguments().getStringArray("head")[i]);
                 listems.add(listem);
             }
-           SimpleAdapter simplead = new SimpleAdapter(getActivity(), listems,
-                   R.layout.xiaoxi, new String[] { "name", "head", "desc" },
-                   new int[] {R.id.name,R.id.head,R.id.desc});
+
+
+            SimpleAdapter simplead = new SimpleAdapter(getActivity(), listems,
+                    R.layout.haoyou, new String[] { "name", "head", "desc" },
+                    new int[] {R.id.name,R.id.head,R.id.desc}){
+                @Override
+                public void setViewImage(final ImageView v, final  String value) {
+                    // TODO Auto-generated method stub
+                    if(v.getId()==R.id.head)
+                    {
+                        new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                try{
+                                    //通过图片Url返回Bitmap
+                                    Bitmap bitmap = getBitmap(value);
+                                    Log.d("12333","done:"+value);
+                                    v.setImageBitmap(bitmap);
+                                }
+                                catch(Exception e){
+                                    e.printStackTrace();
+                                }
+                            }
+                        }).start();
+                    }
+                    else{super.setViewImage(v, value);}
+                }
+
+            };
 
             listView.setAdapter(simplead);
-            //Body1Activity.tv.setText(toolbar[0]);
-
+            //Body1Activity.tv.setText(toolbar[1]);
             simplead.notifyDataSetChanged();
+
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    HashMap<String,String> map=(HashMap<String,String>)listView.getItemAtPosition(position);
+                    String name=map.get("name");
+                    String desc=map.get("desc");
+                    String head=map.get("head");
+                    Intent intent = new Intent(getActivity(),Notify2Activity.class);
+                    intent.putExtra("name",name);
+                    intent.putExtra("desc",getArguments().getStringArray("desc")[position]);
+                    intent.putExtra("head",head);
+                    startActivity(intent);
+                }
+            });
+
         }
         else if (type == 1)
         {
@@ -86,9 +140,6 @@ public class DemoFragment extends Fragment {
 
 
             List<Map<String, Object>> listems = new ArrayList<Map<String, Object>>();
-
-
-
 
                 Log.e(TAG, "done:112");
                 for(int i=0;i<getArguments().getInt("count");i++) {

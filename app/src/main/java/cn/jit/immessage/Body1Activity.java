@@ -76,6 +76,7 @@ public class Body1Activity extends AppCompatActivity
     static boolean islogin=false;
     pp p2=new pp();
     static pp p1;
+    static inform inform1=new inform();
 
     public static Handler mhandler;
 //    public static BodyThread bodyThread;
@@ -91,6 +92,41 @@ public class Body1Activity extends AppCompatActivity
             e.printStackTrace();
         }
 
+        String bq0 ="select * from inform where phone = '"+Body1Activity.p1.getPhone()+"')";
+        BmobQuery<inform> query=new BmobQuery<inform>();
+        query.setSQL(bq0);
+        query.doSQLQuery(new SQLQueryListener<inform>(){
+            @Override
+            public void done(BmobQueryResult<inform> result, BmobException e) {
+                final List<DemoFragment> lista = new ArrayList<>();
+                if(lista.size()!=0)
+                    for(DemoFragment ll: lista)
+                        lista.remove(ll);
+                List<inform> list = (List<inform>) result.getResults();
+
+                DemoFragment fragment0 = new DemoFragment();
+                Bundle bundle0 = new Bundle();
+                bundle0.putInt("type",0);
+                bundle0.putInt("count",list.size());
+                String[] name=new String[list.size()];
+                String[] desc=new String[list.size()];
+                String[] head=new String[list.size()];
+                int i=0;
+                for (inform if1 : list) {
+
+                    name[i]=if1.getSphone();
+                    desc[i]=if1.getContent();
+                    head[i]=if1.getPhoto();
+                    i++;
+                }
+                bundle0.putStringArray("name",name);
+                bundle0.putStringArray("desc",desc);
+                bundle0.putStringArray("head",head);
+
+                fragment0.setArguments(bundle0);
+                lista.add(fragment0);
+
+
         String bql ="select * from uinfo where phone in (select fphone from pfriend where phone = '"+Body1Activity.p1.getPhone()+"')";
         BmobQuery<uinfo> query=new BmobQuery<uinfo>();
         query.setSQL(bql);
@@ -99,20 +135,12 @@ public class Body1Activity extends AppCompatActivity
             @Override
             public void done(BmobQueryResult<uinfo> result, BmobException e) {
                 if(e ==null){
-                    final List<DemoFragment> lista = new ArrayList<>();
-                    if(lista.size()!=0)
-                        for(DemoFragment ll: lista)
-                        lista.remove(ll);
-                    DemoFragment fragment0 = new DemoFragment();
-                    Bundle bundle = new Bundle();
-                    bundle.putInt("type",0);
-//                bundle.putInt("count",i);
-//                bundle.putStringArrayList("name",i);
-//                bundle.putStringArrayList("desc",i);
-//                bundle.putStringArrayList("head",i);
-//
-                    fragment0.setArguments(bundle);
-                    lista.add(fragment0);
+
+//                    DemoFragment fragment0 = new DemoFragment();
+//                    Bundle bundle = new Bundle();
+//                    bundle.putInt("type",0);
+//                    fragment0.setArguments(bundle);
+//                    lista.add(fragment0);
 
 
                     List<uinfo> list = (List<uinfo>) result.getResults();
@@ -197,7 +225,8 @@ public class Body1Activity extends AppCompatActivity
             }
         });
 
-
+            }
+        });
         SharedPreferences pre = getSharedPreferences("user", MODE_PRIVATE);
         String content1 = pre.getString("sms_content", "");
         BmobQuery<uinfo> bmobQuery3 = new BmobQuery<>();
@@ -458,7 +487,7 @@ public class Body1Activity extends AppCompatActivity
             editor1.putString("isService", "1");
             editor1.commit();
             startActivity(intent);
-            BodyService.bodyThread.Socketclose();
+            //BodyService.bodyThread.Socketclose();
             Intent service = new Intent(Body1Activity.this, BodyService.class);
             stopService(service);
             finish();
@@ -547,12 +576,16 @@ public class Body1Activity extends AppCompatActivity
     }
 
     @Override
-    protected void onStop() {
+    protected void onDestroy() {
+        super.onDestroy();
         SharedPreferences.Editor editor1 = getSharedPreferences("isService", Context.MODE_PRIVATE).edit();
         editor1.putString("isService", "1");
         editor1.commit();
-        super.onStop();
+        Intent service = new Intent(Body1Activity.this, BodyService.class);
+        stopService(service);
     }
+
+
 }
 
 

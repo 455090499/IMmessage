@@ -206,6 +206,11 @@ public class Chat2Activity extends AppCompatActivity {
         });
 
     }
+    public void onBackPressed() {
+        Intent in = new Intent(Chat2Activity.this,Body1Activity.class);
+        startActivity(in);
+        finish();
+    }
 
     private void initListener() {
         imbtn1.setOnClickListener(new View.OnClickListener() {
