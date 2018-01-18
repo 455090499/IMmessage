@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    >
+
+
+    <LinearLayout
+        android:id="@+id/file_send_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@mipmap/chatto_bg_normal">
+
+            <ImageView
+                android:id="@+id/file_send_img1"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_marginLeft="8dp"
+                android:src="@mipmap/tranf_file"
+                 />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/file_send_tv1"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="10dp"
+                    android:text="file" />
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/file_send_tv2"
+                        android:layout_width="50dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:text="size"
+                        android:layout_marginTop="25dp"/>
+                    <TextView
+                        android:id="@+id/file_send_tv3"
+                        android:layout_width="70dp"
+                        android:layout_height="wrap_content"
+                        android:text="传输状态"
+                        android:layout_marginTop="25dp"/>
+                </LinearLayout>
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <cn.jit.immessage.Round1ImageViewActivity
+            android:id="@+id/file_send_img2"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            />
+
+
+    </LinearLayout>
+
+
+</LinearLayout>
