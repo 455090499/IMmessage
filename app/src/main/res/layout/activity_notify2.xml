@@ -6,75 +6,106 @@
     <RelativeLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:background="#398dee"
-        android:layout_height="50dp">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center_horizontal|center"
-            android:text="通知"
-            android:textColor="#ffffffff"
-            android:textSize="20dp" />
+        android:background="@drawable/side_nav_bar2"
+        android:layout_height="70dp">
 
-        <Button
-            android:id="@+id/notify2_btn1"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:background="#398dee"
-            android:drawableLeft="@mipmap/chat_back"
-            android:drawablePadding="6dp"
-            android:gravity="center"
-            android:paddingLeft="5dp"
-            android:text="返回"
-            android:textColor="#ffffffff"
-            android:textSize="18dp"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:orientation="vertical"
+            >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal|center"
+                android:text="好友申请"
+                android:textColor="#ffffffff"
+                android:textSize="18sp"
+                android:id="@+id/info5_tv1" />
+
+            <Button
+                android:id="@+id/notify2_btn1"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@android:color/transparent"
+                android:drawableLeft="@mipmap/chat_back"
+                android:gravity="center"
+                android:paddingLeft="15dp"
+                android:textColor="#ffffffff"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+        </RelativeLayout>
+
 
     </RelativeLayout>
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp">
-
-
-        <cn.jit.immessage.Round1ImageViewActivity
-            android:id="@+id/notify2_im"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_marginLeft="5dp"
-            android:src="@mipmap/notify1_item_touxiang"
-            />
+        android:layout_width="300dp"
+        android:layout_height="100dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        android:background="@drawable/shape4_button"
+        >
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:orientation="vertical">
+            android:layout_gravity="center_vertical"
+            android:layout_marginTop="18dp"
+            >
 
-            <TextView
-                android:id="@+id/notify2_et1"
-                android:layout_width="wrap_content"
+
+            <cn.jit.immessage.Round1ImageViewActivity
+                android:id="@+id/notify2_im"
+                android:layout_width="65dp"
+                android:layout_height="65dp"
+                android:layout_marginLeft="5dp"
+                android:src="@mipmap/notify1_item_touxiang"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="20dp"
-                android:text="111111" />
+                android:layout_marginLeft="50dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/notify2_et1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    android:text="111111" />
 
 
 
-            <TextView
-                android:id="@+id/notify2_et2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="10dp"
-                android:text="2222"/>
+                <TextView
+                    android:id="@+id/notify2_et2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp"
+                    android:text="2222"/>
+            </LinearLayout>
+
         </LinearLayout>
 
-    </LinearLayout>
 
+
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+
+        android:orientation="vertical"
         android:layout_marginTop="20dp"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
@@ -82,22 +113,30 @@
 
         <Button
             android:id="@+id/notify2_btn2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="20dp"
+            android:layout_width="300dp"
+            android:layout_height="40dp"
+            android:background="@drawable/shape6_button"
+            android:textSize="18sp"
+            android:textColor="#ffffffff"
+            android:layout_gravity="center"
             android:text="同意"
-            android:layout_weight="0.50" />
+          />
 
         <Button
             android:id="@+id/notify2_btn3"
-            android:layout_toRightOf="@id/notify2_btn1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_width="300dp"
+            android:layout_gravity="center"
+            android:layout_height="40dp"
             android:textColor="@android:color/black"
-            android:textSize="20dp"
+            android:textSize="18sp"
             android:text="拒绝"
-            android:layout_weight="0.50" />
+            android:background="@drawable/shape8_button"
+            />
 
     </LinearLayout>
 
 </LinearLayout>
+
+
+

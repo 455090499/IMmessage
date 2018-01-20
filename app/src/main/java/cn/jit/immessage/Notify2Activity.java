@@ -24,6 +24,7 @@ import cn.bmob.v3.datatype.BmobQueryResult;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.SQLQueryListener;
 import cn.bmob.v3.listener.UpdateListener;
+import qiu.niorgai.StatusBarCompat;
 
 public class Notify2Activity extends AppCompatActivity {
     private TextView tv1;
@@ -39,6 +40,12 @@ public class Notify2Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notify2);
+
+        //透明状态栏
+        StatusBarCompat.translucentStatusBar(Notify2Activity.this);
+        //SDK >= 21时, 取消状态栏的阴影
+        StatusBarCompat.translucentStatusBar(Notify2Activity.this,true);
+
         tv1=(TextView) findViewById(R.id.notify2_et1);
         tv2=(TextView) findViewById(R.id.notify2_et2);
         im=(ImageView)findViewById(R.id.notify2_im);

@@ -25,10 +25,25 @@ public class MsgAdapter extends RecyclerView.Adapter<MsgAdapter.ViewHolder>{
     static class ViewHolder extends RecyclerView.ViewHolder{
          LinearLayout leftLayout;
          LinearLayout rightLayout;
-         TextView leftMsg;
-         TextView rightMsg;
-         ImageView leftImg;
-         ImageView rightImg;
+
+        TextView leftMsg;
+        TextView rightMsg;
+
+        LinearLayout filesend;
+        LinearLayout filerecv;
+
+         TextView send_tv1;
+         TextView send_tv2;
+         TextView send_tv3;
+         TextView recv_tv1;
+         TextView recv_tv2;
+         TextView recv_tv3;
+
+        ImageView leftImg;
+        ImageView rightImg;
+
+        ImageView leftImg1;
+        ImageView rightImg1;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -38,6 +53,17 @@ public class MsgAdapter extends RecyclerView.Adapter<MsgAdapter.ViewHolder>{
             rightMsg = (TextView) itemView.findViewById(R.id.chat_item_right_msg);
             leftImg=(ImageView)itemView.findViewById(R.id.chat_item_left_imag);
             rightImg=(ImageView)itemView.findViewById(R.id.chat_item_right_imag);
+            leftImg1=(ImageView)itemView.findViewById(R.id.chat_item_left_fileimag);
+            rightImg1=(ImageView)itemView.findViewById(R.id.chat_item_right_fileimag);
+            filesend=(LinearLayout) itemView.findViewById(R.id.file_send_layout);
+            filerecv=(LinearLayout) itemView.findViewById(R.id.file_recv_layout);
+            send_tv1=(TextView)itemView.findViewById(R.id.file_send_tv1) ;
+            send_tv2=(TextView)itemView.findViewById(R.id.file_send_tv2) ;
+            send_tv3=(TextView)itemView.findViewById(R.id.file_send_tv3) ;
+            recv_tv1=(TextView)itemView.findViewById(R.id.file_recv_tv1) ;
+            recv_tv2=(TextView)itemView.findViewById(R.id.file_recv_tv2) ;
+            recv_tv3=(TextView)itemView.findViewById(R.id.file_recv_tv3) ;
+
         }
     }
     public MsgAdapter(List<Msg> msgList) {
@@ -59,18 +85,45 @@ public class MsgAdapter extends RecyclerView.Adapter<MsgAdapter.ViewHolder>{
             String url1=msg.getUrl();
             holder.leftLayout.setVisibility(View.VISIBLE);
             holder.rightLayout.setVisibility(View.GONE);
+            holder.filesend.setVisibility(View.GONE);
+            holder.filerecv.setVisibility(View.GONE);
             holder.leftMsg.setText(msg.getContent());
             Bitmap bitmap1 = getBitmap(url1);
             holder.leftImg.setImageBitmap(bitmap1);
 
         } else if(msg.getType() == Msg.TYPE_SENT) {
             String url2=msg.getUrl();
-
             holder.rightLayout.setVisibility(View.VISIBLE);
             holder.leftLayout.setVisibility(View.GONE);
+            holder.filesend.setVisibility(View.GONE);
+            holder.filerecv.setVisibility(View.GONE);
             holder.rightMsg.setText(msg.getContent());
             Bitmap bitmap2 = getBitmap(url2);
             holder.rightImg.setImageBitmap(bitmap2);
+        } else if(msg.getType() == Msg.FILE_SENT) {
+            String url2=msg.getUrl();
+            holder.rightLayout.setVisibility(View.GONE);
+            holder.leftLayout.setVisibility(View.GONE);
+            holder.filesend.setVisibility(View.VISIBLE);
+            holder.filerecv.setVisibility(View.GONE);
+            holder.send_tv1.setText(msg.getFilename());
+            holder.send_tv2.setText(msg.getFilesize());
+            holder.send_tv3.setText(msg.getFilestate());
+            Bitmap bitmap2 = getBitmap(url2);
+            holder.rightImg1.setImageBitmap(bitmap2);
+
+
+        } else if(msg.getType() == Msg.FILE_RECV) {
+            String url2=msg.getUrl();
+            holder.rightLayout.setVisibility(View.GONE);
+            holder.leftLayout.setVisibility(View.GONE);
+            holder.filesend.setVisibility(View.GONE);
+            holder.filerecv.setVisibility(View.VISIBLE);
+            holder.recv_tv1.setText(msg.getFilename());
+            holder.recv_tv2.setText(msg.getFilesize());
+            holder.recv_tv3.setText(msg.getFilestate());
+            Bitmap bitmap2 = getBitmap(url2);
+            holder.leftImg1.setImageBitmap(bitmap2);
         }
     }
 
