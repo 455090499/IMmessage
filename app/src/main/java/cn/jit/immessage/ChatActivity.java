@@ -47,6 +47,7 @@ import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.QueryListener;
 import cn.bmob.v3.listener.SQLQueryListener;
 import cn.bmob.v3.listener.SaveListener;
+import cn.bmob.v3.listener.UpdateListener;
 import cn.bmob.v3.listener.UploadFileListener;
 import cn.bmob.v3.socketio.callback.StringCallback;
 import qiu.niorgai.StatusBarCompat;
@@ -54,7 +55,7 @@ import qiu.niorgai.StatusBarCompat;
 import static cn.jit.immessage.Body1Activity.socketContent;
 
 public class ChatActivity extends AppCompatActivity  {
-
+private  static int filedowna=0;
     private ImageButton plus;
     private RelativeLayout layout;
     boolean visibility_Flag = false;
@@ -68,16 +69,6 @@ public class ChatActivity extends AppCompatActivity  {
     private TextView tv1;
     private ImageButton imbtn;
     private ImageButton imbtn3;
-
-    private TextView send_tv1;
-    private TextView send_tv2;
-    private TextView send_tv3;
-    private TextView recv_tv1;
-    private TextView recv_tv2;
-    private TextView recv_tv3;
-
-
-
 
     public static Handler mhandler;
     String[] url=new String[2];
@@ -103,9 +94,7 @@ public class ChatActivity extends AppCompatActivity  {
         back=(Button)findViewById(R.id.chat_btn1);
         send = (Button) findViewById(R.id.chat_btn2);
         msgRecyclerView = (RecyclerView) findViewById(R.id.chat_rv1);
-
         tv1=(TextView)findViewById(R.id.chat_tv1);
-
         imbtn=(ImageButton)findViewById(R.id.chat_imbtn);
         imbtn3=(ImageButton)findViewById(R.id.chat_imbtn3);
 
@@ -154,7 +143,6 @@ public class ChatActivity extends AppCompatActivity  {
                                     Message mesg = new Message();
                                     mesg.what = 1;
                                     mesg.obj = new Mes(sendphone, recvphone, inputText.getText().toString());
-
                                     BodyService.bodyThread.revHandler.sendMessage(mesg);
 
                                     Msg msg = new Msg(content, Msg.TYPE_SENT,url[0]);
@@ -187,59 +175,113 @@ public class ChatActivity extends AppCompatActivity  {
                         });
                     mhandler = new Handler() {
                         @Override
-                        public void handleMessage(final Message msg) {
+                        public void handleMessage( Message msg) {
                             if (msg.what == 0) {
-                                 final Mes bb = new Mes((String) msg.obj);
+                                final Mes bb = new Mes((String) msg.obj);
                                 if (bb.getRecv().equals(sendphone)) {
                                     if (bb.getSend().equals(recvphone)) {
-                                        Log.d("8888",bb.getText()+"");
-                                        String sss = bb.getText().substring(0,3);
+                                        Log.d("8888", bb.getText() + "");
+                                        //if(bb.getText().length()>4)
+                                        if (bb.getText().length() > 4) {
 
-                                        if (sss.equals("ftp")) {
-                                            final String content=bb.getText();
-
+                                            String sss = bb.getText().substring(0, 3);
+                                            if (sss.equals("ftp")) {
+                                                //String content=bb.getText();
+                                                filedowna++;
 //
-                                            BmobQuery<fileurl> query = new BmobQuery<>();
-                                            query.getObject(bb.getText().substring(4), new QueryListener<fileurl>() {
-                                                @Override
-                                                public void done(final fileurl object, BmobException e) {
-                                                    if(e==null){
-                                                        object.getBfile().download(new File(Environment.getExternalStorageDirectory(), object.getBfile().getFilename()), new DownloadFileListener() {
-
-                                                            @Override
-                                                            public void onStart() {
-//                                                                toast("开始下载...");
-                                                                Toast.makeText(ChatActivity.this,"开始下载...",Toast.LENGTH_SHORT).show();
-                                                            }
-                                                            @Override
-                                                            public void done(String savePath,BmobException e) {
-                                                                Log.d("18888", "url=" + url[1]);
-                                                                if(e==null){
-                                                                    Toast.makeText(ChatActivity.this,"下载成功，保存路径"+savePath,Toast.LENGTH_SHORT).show();
-                                                                    Msg msg1 = new Msg(content, Msg.FILE_RECV, url[1],object.getBfile().getFilename(),object.getFilesize()+"","已接收");
-                                                                    msgList.add(msg1);
-                                                                }else{
-                                                                    Toast.makeText(ChatActivity.this,"下载失败："+e.getErrorCode()+","+e.getMessage(),Toast.LENGTH_SHORT).show();
+                                                BmobQuery<fileurl> query = new BmobQuery<>();
+                                                query.getObject(bb.getText().substring(4), new QueryListener<fileurl>() {
+                                                    @Override
+                                                    public void done(final fileurl object, BmobException e) {
+                                                        if (e == null) {
+                                                            Msg msg1 = new Msg(null, Msg.FILE_RECV, url[1], object.getBfile().getFilename(), object.getFilesize() + "", "等待下载");
+                                                            msgList.add(msg1);
+                                                            msgRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(ChatActivity.this, new RecyclerItemClickListener.OnItemClickListener() {
+                                                                @Override
+                                                                public void onItemClick(View view, int position) {
+                                                                    Toast.makeText(ChatActivity.this, "7777  7", Toast.LENGTH_SHORT).show();
                                                                 }
-                                                            }
+                                                                @Override
+                                                                public void onLongClick(View view, int position) {
+                                                                    if (msgList.get(position).getType() == 3 && filedowna > 0) {
+                                                                        filedowna = 0;
+                                                                        Toast.makeText(ChatActivity.this, "8888", Toast.LENGTH_SHORT).show();
+                                                                        object.getBfile().download(new File(Environment.getExternalStorageDirectory(), object.getBfile().getFilename()), new DownloadFileListener() {
+                                                                            @Override
+                                                                            public void onStart() {
+//                                                                toast("开始下载...");
+                                                                                Toast.makeText(ChatActivity.this, "开始下载...", Toast.LENGTH_SHORT).show();
+                                                                            }
 
-                                                            @Override
-                                                            public void onProgress(Integer value, long newworkSpeed) {
-                                                                Log.i("bmob","下载进度："+value+","+newworkSpeed);
-                                                            }
-                                                        });
+                                                                            @Override
+                                                                            public void done(String savePath, BmobException e) {
+                                                                                Log.d("18888", "url=" + url[1]);
+                                                                                if (e == null) {
+                                                                                    Toast.makeText(ChatActivity.this, "下载成功，保存路径" + savePath, Toast.LENGTH_SHORT).show();
+                                                                                    Msg msg5 = new Msg(null, Msg.FILE_RECV, url[1], object.getBfile().getFilename(), object.getFilesize() + "", "已接收");
+                                                                                    msgList.add(msg5);
 
-                                                    }else{
-                                                        Log.i("bmob","失败："+e.getMessage()+","+e.getErrorCode());
+
+
+
+
+
+                                                                                } else {
+                                                                                    Toast.makeText(ChatActivity.this, "下载失败：" + e.getErrorCode() + "," + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                                                                }
+
+                                                                                object.setObjectId(object.getObjectId());
+                                                                                object.delete(new UpdateListener() {
+
+                                                                                    @Override
+                                                                                    public void done(BmobException e) {
+                                                                                        if(e==null){
+                                                                                            Toast.makeText(ChatActivity.this, "删除FILE成功", Toast.LENGTH_SHORT).show();
+                                                                                        }else{
+                                                                                            Toast.makeText(ChatActivity.this, "删除FILE失败", Toast.LENGTH_SHORT).show();
+                                                                                        }
+                                                                                    }
+
+                                                                                });
+
+
+
+                                                                            }
+
+                                                                            @Override
+                                                                            public void onProgress(Integer value, long newworkSpeed) {
+                                                                                Log.i("bmob", "下载进度：" + value + "," + newworkSpeed);
+                                                                            }
+                                                                        });
+
+                                                                    }
+                                                                }
+                                                            }));
+
+
+                                                        } else {
+                                                            Log.i("bmob", "失败：" + e.getMessage() + "," + e.getErrorCode());
+                                                            Msg msg1 = new Msg(bb.getText(), Msg.TYPE_RECEIVCED, url[1]);
+
+                                                            Log.d("18888", "url=" + url[1]);
+                                                            msgList.add(msg1);
+                                                        }
                                                     }
-                                                }
 
-                                            });
+                                                });
 
+                                            } else {
+                                                Msg msg1 = new Msg(bb.getText(), Msg.TYPE_RECEIVCED, url[1]);
+
+                                                Log.d("18888", "url=" + url[1]);
+                                                msgList.add(msg1);
+                                            }
                                         } else {
                                             Msg msg1 = new Msg(bb.getText(), Msg.TYPE_RECEIVCED, url[1]);
+
                                             Log.d("18888", "url=" + url[1]);
                                             msgList.add(msg1);
+
                                         }
                                     }
                                 }
@@ -458,9 +500,6 @@ public class ChatActivity extends AppCompatActivity  {
                         });
                     }
                 });
-
-
-                // Do something with the result...
             }
         }
     }

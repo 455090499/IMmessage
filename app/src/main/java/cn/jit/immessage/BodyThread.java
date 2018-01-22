@@ -36,7 +36,7 @@ public class BodyThread implements Runnable {
     public void run() {
         try {
 //            mSocket = new Socket("139.196.138.200", 30000);
-            mSocket = new Socket("192.168.1.127", 30003);
+            mSocket = new Socket("192.168.1.122", 30003);
             mBufferedReader = new BufferedReader(new InputStreamReader(mSocket.getInputStream()));
             mOutputStream = mSocket.getOutputStream();
 
@@ -72,10 +72,22 @@ public class BodyThread implements Runnable {
                             msg.obj = content;
                             if (Body1Activity.flag == 0)
                                 Body1Activity.mhandler.sendMessage(msg);
-                            else if (Body1Activity.flag ==1)
+                            else if (Body1Activity.flag ==1) {
+                                try {
+                                    Thread.sleep(200L);
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                }
                                 ChatActivity.mhandler.sendMessage(msg);
-                            else if (Body1Activity.flag ==2)
+                            }
+                            else if (Body1Activity.flag ==2) {
+                                try {
+                                    Thread.sleep(200L);
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                }
                                 Chat2Activity.mhandler.sendMessage(msg);
+                            }
                         }
                     }catch (IOException e){
                         e.printStackTrace();

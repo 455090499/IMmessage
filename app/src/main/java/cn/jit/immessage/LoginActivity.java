@@ -125,6 +125,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                // p2.insertpp("13260905105","chenhao");
 
+
                 BmobQuery<pp> bmobQuery = new BmobQuery<>();
                 bmobQuery.addWhereEqualTo("phone",et1.getText());
                 bmobQuery.addWhereEqualTo("passwd",et2.getText());
@@ -132,6 +133,7 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void done(List<pp> object, BmobException e) {
                         if(e==null){
+                            Toast.makeText(LoginActivity.this,"444444",Toast.LENGTH_SHORT).show();
                             if(object.size()==0)
                                 Toast.makeText(LoginActivity.this,"密码错误！", Toast.LENGTH_SHORT).show();
                             for (pp p1 : object) {

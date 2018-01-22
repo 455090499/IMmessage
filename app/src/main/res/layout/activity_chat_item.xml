@@ -9,6 +9,7 @@
         android:id="@+id/chat_item_left"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:clickable="false"
         android:layout_gravity="left">
         <cn.jit.immessage.Round1ImageViewActivity
             android:id="@+id/chat_item_left_imag"
@@ -23,6 +24,7 @@
             android:layout_height="wrap_content"
             android:textSize="15sp"
             android:maxWidth="220dp"
+            android:clickable="false"
             android:background="@mipmap/chatfrom_bg_normal"
             android:gravity="center_vertical"/>
     </LinearLayout>
@@ -31,6 +33,7 @@
         android:id="@+id/chat_item_right"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:clickable="false"
         android:layout_gravity="right">
 
         <TextView
@@ -41,6 +44,7 @@
             android:textSize="15sp"
             android:maxWidth="220dp"
             android:background="@mipmap/chatto_bg_normal"
+            android:clickable="false"
             android:gravity="center_vertical" />
 
         <cn.jit.immessage.Round1ImageViewActivity
@@ -121,11 +125,13 @@
         android:id="@+id/file_send_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:clickable="false"
         android:layout_gravity="right">
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="95dp"
+            android:clickable="false"
             android:background="@mipmap/chatto_bg_normal">
 
             <ImageView

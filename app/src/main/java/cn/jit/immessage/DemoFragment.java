@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -53,6 +54,9 @@ public class DemoFragment extends Fragment {
         View view = inflater.inflate(R.layout.body_message, container, false);
         int type = getArguments().getInt("type");
         listView = (ListView) view.findViewById(R.id.body_message_lv);
+        //图片设置
+        StrictMode.setThreadPolicy(new
+                StrictMode.ThreadPolicy.Builder().detectDiskReads().detectDiskWrites().detectNetwork().penaltyLog().build());
 
 
 
@@ -203,11 +207,6 @@ public class DemoFragment extends Fragment {
 
         } else if (type == 2)
         {
-
-            System.out.println("够好跪下!");
-
-
-
             List<Map<String, Object>> listems = new ArrayList<Map<String, Object>>();
             for(int i=0;i<getArguments().getInt("count");i++) {
                 Map<String, Object> listem = new HashMap<String, Object>();
@@ -281,7 +280,6 @@ public class DemoFragment extends Fragment {
             if (conn.getResponseCode() == 200) {
                 InputStream inputStream = conn.getInputStream();
                 Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
-                inputStream.close();
                 return bitmap;
             }
         } catch (IOException e) {

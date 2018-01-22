@@ -20,17 +20,18 @@ import java.util.List;
 /**
  * Created by liweiwei on 2018/1/5.
  */
+
 public class MsgAdapter extends RecyclerView.Adapter<MsgAdapter.ViewHolder>{
     private List<Msg> mMsgList;
     static class ViewHolder extends RecyclerView.ViewHolder{
          LinearLayout leftLayout;
          LinearLayout rightLayout;
 
-        TextView leftMsg;
-        TextView rightMsg;
+         TextView leftMsg;
+         TextView rightMsg;
 
-        LinearLayout filesend;
-        LinearLayout filerecv;
+         LinearLayout filesend;
+         LinearLayout filerecv;
 
          TextView send_tv1;
          TextView send_tv2;
@@ -39,11 +40,11 @@ public class MsgAdapter extends RecyclerView.Adapter<MsgAdapter.ViewHolder>{
          TextView recv_tv2;
          TextView recv_tv3;
 
-        ImageView leftImg;
-        ImageView rightImg;
+         ImageView leftImg;
+         ImageView rightImg;
 
-        ImageView leftImg1;
-        ImageView rightImg1;
+         ImageView leftImg1;
+         ImageView rightImg1;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -125,6 +126,7 @@ public class MsgAdapter extends RecyclerView.Adapter<MsgAdapter.ViewHolder>{
             Bitmap bitmap2 = getBitmap(url2);
             holder.leftImg1.setImageBitmap(bitmap2);
         }
+
     }
 
     private Bitmap getBitmap(String url1) {
@@ -150,6 +152,7 @@ public class MsgAdapter extends RecyclerView.Adapter<MsgAdapter.ViewHolder>{
     public int getItemCount() {
         return mMsgList.size();
     }
+
 
 
 

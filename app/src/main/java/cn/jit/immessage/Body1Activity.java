@@ -63,6 +63,7 @@ public class Body1Activity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private ViewPager viewPager;
     public static boolean rff=true;
+    static int filedowna=0;
     private WeChatRadioGroup gradualRadioGroup;
     private TextView header_tv1;
     private TextView header_tv2;
