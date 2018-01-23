@@ -58,8 +58,6 @@ public class Info2Activity extends AppCompatActivity {
         //图片设置
         StrictMode.setThreadPolicy(new
                 StrictMode.ThreadPolicy.Builder().detectDiskReads().detectDiskWrites().detectNetwork().penaltyLog().build());
-//        StrictMode.setVmPolicy(
-//                new StrictMode.VmPolicy.Builder().detectLeakedSqlLiteObjects().detectLeakedClosableObjects().penaltyLog().penaltyDeath().build());
 
         SharedPreferences pre = getSharedPreferences("user", MODE_PRIVATE);
         String content = pre.getString("sms_content", "");
@@ -81,7 +79,6 @@ public class Info2Activity extends AppCompatActivity {
                     try {
 
                         String url = bmobfile.getFileUrl();
-                        Log.e("1", url);
                         Bitmap bitmap = getBitmap(url);
                         im.setImageBitmap(bitmap);
                     } catch (IOException e2) {

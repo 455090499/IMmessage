@@ -122,11 +122,8 @@ private  static int filedowna=0;
                     for (uinfo uf1 : list) {
                         if (uf1.getPhone().equals(content1)) {
                             url[0] = uf1.getPhoto().getFileUrl();
-                            Log.d("18989","url="+url[0]);
                         } else {
                             url[1] = uf1.getPhoto().getFileUrl();
-                            Log.d("15989","url="+url[1]);
-
                         }
 
                     }
@@ -137,8 +134,6 @@ private  static int filedowna=0;
                             @Override
                             public void onClick(View v) {
                                 String content = inputText.getText().toString();
-
-                                //System.out.println(url[1]+"");
                                 if(!"".equals(content)) {
                                     Message mesg = new Message();
                                     mesg.what = 1;
@@ -180,13 +175,10 @@ private  static int filedowna=0;
                                 final Mes bb = new Mes((String) msg.obj);
                                 if (bb.getRecv().equals(sendphone)) {
                                     if (bb.getSend().equals(recvphone)) {
-                                        Log.d("8888", bb.getText() + "");
-                                        //if(bb.getText().length()>4)
                                         if (bb.getText().length() > 4) {
 
                                             String sss = bb.getText().substring(0, 3);
                                             if (sss.equals("ftp")) {
-                                                //String content=bb.getText();
                                                 filedowna++;
 //
                                                 BmobQuery<fileurl> query = new BmobQuery<>();
@@ -199,32 +191,24 @@ private  static int filedowna=0;
                                                             msgRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(ChatActivity.this, new RecyclerItemClickListener.OnItemClickListener() {
                                                                 @Override
                                                                 public void onItemClick(View view, int position) {
-                                                                    Toast.makeText(ChatActivity.this, "7777  7", Toast.LENGTH_SHORT).show();
+
                                                                 }
                                                                 @Override
                                                                 public void onLongClick(View view, int position) {
                                                                     if (msgList.get(position).getType() == 3 && filedowna > 0) {
                                                                         filedowna = 0;
-                                                                        Toast.makeText(ChatActivity.this, "8888", Toast.LENGTH_SHORT).show();
                                                                         object.getBfile().download(new File(Environment.getExternalStorageDirectory(), object.getBfile().getFilename()), new DownloadFileListener() {
                                                                             @Override
                                                                             public void onStart() {
-//                                                                toast("开始下载...");
                                                                                 Toast.makeText(ChatActivity.this, "开始下载...", Toast.LENGTH_SHORT).show();
                                                                             }
 
                                                                             @Override
                                                                             public void done(String savePath, BmobException e) {
-                                                                                Log.d("18888", "url=" + url[1]);
                                                                                 if (e == null) {
                                                                                     Toast.makeText(ChatActivity.this, "下载成功，保存路径" + savePath, Toast.LENGTH_SHORT).show();
                                                                                     Msg msg5 = new Msg(null, Msg.FILE_RECV, url[1], object.getBfile().getFilename(), object.getFilesize() + "", "已接收");
                                                                                     msgList.add(msg5);
-
-
-
-
-
 
                                                                                 } else {
                                                                                     Toast.makeText(ChatActivity.this, "下载失败：" + e.getErrorCode() + "," + e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -236,7 +220,6 @@ private  static int filedowna=0;
                                                                                     @Override
                                                                                     public void done(BmobException e) {
                                                                                         if(e==null){
-                                                                                            Toast.makeText(ChatActivity.this, "删除FILE成功", Toast.LENGTH_SHORT).show();
                                                                                         }else{
                                                                                             Toast.makeText(ChatActivity.this, "删除FILE失败", Toast.LENGTH_SHORT).show();
                                                                                         }
@@ -250,7 +233,7 @@ private  static int filedowna=0;
 
                                                                             @Override
                                                                             public void onProgress(Integer value, long newworkSpeed) {
-                                                                                Log.i("bmob", "下载进度：" + value + "," + newworkSpeed);
+
                                                                             }
                                                                         });
 
@@ -260,10 +243,7 @@ private  static int filedowna=0;
 
 
                                                         } else {
-                                                            Log.i("bmob", "失败：" + e.getMessage() + "," + e.getErrorCode());
                                                             Msg msg1 = new Msg(bb.getText(), Msg.TYPE_RECEIVCED, url[1]);
-
-                                                            Log.d("18888", "url=" + url[1]);
                                                             msgList.add(msg1);
                                                         }
                                                     }
@@ -272,16 +252,11 @@ private  static int filedowna=0;
 
                                             } else {
                                                 Msg msg1 = new Msg(bb.getText(), Msg.TYPE_RECEIVCED, url[1]);
-
-                                                Log.d("18888", "url=" + url[1]);
                                                 msgList.add(msg1);
                                             }
                                         } else {
                                             Msg msg1 = new Msg(bb.getText(), Msg.TYPE_RECEIVCED, url[1]);
-
-                                            Log.d("18888", "url=" + url[1]);
                                             msgList.add(msg1);
-
                                         }
                                     }
                                 }
@@ -308,22 +283,11 @@ private  static int filedowna=0;
         imbtn3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // This always works
                 Intent i = new Intent(ChatActivity.this, FilePickerActivity.class);
-                // This works if you defined the intent filter
-                // Intent i = new Intent(Intent.ACTION_GET_CONTENT);
-
-                // Set these depending on your use case. These are the defaults.
                 i.putExtra(FilePickerActivity.EXTRA_ALLOW_MULTIPLE, false);
                 i.putExtra(FilePickerActivity.EXTRA_ALLOW_CREATE_DIR, false);
                 i.putExtra(FilePickerActivity.EXTRA_MODE, FilePickerActivity.MODE_FILE);
-
-                // Configure initial directory by specifying a String.
-                // You could specify a String like "/storage/emulated/0/", but that can
-                // dangerous. Always use Android's API calls to get paths to the SD-card or
-                // internal memory.
                 i.putExtra(FilePickerActivity.EXTRA_START_PATH, Environment.getExternalStorageDirectory().getPath());
-
                 startActivityForResult(i, 2);
             }
         });
@@ -347,47 +311,6 @@ private  static int filedowna=0;
         msgRecyclerView.setLayoutManager(layoutManager);
         adapter = new MsgAdapter(msgList);
         msgRecyclerView.setAdapter(adapter);
-//        send.setOnClickListener(new View.OnClickListener(){
-//
-//            @Override
-//            public void onClick(View v) {
-//                String content = inputText.getText().toString();
-//                if(!"".equals(content)) {
-//                    Message mesg = new Message();
-//                    mesg.what = 1;
-//                    mesg.obj = new Mes(sendphone, recvphone, inputText.getText().toString());
-//                    Body1Activity.bodyThread.revHandler.sendMessage(mesg);
-//                    Log.d("1111","url="+url[0]);
-//
-//                    Msg msg = new Msg(content, Msg.TYPE_SENT,url[0]);
-//                    msgList.add(msg);
-//                    adapter.notifyItemChanged(msgList.size() - 1);
-//                    msgRecyclerView.scrollToPosition(msgList.size() - 1);
-//                    inputText.setText("");
-//                }
-//            }
-//        });
-
-//        inputText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-//            @Override
-//            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-//                String content = inputText.getText().toString();
-//                if(!"".equals(content)) {
-//                    Message mesg = new Message();
-//                    mesg.what = 1;
-//                    mesg.obj = new Mes(sendphone, recvphone, inputText.getText().toString());
-//                    Body1Activity.bodyThread.revHandler.sendMessage(mesg);
-//                    Log.d("1111","url="+url[1]);
-//
-//                    Msg msg = new Msg(content, Msg.TYPE_SENT,url[1]);
-//                    msgList.add(msg);
-//                    adapter.notifyItemChanged(msgList.size() - 1);
-//                    msgRecyclerView.scrollToPosition(msgList.size() - 1);
-//                    inputText.setText("");
-//                }
-//                return true;
-//            }
-//        });
     }
 
     @Override
@@ -450,16 +373,11 @@ private  static int filedowna=0;
 
                 try {
                     long size=getFileSizes(file);
-                    Log.d("456",FormentFileSize(size)+"");
-                    //send_tv2.setText(FormentFileSize(size));
 
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                Log.d("555",file+"");
-
                 final BmobFile icon = new BmobFile(file);
-                //send_tv1.setText(icon.getFilename());
 
 
                 icon.uploadblock(new UploadFileListener() {
@@ -480,7 +398,6 @@ private  static int filedowna=0;
                                     mesg.what = 1;
                                     mesg.obj = new Mes(sendphone, recvphone, "ftp/"+fu1.getObjectId());
                                     BodyService.bodyThread.revHandler.sendMessage(mesg);
-                                    Log.d("9999",url[0]);
                                     Msg msg = null;
                                     try {
                                         msg = new Msg("ftp/"+fu1.getObjectId(), Msg.FILE_SENT,url[0],icon.getFilename(),FormentFileSize(getFileSizes(file)),"已发送");
@@ -494,7 +411,7 @@ private  static int filedowna=0;
 
 
                                 }else{
-                                    Log.d("666","error");
+
                                 }
                             }
                         });
@@ -514,7 +431,6 @@ private  static int filedowna=0;
             fis.close();
         } else {
             f.createNewFile();
-            System.out.println("文件夹不存在");
         }
 
         return s;

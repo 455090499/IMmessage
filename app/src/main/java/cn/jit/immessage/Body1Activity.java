@@ -5,22 +5,15 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.os.StrictMode;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentStatePagerAdapter;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.ActionBar;
 import android.support.v7.view.menu.MenuBuilder;
 import android.util.Log;
 import android.view.View;
@@ -32,12 +25,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.ViewGroup;
-import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.nononsenseapps.filepicker.FilePickerActivity;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -136,14 +128,6 @@ public class Body1Activity extends AppCompatActivity
             @Override
             public void done(BmobQueryResult<uinfo> result, BmobException e) {
                 if(e ==null){
-
-//                    DemoFragment fragment0 = new DemoFragment();
-//                    Bundle bundle = new Bundle();
-//                    bundle.putInt("type",0);
-//                    fragment0.setArguments(bundle);
-//                    lista.add(fragment0);
-
-
                     List<uinfo> list = (List<uinfo>) result.getResults();
 
                     DemoFragment fragment1 = new DemoFragment();
@@ -206,22 +190,12 @@ public class Body1Activity extends AppCompatActivity
 
                                 gradualRadioGroup.setViewPager(viewPager);
                             }else{
-                                Log.i("smile", "错误码："+e.getErrorCode()+"，错误描述："+e.getMessage());
+
                             }
                         }
                     });
-
-
-
-
-//                bundle.putInt("count",i);
-//                bundle.putStringArrayList("name",i);
-//                bundle.putStringArrayList("desc",i);
-//                bundle.putStringArrayList("head",i);
-//
-
                 }else{
-                    Log.i("smile", "错误码："+e.getErrorCode()+"，错误描述："+e.getMessage());
+
                 }
             }
         });
@@ -240,9 +214,7 @@ public class Body1Activity extends AppCompatActivity
                     BmobFile bmobfile = u4.getPhoto();
                     if (bmobfile != null)
                         try {
-
                             String url = bmobfile.getFileUrl();
-                            Log.e("1", url);
                             Bitmap bitmap = getBitmap(url);
                             im.setImageBitmap(bitmap);
                         } catch (IOException e2) {
@@ -302,11 +274,6 @@ public class Body1Activity extends AppCompatActivity
         sendphone = content1;
         socketContent = sendphone + "," + "0" + "," + "alive" + "\n";
 
-
-
-
-
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout)
 ;
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -359,21 +326,6 @@ public class Body1Activity extends AppCompatActivity
                     }
                 }
             });
-//            List<DemoFragment> lista = new ArrayList<>();
-
-//            for (int i = 0; i < 3; i++) {
-//            List<DemoFragment> lista = new ArrayList<>();
-//                DemoFragment fragment0 = new DemoFragment();
-//                Bundle bundle = new Bundle();
-//                bundle.putInt("type",0);
-//               bundle.putInt("count",i);
-//                bundle.putStringArrayList("name",i);
-//                bundle.putStringArrayList("desc",i);
-//                bundle.putStringArrayList("head",i);
-//
-//                fragment0.setArguments(bundle);
-//                lista.add(fragment0);
-
         }
         mhandler = new Handler() {
             @Override
@@ -382,12 +334,12 @@ public class Body1Activity extends AppCompatActivity
                     Mes bb = new Mes((String) msg.obj);
                     if (!bb.getRecv().equals("0")) {
                         if (bb.getSend().equals("0")) {
-                            if (bb.getText().length() == 11)
-                                Toast.makeText(Body1Activity.this, bb.getText() + "请求添加好友", Toast.LENGTH_SHORT).show();
-                            else {
-                                String[] array = bb.getText().split("/");
-                                Toast.makeText(Body1Activity.this, array[1] + "请求加群" + array[0], Toast.LENGTH_SHORT).show();
-                            }
+//                            if (bb.getText().length() == 11)
+//                                Toast.makeText(Body1Activity.this, bb.getText() + "请求添加好友", Toast.LENGTH_SHORT).show();
+//                            else {
+//                                String[] array = bb.getText().split("/");
+//                                Toast.makeText(Body1Activity.this, array[1] + "请求加群" + array[0], Toast.LENGTH_SHORT).show();
+//                            }
                         }
                         else
                             Toast.makeText(Body1Activity.this, bb.getSend() + "发来消息", Toast.LENGTH_SHORT).show();
@@ -396,19 +348,12 @@ public class Body1Activity extends AppCompatActivity
                 super.handleMessage(msg);
             }
         };
-
-//        bodyThread = new BodyThread(mHandler);
-//        bodyThread.setSendphone(sendphone);
-//        new Thread(bodyThread).start();
-
     }
 
 
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-
-
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -418,35 +363,26 @@ public class Body1Activity extends AppCompatActivity
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.body1, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
 
         if (id == R.id.body1_settings1) {
             Intent intent = new Intent(Body1Activity.this,AddActivity.class);
             startActivity(intent);
-            // Toast.makeText(Body1Activity.this,"SUCCESS",Toast.LENGTH_SHORT).show();
             return true;
         }
         if (id == R.id.body2_settings2) {
-            //Toast.makeText(Body1Activity.this,"SUCCESS2",Toast.LENGTH_SHORT).show();
             Intent intent=new Intent(Body1Activity.this,CreatActivity.class);
             startActivity(intent);
             return true;
         }
 
         if (id == R.id.body3_settings3) {
-            //Toast.makeText(Body1Activity.this,"SUCCESS3",Toast.LENGTH_SHORT).show();
             String state = Environment.getExternalStorageState();// 获取内存卡可用状态
             if(state.equals(Environment.MEDIA_MOUNTED)) {
                 Intent intent =new Intent("android.media.action.IMAGE_CAPTURE");
@@ -465,14 +401,17 @@ public class Body1Activity extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
         int id = item.getItemId();
 
         if (id == R.id.nav_camera) {
                     Intent intent=new Intent(Body1Activity.this,Info2Activity.class);
                     startActivity(intent);
-            // Handle the camera action
         } else if (id == R.id.nav_gallery) {
+
+            Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+            intent.setType("*/*");
+            intent.addCategory(Intent.CATEGORY_OPENABLE);
+            startActivity(intent);
 
         } else if (id == R.id.nav_slideshow) {
             Intent intent=new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
@@ -488,14 +427,19 @@ public class Body1Activity extends AppCompatActivity
             editor1.putString("isService", "1");
             editor1.commit();
             startActivity(intent);
-            //BodyService.bodyThread.Socketclose();
             Intent service = new Intent(Body1Activity.this, BodyService.class);
             stopService(service);
             finish();
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
+        }
+        else if (id == R.id.nav_software_decs) {
+            Intent intent = new Intent(Body1Activity.this,ShowSoftwareActivity.class);
+            startActivity(intent);
+        } else if (id == R.id.nav_user_advice) {
+            Intent intent = new Intent(Body1Activity.this,ShowAdviceActivity.class);
+            startActivity(intent);
+        }else if (id == R.id.nav_about_us) {
+            Intent intent = new Intent(Body1Activity.this,ShowAboutUsActivity.class);
+            startActivity(intent);
         }
 
 
@@ -518,22 +462,11 @@ public class Body1Activity extends AppCompatActivity
         }
         @Override
         public Fragment getItem(int position) {
-
-           Log.d("88888","position="+position);
-
             return mData.get(position);
         }
 
-//        @Override
-//        public int getItemPosition(Object object) {
-//            return POSITION_NONE;
-//        }
-//
-//
-
         @Override
         public int getCount() {
-            Log.d("77777","mData.size()="+mData.size());
             return mData.size();
         }
 
@@ -585,8 +518,6 @@ public class Body1Activity extends AppCompatActivity
         Intent service = new Intent(Body1Activity.this, BodyService.class);
         stopService(service);
     }
-
-
 }
 
 

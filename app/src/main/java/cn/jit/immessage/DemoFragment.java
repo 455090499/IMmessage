@@ -62,22 +62,6 @@ public class DemoFragment extends Fragment {
 
         if (type == 0)
         {
-//            Log.e(TAG, "onCreateView: xiaoxi" );
-//            Log.d("0000","xiaoxi");
-//            String[] name = { "李四", "张三"};
-//            String[] desc = { "怎么不回我信息", "在哪呢"};
-//            List<Map<String, Object>> listems = new ArrayList<Map<String, Object>>();
-//            for (int i = 0; i < name.length; i++) {
-//                Map<String, Object> listem = new HashMap<String, Object>();
-//                listem.put("name", name[i]);
-//                listem.put("desc", desc[i]);
-//                listems.add(listem);
-//            }
-//           SimpleAdapter simplead = new SimpleAdapter(getActivity(), listems,
-//                   R.layout.xiaoxi, new String[] { "name", "head", "desc" },
-//                   new int[] {R.id.name,R.id.head,R.id.desc});
-//            listView.setAdapter(simplead);
-//            simplead.notifyDataSetChanged();
             List<Map<String, Object>> listems = new ArrayList<Map<String, Object>>();
             Log.e(TAG, "done:112");
             for(int i=0;i<getArguments().getInt("count");i++) {
@@ -104,7 +88,6 @@ public class DemoFragment extends Fragment {
                                 try{
                                     //通过图片Url返回Bitmap
                                     Bitmap bitmap = getBitmap(value);
-                                    Log.d("12333","done:"+value);
                                     v.setImageBitmap(bitmap);
                                 }
                                 catch(Exception e){
@@ -119,7 +102,6 @@ public class DemoFragment extends Fragment {
             };
 
             listView.setAdapter(simplead);
-            //Body1Activity.tv.setText(toolbar[1]);
             simplead.notifyDataSetChanged();
 
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -145,7 +127,6 @@ public class DemoFragment extends Fragment {
 
             List<Map<String, Object>> listems = new ArrayList<Map<String, Object>>();
 
-                Log.e(TAG, "done:112");
                 for(int i=0;i<getArguments().getInt("count");i++) {
                     Map<String, Object> listem = new HashMap<String, Object>();
                     listem.put("name", getArguments().getStringArray("name")[i]);
@@ -170,7 +151,6 @@ public class DemoFragment extends Fragment {
                                 try{
                                     //通过图片Url返回Bitmap
                                     Bitmap bitmap = getBitmap(value);
-                                    Log.d("12333","done:"+value);
                                     v.setImageBitmap(bitmap);
                                 }
                                 catch(Exception e){
@@ -185,7 +165,6 @@ public class DemoFragment extends Fragment {
             };
 
             listView.setAdapter(simplead);
-            //Body1Activity.tv.setText(toolbar[1]);
             simplead.notifyDataSetChanged();
 
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -211,7 +190,6 @@ public class DemoFragment extends Fragment {
             for(int i=0;i<getArguments().getInt("count");i++) {
                 Map<String, Object> listem = new HashMap<String, Object>();
                 listem.put("name", getArguments().getStringArray("name")[i]);
-                System.out.println(getArguments().getStringArray("name")[i]);
                 listem.put("desc", getArguments().getStringArray("desc")[i]);
                 listem.put("head", getArguments().getStringArray("head")[i]);
                 listems.add(listem);
@@ -231,7 +209,6 @@ public class DemoFragment extends Fragment {
                                 try{
                                     //通过图片Url返回Bitmap
                                     Bitmap bitmap = getBitmap(value);
-                                    Log.d("12333","done:"+value);
                                     v.setImageBitmap(bitmap);
                                 }
                                 catch(Exception e){
@@ -246,7 +223,6 @@ public class DemoFragment extends Fragment {
             };
             simplead.notifyDataSetChanged();
             listView.setAdapter(simplead);
-            //Body1Activity.tv.setText(toolbar[2]);
 
 
 

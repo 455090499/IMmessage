@@ -19,6 +19,7 @@ import cn.bmob.sms.listener.VerifySMSCodeListener;
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.UpdateListener;
+import qiu.niorgai.StatusBarCompat;
 
 public class ForgetActivity extends AppCompatActivity {
 
@@ -34,6 +35,10 @@ public class ForgetActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forget);
+
+        //透明状态栏
+        StatusBarCompat.translucentStatusBar(ForgetActivity.this);
+
         BmobSMS.initialize(this, "52c7b2c9b75c6bea231965db8248157a");
         et1=(EditText)findViewById(R.id.forget_et1);
         et2=(EditText)findViewById(R.id.forget_et2);

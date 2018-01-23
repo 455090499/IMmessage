@@ -35,7 +35,6 @@ import qiu.niorgai.StatusBarCompat;
 public class Info1Activity extends AppCompatActivity {
     private Button button2;
     private Button button3;
-//    private Button button1;
     private TextView text;
     private EditText et1;
     private RadioButton rb1;
@@ -59,7 +58,6 @@ public class Info1Activity extends AppCompatActivity {
         ufo1 = new uinfo();
         im=(ImageView)findViewById(R.id.info1_im);
         button2=(Button)findViewById(R.id.info1_btn2);
-//        button1=(Button)findViewById(R.id.info1_btn1);
         button3=(Button)findViewById(R.id.info1_btn3);
         text=(TextView)findViewById(R.id.info1_tv1);
         et1=(EditText) findViewById(R.id.info1_et1);
@@ -101,26 +99,19 @@ public class Info1Activity extends AppCompatActivity {
         button3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(ufo1.getPhoto()!=null)
+                if(ufo1.getPhoto()!=null && et1.getText().toString()!=null) {
                     ufo1.getPhoto().uploadblock(new UploadFileListener() {
-                    @Override
-                    public void done(BmobException e) {
-                        Log.d("1","1");
-                        isex="".equals("")?"男":isex;
-                        SharedPreferences pre = getSharedPreferences("user", MODE_PRIVATE);
-                        ufo1.insertuinfo(pre.getString("sms_content", ""),et1.getText().toString(),isex,text.getText().toString(),et2.getText().toString(),et3.getText().toString());
-
-                    }
-                });
-                else {
-                    Log.d("2","2");
-                    isex = "".equals("") ? "男" : isex;
-                    SharedPreferences pre = getSharedPreferences("user", MODE_PRIVATE);
-                    ufo1.insertuinfo(pre.getString("sms_content", ""), et1.getText().toString(), isex, text.getText().toString(), et2.getText().toString(), et3.getText().toString());
+                        @Override
+                        public void done(BmobException e) {
+                            isex = "".equals("") ? "男" : isex;
+                            SharedPreferences pre = getSharedPreferences("user", MODE_PRIVATE);
+                            ufo1.insertuinfo(pre.getString("sms_content", ""), et1.getText().toString(), isex, text.getText().toString(), et2.getText().toString(), et3.getText().toString());
+                        }
+                    });
+                    finish();
+                } else {
+                    Toast.makeText(Info1Activity.this,"请把信息填写完成",Toast.LENGTH_SHORT).show();
                 }
-//                    Intent intent=new Intent(Info1Activity.this,LoginActivity.class);
-//                startActivity(intent);
-                finish();
             }
         });
 
@@ -145,8 +136,6 @@ public class Info1Activity extends AppCompatActivity {
             cursor.close();
             ImageView imageView = (ImageView) findViewById(R.id.info1_im);
             imageView.setImageBitmap(BitmapFactory.decodeFile(picturePath));
-
-
         }else
         {
             ufo1.setPhoto(null);

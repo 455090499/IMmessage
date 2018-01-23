@@ -5,45 +5,53 @@
     android:orientation="vertical">
 
     <ImageView
-        android:layout_width="110dp"
-        android:layout_height="110dp"
+        android:layout_width="95dp"
+        android:layout_height="95dp"
         android:layout_gravity="center"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="50dp"
         android:layout_marginBottom="20dp"
         android:src="@mipmap/logo"/>
 
     <EditText
         android:id="@+id/forget_et1"
-        android:layout_width="255dp"
-        android:layout_height="38dp"
+        android:layout_width="245dp"
+        android:layout_height="37dp"
         android:hint="手机号"
         android:background="@drawable/shape3_button"
+        android:maxLines="1"
         android:textSize="15dp"
         android:inputType="phone"
         android:paddingLeft="10dp"
         android:layout_gravity="center" />
 
+
     <EditText
         android:id="@+id/forget_et2"
-        android:layout_width="255dp"
-        android:layout_height="38dp"
+        android:layout_width="245dp"
+        android:layout_height="37dp"
+        android:hint="请输入密码"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/shape3_button"
+        android:maxLines="1"
+        android:textSize="15dp"
+        android:inputType="phone"
+        android:paddingLeft="10dp"
+        android:layout_gravity="center" />
+
+
+    <EditText
+        android:id="@+id/forget_et3"
+        android:layout_width="245dp"
+        android:layout_height="37dp"
         android:layout_marginTop="20dp"
         android:layout_gravity="center"
-        android:hint="新密码"
+        android:maxLines="1"
+        android:hint="密码"
+        android:password="true"
         android:paddingLeft="10dp"
         android:background="@drawable/shape3_button"
         android:textSize="15dp" />
 
-    <EditText
-        android:id="@+id/forget_et3"
-        android:layout_width="255dp"
-        android:layout_height="38dp"
-        android:layout_marginTop="20dp"
-        android:layout_gravity="center"
-        android:hint="确认密码"
-        android:paddingLeft="10dp"
-        android:background="@drawable/shape3_button"
-        android:textSize="15dp" />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -53,10 +61,11 @@
 
         <EditText
             android:id="@+id/forget_et4"
-            android:layout_width="150dp"
-            android:layout_height="38dp"
+            android:layout_width="140dp"
+            android:layout_height="37dp"
             android:hint="验证码"
-            android:layout_marginLeft="52dp"
+            android:maxLines="1"
+            android:layout_marginLeft="56dp"
             android:background="@drawable/shape3_button"
             android:paddingLeft="10dp"
             android:textSize="15dp"
@@ -79,11 +88,12 @@
 
         <Button
             android:id="@+id/forget_btn2"
-            android:layout_width="wrap_content"
-            android:layout_height="60dp"
+            android:layout_width="250dp"
+            android:layout_height="35dp"
             android:text="完成"
-            android:background="@android:color/transparent"
+            android:textColor="#ffffffff"
+            android:background="@drawable/shape6_button"
             android:textSize="18dp"
-            android:layout_marginTop="20dp"/>
+            android:layout_marginTop="30dp"/>
     </LinearLayout>
 </LinearLayout>

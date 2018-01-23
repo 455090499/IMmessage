@@ -37,7 +37,7 @@ public class pfriend extends BmobObject {
             @Override
             public void done(String objectId, BmobException e) {
                 if(e==null){
-                    Toast.makeText(getApplicationContext(),"好友申请已发送，返回objectId为："+objectId,Toast.LENGTH_SHORT).show();
+
                 }else{
                     Toast.makeText(getApplicationContext(),"好友申请发送失败：" + e.getMessage(),Toast.LENGTH_SHORT).show();
                 }

@@ -56,7 +56,7 @@ public class ginfo  extends BmobObject {
             @Override
             public void done(String objectId, BmobException e) {
                 if(e==null){
-                    Toast.makeText(getApplicationContext(),"创建群组成功，返回objectId为："+objectId,Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getApplicationContext(),"创建群组成功，返回objectId为："+objectId,Toast.LENGTH_SHORT).show();
                 }else{
                     Toast.makeText(getApplicationContext(),"创建群组失败：" + e.getMessage(),Toast.LENGTH_SHORT).show();
                 }

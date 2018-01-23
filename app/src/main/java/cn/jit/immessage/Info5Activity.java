@@ -78,16 +78,13 @@ public class Info5Activity extends AppCompatActivity {
 
                     if (bmobfile != null)
                         try {
-
                             String url = bmobfile.getFileUrl();
-                            Log.e("1", url);
                             Bitmap bitmap = getBitmap(url);
                             img.setImageBitmap(bitmap);
                         } catch (IOException e2) {
                             // TODO Auto-generated catch block
                             e2.printStackTrace();
                         }
-                    //             tv1.setText(u1.get());
                     tv2.setText(u1.getPhone());
                     tv3.setText(u1.getGname());
                     tv4.setText(u1.getGid());
@@ -125,7 +122,7 @@ public class Info5Activity extends AppCompatActivity {
                                                 @Override
                                                 public void done(BmobException e) {
                                                     if (e == null) {
-                                                        Toast.makeText(Info5Activity.this, "删除gphone成功", Toast.LENGTH_SHORT).show();
+                                                        //Toast.makeText(Info5Activity.this, "删除gphone成功", Toast.LENGTH_SHORT).show();
                                                     } else {
                                                         Toast.makeText(Info5Activity.this, "删除gphone失败", Toast.LENGTH_SHORT).show();
 
@@ -146,7 +143,7 @@ public class Info5Activity extends AppCompatActivity {
                                                 @Override
                                                 public void done(BmobException e) {
                                                     if (e == null) {
-                                                        Toast.makeText(Info5Activity.this, "删除ginfo成功", Toast.LENGTH_SHORT).show();
+                                                        //Toast.makeText(Info5Activity.this, "删除ginfo成功", Toast.LENGTH_SHORT).show();
                                                     } else {
                                                         Toast.makeText(Info5Activity.this, "删除ginfo失败", Toast.LENGTH_SHORT).show();
 
@@ -176,14 +173,13 @@ public class Info5Activity extends AppCompatActivity {
                                                     @Override
                                                     public void done(BmobException e) {
                                                         if (e == null) {
-                                                            Toast.makeText(Info5Activity.this, "删除成员成功", Toast.LENGTH_SHORT).show();
+                                                            //Toast.makeText(Info5Activity.this, "删除成员成功", Toast.LENGTH_SHORT).show();
                                                         } else {
                                                             Toast.makeText(Info5Activity.this, "删除成员失败", Toast.LENGTH_SHORT).show();
                                                         }
                                                     }
                                                 });
                                             }
-
 
                                         }
 
@@ -203,94 +199,6 @@ public class Info5Activity extends AppCompatActivity {
             }
         });
 
-
-
-//            @Override
-//            public void onClick(View v) {
-//                SharedPreferences pre = getSharedPreferences("user", MODE_PRIVATE);
-//                String content = pre.getString("sms_content", "");
-//                if (content.equals(tv2.getText().toString())) {
-//                    BmobQuery<gphone> bmobQuery = new BmobQuery<>();
-//                    bmobQuery.addWhereEqualTo("gid", tv4.getText().toString());
-//                    bmobQuery.findObjects(new FindListener<gphone>() {
-//                        @Override
-//                        public void done(List<gphone> list, BmobException e) {
-//                            for (gphone u1 : list) {
-//                                u1.delete(new UpdateListener() {
-//                                    @Override
-//                                    public void done(BmobException e) {
-//                                        if (e == null) {
-//                                            Toast.makeText(Info5Activity.this, "删除gphone成功", Toast.LENGTH_SHORT).show();
-//                                        } else {
-//                                            Toast.makeText(Info5Activity.this, "删除gphone失败", Toast.LENGTH_SHORT).show();
-//
-//                                        }
-//                                    }
-//                                });
-//                            }
-//                        }
-//                    });
-//                    BmobQuery<ginfo> bmobQuery1 = new BmobQuery<>();
-//                    bmobQuery1.addWhereEqualTo("phone", content);
-//                    bmobQuery1.findObjects(new FindListener<ginfo>() {
-//                        @Override
-//                        public void done(List<ginfo> list, BmobException e) {
-//                            for (ginfo u1 : list) {
-//                                u1.delete(new UpdateListener() {
-//                                    @Override
-//                                    public void done(BmobException e) {
-//                                        if (e == null) {
-//                                            Toast.makeText(Info5Activity.this, "删除ginfo成功", Toast.LENGTH_SHORT).show();
-//                                        } else {
-//                                            Toast.makeText(Info5Activity.this, "删除ginfo失败", Toast.LENGTH_SHORT).show();
-//
-//                                        }
-//                                    }
-//                                });
-//                            }
-//                        }
-//                    });
-//                    Intent intent1=new Intent(Info5Activity.this,Body1Activity.class);
-//                    startActivity(intent1);
-//
-//                } else {
-//
-//                    String bql = "select * from gphone where gid='" + tv4.getText().toString() + "'and phone='" + Body1Activity.p1.getPhone() + "'";
-//                    BmobQuery<gphone> query = new BmobQuery<gphone>();
-//                    //设置查询的SQL语句
-//                    query.setSQL(bql);
-//                    query.doSQLQuery(new SQLQueryListener<gphone>() {
-//
-//                        @Override
-//                        public void done(BmobQueryResult<gphone> result, BmobException e) {
-//                            if (e == null) {
-//                                List<gphone> list = (List<gphone>) result.getResults();
-//                                for (gphone uf1 : list) {
-//                                    uf1.delete(new UpdateListener() {
-//                                        @Override
-//                                        public void done(BmobException e) {
-//                                            if (e == null) {
-//                                                Toast.makeText(Info5Activity.this, "删除成员成功", Toast.LENGTH_SHORT).show();
-//                                            } else {
-//                                                Toast.makeText(Info5Activity.this, "删除成员失败", Toast.LENGTH_SHORT).show();
-//                                            }
-//                                        }
-//                                    });
-//                                }
-//
-//
-//                            }
-//
-//                        }
-//                    });
-//                    Intent intent1=new Intent(Info5Activity.this,Body1Activity.class);
-//                    startActivity(intent1);
-//                }
-//
-//
-//            }
-
-//        });
         imbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -9,7 +9,7 @@
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-   <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <application
         android:allowBackup="true"
@@ -42,6 +42,7 @@
         <activity android:name=".LoginActivity" />
         <activity android:name=".Splash2Activity" />
         <activity android:name=".AddActivity" />
+        <activity android:name=".ShowSoftwareActivity" />
         <activity android:name=".ForgetActivity" />
         <activity android:name=".AddgroupActivity" />
         <activity android:name=".Showgroupers" />
@@ -51,6 +52,7 @@
             android:theme="@style/FilePickerTheme">
             <intent-filter>
                 <action android:name="android.intent.action.GET_CONTENT" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
@@ -58,7 +60,8 @@
         <service
             android:name=".BodyService"
             android:enabled="true"
-            android:exported="true"></service>
+            android:exported="true" />
+
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="${applicationId}.provider"
@@ -68,6 +71,10 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/nnf_provider_paths" />
         </provider>
+
+        <activity android:name=".ShowAdviceActivity" />
+        <activity android:name=".ShowAdvice2Activity" />
+        <activity android:name=".ShowAboutUsActivity"></activity>
     </application>
 
 </manifest>

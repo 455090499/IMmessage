@@ -109,7 +109,6 @@ public class Showgroupers extends AppCompatActivity {
                                         try{
                                             //通过图片Url返回Bitmap
                                             Bitmap bitmap = getBitmap(value);
-                                            Log.d("12333","done:"+value);
                                             v.setImageBitmap(bitmap);
                                         }
                                         catch(Exception e){
@@ -126,11 +125,8 @@ public class Showgroupers extends AppCompatActivity {
                     lv1.setAdapter(simplead);
                     simplead.notifyDataSetChanged();
 
-
-
-
                 }else{
-                    Log.i("smile", "错误码："+e.getErrorCode()+"，错误描述："+e.getMessage());
+
                 }
             }
         });

@@ -21,7 +21,6 @@ public class Splash2Activity extends AppCompatActivity {
                     Splash2Activity.this.finish();
                     overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
                     overridePendingTransition(android.R.anim.slide_in_left,android.R.anim.slide_out_right);
-                   // overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }

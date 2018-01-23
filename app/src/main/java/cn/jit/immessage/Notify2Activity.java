@@ -103,7 +103,6 @@ public class Notify2Activity extends AppCompatActivity {
                                     @Override
                                     public void done(BmobException e) {
                                         if (e == null) {
-                                            Toast.makeText(Notify2Activity.this, "删除记录成功", Toast.LENGTH_SHORT).show();
 
                                         } else {
                                             Toast.makeText(Notify2Activity.this, "删除记录失败", Toast.LENGTH_SHORT).show();
@@ -143,7 +142,6 @@ public class Notify2Activity extends AppCompatActivity {
                                         @Override
                                         public void done(BmobException e) {
                                             if (e == null) {
-                                                Toast.makeText(Notify2Activity.this, "删除成员成功", Toast.LENGTH_SHORT).show();
 
                                             } else {
                                                 Toast.makeText(Notify2Activity.this, "删除成员失败", Toast.LENGTH_SHORT).show();
@@ -167,7 +165,6 @@ public class Notify2Activity extends AppCompatActivity {
                                                     @Override
                                                     public void done(BmobException e) {
                                                         if (e == null) {
-                                                            Toast.makeText(Notify2Activity.this, "删除记录成功", Toast.LENGTH_SHORT).show();
 
                                                         } else {
                                                             Toast.makeText(Notify2Activity.this, "删除记录失败", Toast.LENGTH_SHORT).show();

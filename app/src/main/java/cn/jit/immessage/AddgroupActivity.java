@@ -35,7 +35,6 @@ import qiu.niorgai.StatusBarCompat;
 public class AddgroupActivity extends AppCompatActivity {
 
     private Button button2;
-//    private Button button3;
     private EditText et1;
     private ImageButton im;
     private ListView lv1;
@@ -54,7 +53,6 @@ public class AddgroupActivity extends AppCompatActivity {
         et1=(EditText)findViewById(R.id.addgroup_et1);
         im=(ImageButton)findViewById(R.id.addgroup_imbtn);
         button2=(Button)findViewById(R.id.addgroup_btn2);
-//        button3=(Button)findViewById(R.id.add_item_btn);
 
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,20 +63,7 @@ public class AddgroupActivity extends AppCompatActivity {
                 finish();
             }
         });
-//        button3.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = getIntent();
-//                String name = intent.getStringExtra("name");
-//                String gid=intent.getStringExtra("gid");
-//                if(name!=null){
-//                    gphone.insertgphone(name,et1.getText().toString());
-//                }else if(gid!=null){
-//                    gphone.insertgphone(gid,et1.getText().toString());
-//                }
-//
-//            }
-//        });
+
         im.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -104,8 +89,6 @@ public class AddgroupActivity extends AppCompatActivity {
                                 List<Map<String, Object>> listems = new ArrayList<Map<String, Object>>();
                                 for (int i = 0; i < name.length; i++) {
                                     Map<String, Object> listem = new HashMap<String, Object>();
-                                    //listem.put("head", imageids[i]);
-
                                     listem.put("name", name[i]);
                                     listem.put("desc", desc[i]);
                                     listem.put("head",head[i]);

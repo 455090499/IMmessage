@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:background="@drawable/side_nav_bar2"
+        android:layout_height="70dp">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:orientation="vertical"
+            >
+            <TextView
+
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal|center"
+                android:text="我要反馈"
+                android:textColor="#ffffffff"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/showadvice_btn1"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@android:color/transparent"
+                android:drawableLeft="@mipmap/chat_back"
+                android:gravity="center"
+                android:paddingLeft="15dp"
+                android:textColor="#ffffffff"
+                android:textSize="18sp"/>
+
+
+
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+
+    <EditText
+      android:id="@+id/showadvice_et1"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:padding="10dp"
+        android:hint="请输入建议和意见(必填)"
+        android:gravity="top"
+        android:textSize="15sp"
+        android:inputType="textMultiLine"
+        android:maxLines="5"
+        android:background="@drawable/shape2_button"
+        />
+    <EditText
+        android:id="@+id/showadvice_et2"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="40dp"
+        android:padding="10dp"
+        android:textSize="15sp"
+        android:hint="请输入你的手机号(选填)"
+        android:background="@drawable/shape2_button"/>
+
+
+    <Button
+        android:id="@+id/showadvice_btn2"
+        android:layout_width="320dp"
+        android:layout_height="35dp"
+        android:text="提交建议"
+        android:textColor="#ffffffff"
+        android:background="@drawable/shape6_button"
+        android:textSize="18dp"
+        android:layout_gravity="center"
+       android:layout_marginTop="30dp"/>
+</LinearLayout>

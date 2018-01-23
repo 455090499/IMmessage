@@ -128,9 +128,6 @@ public class Info3Activity extends AppCompatActivity {
                                                     @Override
                                                     public void done(BmobException e) {
                                                         u1.setValue("photo", ufo2.getPhoto());
-                                                        Toast.makeText(Info3Activity.this, "done" + u1.getObjectId(), Toast.LENGTH_SHORT).show();
-
-                                                        Toast.makeText(Info3Activity.this, "done" + isex, Toast.LENGTH_SHORT).show();
                                                         if(!edt1.getText().toString().equals(""))
                                                             u1.setValue("niconame", edt1.getText().toString());
                                                         if(!isex.equals(""))
@@ -146,7 +143,6 @@ public class Info3Activity extends AppCompatActivity {
                                                             @Override
                                                             public void done(BmobException e) {
                                                                 if (e == null) {
-                                                                    Log.i("bmob", "更新成功");
                                                                     try {
                                                                         fphoto=false;
                                                                         Toast.makeText(Info3Activity.this, "正在保存" + u1.getObjectId(), Toast.LENGTH_LONG).show();
@@ -158,24 +154,19 @@ public class Info3Activity extends AppCompatActivity {
                                                                     }
 
                                                                 } else {
-                                                                    Log.i("bmob", "更新失败：" + e.getMessage() + "," + e.getErrorCode());
+
                                                                 }
                                                             }
                                                         });
                                                     }
                                                 });
-                                            }else
-                                            {
-                                                Toast.makeText(Info3Activity.this,"done"+u1.getObjectId(),Toast.LENGTH_SHORT).show();
-
+                                            }else {
 
                                             }
 
                                     }
                                 });
                             }else{
-
-                                Toast.makeText(Info3Activity.this, "done" + isex, Toast.LENGTH_SHORT).show();
                                 if(!edt1.getText().toString().equals(""))
                                     u1.setValue("niconame", edt1.getText().toString());
                                 if(!isex.equals(""))
@@ -191,27 +182,18 @@ public class Info3Activity extends AppCompatActivity {
                                     @Override
                                     public void done(BmobException e) {
                                         if (e == null) {
-                                            Log.i("bmob", "更新成功");
                                             try {
-                                                Toast.makeText(Info3Activity.this, "运行成功" + u1.getObjectId(), Toast.LENGTH_LONG).show();
-
                                                 Thread.sleep(1000L);
-
                                                 finish();
                                             } catch (InterruptedException e1) {
                                                 e1.printStackTrace();
                                             }
-
                                         } else {
-                                            Log.i("bmob", "更新失败：" + e.getMessage() + "," + e.getErrorCode());
+
                                         }
                                     }
                                 });
                             }
-
-                            Log.d("d","done:"+u1.getObjectId() );
-
-
                         }
                     }
                 });
@@ -237,7 +219,6 @@ public class Info3Activity extends AppCompatActivity {
             int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
             final  BmobFile icon = new BmobFile(new File(cursor.getString(columnIndex)));
             ufo2.setPhoto(icon);
-
             String picturePath = cursor.getString(columnIndex);
             cursor.close();
             ImageView imageView = (ImageView) findViewById(R.id.info3_im);

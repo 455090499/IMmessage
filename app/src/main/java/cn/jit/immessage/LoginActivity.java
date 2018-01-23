@@ -133,26 +133,22 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void done(List<pp> object, BmobException e) {
                         if(e==null){
-                            Toast.makeText(LoginActivity.this,"444444",Toast.LENGTH_SHORT).show();
                             if(object.size()==0)
-                                Toast.makeText(LoginActivity.this,"密码错误！", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(LoginActivity.this,"账号或密码错误！", Toast.LENGTH_SHORT).show();
                             for (pp p1 : object) {
                                 SharedPreferences.Editor editor = getSharedPreferences("user", MODE_PRIVATE).edit();
                                 editor.putString("sms_content", et1.getText().toString());
                                 editor.putString("sms_content1", et2.getText().toString());
-
                                 Body1Activity.islogin=true;
                                 editor.putString("islogin","1");
                                 editor.commit();
                                 Intent intent=new Intent(LoginActivity.this,Body1Activity.class);
-                                Toast.makeText(LoginActivity.this,p1.getObjectId()+","+et2.getText(), Toast.LENGTH_SHORT).show();
                                 startActivity(intent);
                                 finish();
 
                             }
                         }else{
-                            Toast.makeText(LoginActivity.this,"登陆失败，检查网络",Toast.LENGTH_SHORT).show();
-                            Log.i("bmob","登录失败："+e.getMessage()+","+e.getErrorCode());
+                            Toast.makeText(LoginActivity.this,"登陆失败，检查网络！",Toast.LENGTH_SHORT).show();
                         }
                     }
                 });

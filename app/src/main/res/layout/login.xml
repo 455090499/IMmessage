@@ -23,6 +23,7 @@
             android:layout_height="38dp"
             android:layout_gravity="center"
             android:maxLines="1"
+            android:maxLength="11"
             android:inputType="number"
             android:textSize="15dp"
             android:paddingLeft="20dp"
@@ -45,6 +46,7 @@
            android:paddingLeft="20dp"
            android:drawableLeft="@mipmap/login2"
            android:maxLines="1"
+           android:digits="0123456789abcdefghigklmnopqrstuvwxyzQWERTYUIOPASDFGHJKLZXCVBNM"
            android:password="true"
            android:hint="密码"/>
         <CheckBox

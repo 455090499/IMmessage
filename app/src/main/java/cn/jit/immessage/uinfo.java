@@ -86,7 +86,7 @@ public class uinfo extends BmobObject {
                 @Override
                 public void done(String objectId, BmobException e) {
                     if(e==null){
-                        Toast.makeText(getApplicationContext(),"添加数据成功，返回objectId为："+objectId,Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getApplicationContext(),"添加数据成功，返回objectId为："+objectId,Toast.LENGTH_SHORT).show();
                     }else{
                         Toast.makeText(getApplicationContext(),"创建数据失败：" + e.getMessage(),Toast.LENGTH_SHORT).show();
                     }

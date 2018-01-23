@@ -42,6 +42,8 @@ import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.FindListener;
 import rx.Subscription;
 
+import static cn.bmob.v3.Bmob.getApplicationContext;
+
 public class AddActivity extends AppCompatActivity {
     private ListView lv1;
     private Button btn1;
@@ -49,6 +51,7 @@ public class AddActivity extends AppCompatActivity {
     private EditText et1;
     private ImageView im;
     private boolean isfound=false;
+    private static  String photourl=new String();
     pfriend pfriend=new pfriend();
     gphone gphone=new gphone();
 
@@ -60,7 +63,6 @@ public class AddActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
-
         btn1=(Button)findViewById(R.id.add_btn1);
         btn2=(ImageButton)findViewById(R.id.add_imbtn);
 
@@ -71,6 +73,8 @@ public class AddActivity extends AppCompatActivity {
         SharedPreferences pre = getSharedPreferences("user", MODE_PRIVATE);
         final String content1 = pre.getString("sms_content", "");
         sendphone = content1;
+
+
 
         if (Build.VERSION.SDK_INT >= 21) {
             View decorView = getWindow().getDecorView();
@@ -86,6 +90,20 @@ public class AddActivity extends AppCompatActivity {
         StrictMode.setThreadPolicy(new
                 StrictMode.ThreadPolicy.Builder().detectDiskReads().detectDiskWrites().detectNetwork().penaltyLog().build());
 
+        BmobQuery<uinfo> bmobQuery4 = new BmobQuery<>();
+        bmobQuery4.addWhereEqualTo("phone", content1);
+        bmobQuery4.findObjects(new FindListener<uinfo>() {
+            @Override
+            public void done(List<uinfo> list, BmobException e) {
+
+                for (uinfo u1 : list) {
+                    BmobFile bmobFile=u1.getPhoto();
+                    photourl = bmobFile.getFileUrl();
+
+                }
+            }
+        });
+
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -100,16 +118,6 @@ public class AddActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(et1.getText().toString().length() == 11){
-//                    BmobQuery<uinfo> bmobQuery6 = new BmobQuery<>();
-//                    bmobQuery6.addWhereEqualTo("phone", et1.getText().toString());
-//                    bmobQuery6.findObjects(new FindListener<uinfo>() {
-//                        @Override
-//                        public void done(List<uinfo> list, BmobException e) {
-//
-//
-//                        }
-//                    });
-
                     BmobQuery<uinfo> bmobQuery5 = new BmobQuery<>();
                     bmobQuery5.addWhereEqualTo("phone", et1.getText().toString());
                     bmobQuery5.findObjects(new FindListener<uinfo>() {
@@ -124,7 +132,6 @@ public class AddActivity extends AppCompatActivity {
                                 recvphone = u1.getPhone();
                                 BmobFile bmobFile=u1.getPhoto();
                                 String url = bmobFile.getFileUrl();
-                                Body1Activity.inform1.insertinform(et1.getText().toString(),content1,"",url);
                                 String s1="(";
                                 String s2=")";
                                 String[] name = {u1.getNiconame()};
@@ -133,11 +140,9 @@ public class AddActivity extends AppCompatActivity {
                                 List<Map<String, Object>> listems = new ArrayList<Map<String, Object>>();
                                 for (int i = 0; i < name.length; i++) {
                                     Map<String, Object> listem = new HashMap<String, Object>();
-                                    //listem.put("head", imageids[i]);
-
                                     listem.put("name", name[i]);
                                     listem.put("desc", desc[i]);
-                                     listem.put("head",head[i]);
+                                    listem.put("head",head[i]);
                                     listems.add(listem);
                                 }
                                 SimpleAdapter simplead = new SimpleAdapter(AddActivity.this, listems,
@@ -155,19 +160,19 @@ public class AddActivity extends AppCompatActivity {
                                                     try{
                                                         //通过图片Url返回Bitmap
                                                         Bitmap bitmap = getBitmap(value);
-                                                        Log.d("12333","done:"+value);
                                                         v.setImageBitmap(bitmap);
                                                         ((Button) findViewById(R.id.add_item_btn)).setOnClickListener(new View.OnClickListener() {
                                                             @Override
                                                             public void onClick(View v) {
-                                                                Toast.makeText(AddActivity.this, "添加成功", Toast.LENGTH_LONG).show();
                                                                 SharedPreferences pre = getSharedPreferences("user", MODE_PRIVATE);
                                                                 if(isfound) {
-                                                                    Message msg = new Message();
-                                                                    msg.what = 1;
-                                                                    msg.obj = new Mes(sendphone, "0", recvphone);
-                                                                    BodyService.bodyThread.revHandler.sendMessage(msg);
+                                                                    Body1Activity.inform1.insertinform(et1.getText().toString(),content1,"",photourl);
+//                                                                    Message msg = new Message();
+//                                                                    msg.what = 1;
+//                                                                    msg.obj = new Mes(sendphone, "0", recvphone);
+//                                                                    BodyService.bodyThread.revHandler.sendMessage(msg);
                                                                     pfriend.insertpfriend(pre.getString("sms_content", ""), et1.getText().toString());
+                                                                    Toast.makeText(AddActivity.this,"好友申请已发送",Toast.LENGTH_SHORT).show();
                                                                 }
                                                             }
                                                         });
@@ -180,14 +185,8 @@ public class AddActivity extends AppCompatActivity {
                                         }
                                         else{super.setViewImage(v, value);}
                                     }
-
-
-
-
                                 };
                                 lv1.setAdapter(simplead);
-
-
                             }
                         }
                     });
@@ -204,11 +203,9 @@ public class AddActivity extends AppCompatActivity {
                             for (ginfo gu1 : list) {
 
                                 BmobFile bmobFile=gu1.getPhoto();
-                                String url = bmobFile.getFileUrl();
-
+                                final String url = bmobFile.getFileUrl();
                                 recvphone = gu1.getPhone();
                                 groupphone = gu1.getGid();
-                                Body1Activity.inform1.insertinform(recvphone,content1,et1.getText().toString(),url);
                                 String s1 = "(";
                                 String s2 = ")";
                                 String[] name = {gu1.getGname()};
@@ -217,8 +214,6 @@ public class AddActivity extends AppCompatActivity {
                                 List<Map<String, Object>> listems = new ArrayList<Map<String, Object>>();
                                 for (int i = 0; i < name.length; i++) {
                                     Map<String, Object> listem = new HashMap<String, Object>();
-                                    //listem.put("head", imageids[i]);
-
                                     listem.put("name", name[i]);
                                     listem.put("desc", desc[i]);
                                     listem.put("head",head[i]);
@@ -238,19 +233,18 @@ public class AddActivity extends AppCompatActivity {
                                                     try{
                                                         //通过图片Url返回Bitmap
                                                         Bitmap bitmap = getBitmap(value);
-                                                        Log.d("12333","done:"+value);
                                                         v.setImageBitmap(bitmap);
                                                         ((Button) findViewById(R.id.add_item_btn)).setOnClickListener(new View.OnClickListener() {
                                                             @Override
                                                             public void onClick(View v) {
-                                                                Toast.makeText(AddActivity.this, "添加成功", Toast.LENGTH_LONG).show();
                                                                 SharedPreferences pre = getSharedPreferences("user", MODE_PRIVATE);
                                                                 if(isfound) {
-                                                                    Message msg = new Message();
-                                                                    msg.what = 1;
-                                                                    msg.obj = new Mes(sendphone, "0", groupphone + "/" + recvphone);
-                                                                    BodyService.bodyThread.revHandler.sendMessage(msg);
-                                                                    //gphone.insertgphone(et1.getText().toString(),pre.getString("sms_content", "") );
+                                                                    Body1Activity.inform1.insertinform(recvphone,content1,et1.getText().toString(),photourl);
+                                                                    Toast.makeText(AddActivity.this, "群组申请已发送！", Toast.LENGTH_SHORT).show();
+//                                                                    Message msg = new Message();
+//                                                                    msg.what = 1;
+//                                                                    msg.obj = new Mes(sendphone, "0", groupphone + "/" + recvphone);
+//                                                                    BodyService.bodyThread.revHandler.sendMessage(msg);
                                                                 }
                                                             }
                                                         });
@@ -263,10 +257,8 @@ public class AddActivity extends AppCompatActivity {
                                         }
                                         else{super.setViewImage(v, value);}
                                     }
-
                                 };
                                 lv1.setAdapter(simplead);
-
                             }
                         }
                     });
@@ -275,6 +267,7 @@ public class AddActivity extends AppCompatActivity {
 
             }
         });
+
 
         et1.addTextChangedListener(new TextWatcher() {
 

@@ -83,10 +83,6 @@ public class CreatActivity extends AppCompatActivity {
                         });
                     else {
                         Toast.makeText(CreatActivity.this, "请添加头像", Toast.LENGTH_SHORT).show();
-//                    SharedPreferences pre = getSharedPreferences("user", MODE_PRIVATE);
-//                    ginfo1.insertginfo(pre.getString("sms_content", ""), et1.getText().toString(),et2.getText().toString());
-//                    gphone.insertgphone(et1.getText().toString(),pre.getString("sms_content", ""));
-
                     }
 
                 }else{

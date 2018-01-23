@@ -60,19 +60,16 @@ public class RegisterActivity extends AppCompatActivity {
                             Log.e("bmob", "短信id：" + smsId);//用于查询本次短信发送详情
                             //button 60s 倒计时
                             button1.setClickable(false);
-//        mbtn.setBackgroundColor(Color.GRAY);
                             Toast.makeText(RegisterActivity.this, "验证码发送成功，请尽快使用", Toast.LENGTH_SHORT).show();
                             new CountDownTimer(60000, 1000) {
                                 @Override
                                 public void onTick(long millisUntilFinished) {
-//                Message_btn.setBackgroundResource(R.drawable.button_shape02);
                                     button1.setText(millisUntilFinished / 1000 + "秒");
                                 }
 
                                 @Override
                                 public void onFinish() {
                                     button1.setClickable(true);
-//                Message_btn.setBackgroundResource(R.drawable.button_shape);
                                     button1.setText("重新发送");
                                 }
                             }.start();
@@ -87,8 +84,6 @@ public class RegisterActivity extends AppCompatActivity {
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent intent=new Intent(RegisterActivity.this,Info1Activity.class);
-//                startActivity(intent);
                 BmobSMS.verifySmsCode(RegisterActivity.this,et1.getText().toString(), et4.getText().toString(), new VerifySMSCodeListener() {
 
                     @Override
@@ -119,14 +114,13 @@ public class RegisterActivity extends AppCompatActivity {
                                             else
                                                 Toast.makeText(RegisterActivity.this, "该手机号已注册！", Toast.LENGTH_SHORT).show();
                                         } else {
-                                            Log.i("bmob", "系统异常：" + e.getMessage() + "," + e.getErrorCode());
+
                                         }
                                     }
                                 });
                             }else
                                 Toast.makeText(RegisterActivity.this, "两次密码不相同！", Toast.LENGTH_SHORT).show();
                         }else{
-                            Log.i("bmob", "验证失败：code ="+ex.getErrorCode()+",msg = "+ex.getLocalizedMessage());
                             Toast.makeText(RegisterActivity.this,"验证码错误",Toast.LENGTH_SHORT).show();
                         }
 

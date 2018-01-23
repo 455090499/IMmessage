@@ -1,6 +1,8 @@
 package cn.jit.immessage;
 
+import android.app.Dialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.Image;
@@ -21,18 +23,23 @@ import java.util.List;
 
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.datatype.BmobFile;
+import cn.bmob.v3.datatype.BmobQueryResult;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.FindListener;
+import cn.bmob.v3.listener.SQLQueryListener;
+import cn.bmob.v3.listener.UpdateListener;
 import qiu.niorgai.StatusBarCompat;
 
 public class Info4Activity extends AppCompatActivity {
-    private Button btn;
+    private Button btn1;
+    private Button btn2;
     private TextView tv1;
     private TextView tv2;
     private TextView tv3;
     private TextView tv4;
     private TextView tv5;
     private ImageView img;
+
 
 
     @Override
@@ -52,10 +59,12 @@ public class Info4Activity extends AppCompatActivity {
         tv4 = (TextView) findViewById(R.id.info4_tv4);
         tv5 = (TextView) findViewById(R.id.info4_tv5);
         img = (ImageView) findViewById(R.id.info4_im);
-        Button btn1 = (Button) findViewById(R.id.info4_btn1);
+        btn1 = (Button) findViewById(R.id.info4_btn1);
+        btn2 = (Button) findViewById(R.id.info4_btn2);
+
 
         Intent intent = getIntent();
-        String desc = intent.getStringExtra("desc");
+        final String desc = intent.getStringExtra("desc");
 
         BmobQuery<uinfo> bmobQuery = new BmobQuery<>();
         bmobQuery.addWhereEqualTo("phone", desc);
@@ -89,6 +98,55 @@ public class Info4Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 finish();
+            }
+        });
+        btn2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                  new CommomDialog(Info4Activity.this, R.style.dialog, "您确定删除该好友？", new CommomDialog.OnCloseListener() {
+                    @Override
+                    public void onClick(Dialog dialog, boolean confirm) {
+                        if(confirm){
+                            SharedPreferences pre = getSharedPreferences("user", MODE_PRIVATE);
+                            String content = pre.getString("sms_content", "");
+
+                            String bql = "select * from pfriend where (phone='" + content + "'and fphone='" + desc + "')or(phone='"+desc+"'and fphone='"+content+"')";
+                            BmobQuery<pfriend> query = new BmobQuery<pfriend>();
+                            //设置查询的SQL语句
+                            query.setSQL(bql);
+                            query.doSQLQuery(new SQLQueryListener<pfriend>() {
+
+                                @Override
+                                public void done(BmobQueryResult<pfriend> result, BmobException e) {
+                                    if (e == null) {
+                                        List<pfriend> list = (List<pfriend>) result.getResults();
+                                        for (pfriend pf1 : list) {
+                                            pf1.delete(new UpdateListener() {
+                                                @Override
+                                                public void done(BmobException e) {
+                                                    if (e == null) {
+                                                        Toast.makeText(Info4Activity.this, "删除好友成功", Toast.LENGTH_SHORT).show();
+                                                    } else {
+                                                        Toast.makeText(Info4Activity.this, "删除好友失败", Toast.LENGTH_SHORT).show();
+                                                    }
+                                                }
+                                            });
+                                        }
+                                    }else{
+                                        Toast.makeText(Info4Activity.this, "查找失败", Toast.LENGTH_SHORT).show();
+                                    }
+
+                                }
+                            });
+                            Intent intent1=new Intent(Info4Activity.this,Body1Activity.class);
+                            startActivity(intent1);
+
+                        }else{
+                            dialog.dismiss();
+                        }
+
+                    }
+                  }).setTitle("提示").show();
             }
         });
 
