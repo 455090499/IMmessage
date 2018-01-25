@@ -15,6 +15,8 @@ public class Msg {
     private String filename;
     private String filesize;
     private String filestate;
+    private String fileobject;
+
 
 
     public Msg(String content, int type) {
@@ -34,6 +36,16 @@ public class Msg {
         this.filesize=filesize;
         this.filestate=filestate;
     }
+    public Msg(String content, int type,String url,String filename,String filesize,String filestate,String fileobject) {
+        this.content = content;
+        this.type = type;
+        this.url=url;
+        this.filename=filename;
+        this.filesize=filesize;
+        this.filestate=filestate;
+        this.fileobject=fileobject;
+
+    }
     public String getContent() {
         return content;
     }
@@ -46,4 +58,5 @@ public class Msg {
     public String getFilename() { return  filename;}
     public String getFilesize() { return  filesize;}
     public String getFilestate() { return  filestate;}
+    public String getFileobject() { return  fileobject;}
 }

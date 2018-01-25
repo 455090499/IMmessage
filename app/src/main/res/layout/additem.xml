@@ -9,12 +9,13 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp">
 
     <cn.jit.immessage.Round1ImageViewActivity
         android:id="@+id/add_item_imag"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:layout_marginLeft="20dp" />
 
     <LinearLayout
@@ -28,7 +29,7 @@
             android:id="@+id/add_item_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20dp"
+            android:textSize="18sp"
             android:textColor="#000000"
             android:text="11111"
             android:paddingLeft="10dp"/>
@@ -38,7 +39,7 @@
             android:id="@+id/add_item_desc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="17dp"
+            android:textSize="16sp"
             android:text="11111"
             android:layout_marginTop="10dp"
             android:paddingLeft="10dp"/>

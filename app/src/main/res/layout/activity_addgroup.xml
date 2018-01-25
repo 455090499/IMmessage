@@ -54,6 +54,7 @@
             android:layout_marginLeft="10dp"
             android:drawableLeft="@mipmap/sousuo"
             android:maxLines="1"
+            android:maxLength="11"
             android:background="#E8E8E8"
             android:textSize="15sp"
             android:hint="请输入所要添加的账号"/>

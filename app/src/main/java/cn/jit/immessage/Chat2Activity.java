@@ -186,80 +186,73 @@ public class Chat2Activity extends AppCompatActivity {
                                 url2[1] = uf1.getPhoto().getFileUrl();
                                 if (!bb.getSend().equals(sendphone)) {
                                     if (bb.getRecv().equals(groupphone)) {
-                                        Log.d("8888", bb.getText() + "");
-                                        //if(bb.getText().length()>4)
                                         if (bb.getText().length() > 4) {
 
                                             String sss = bb.getText().substring(0, 3);
                                             if (sss.equals("ftp")) {
-                                                //String content=bb.getText();
-                                                filedownb++;
+
 //
                                                 BmobQuery<fileurl> query = new BmobQuery<>();
                                                 query.getObject(bb.getText().substring(4), new QueryListener<fileurl>() {
                                                     @Override
-                                                    public void done(final fileurl object, BmobException e) {
+                                                    public void done( fileurl object, BmobException e) {
                                                         if (e == null) {
-                                                            Msg msg1 = new Msg(null, Msg.FILE_RECV, url2[1] , object.getBfile().getFilename(), object.getFilesize() + "", "等待下载");
+                                                            Msg msg1 = new Msg(null, Msg.FILE_RECV, url2[1] , object.getBfile().getFilename(), object.getFilesize() + "", "等待下载",object.getObjectId());
                                                             msgList.add(msg1);
-                                                            msgRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(Chat2Activity.this, new RecyclerItemClickListener.OnItemClickListener() {
-                                                                @Override
-                                                                public void onItemClick(View view, int position) {
-                                                                    Toast.makeText(Chat2Activity.this, "7777  7", Toast.LENGTH_SHORT).show();
-                                                                }
-                                                                @Override
-                                                                public void onLongClick(View view, int position) {
-                                                                    if (msgList.get(position).getType() == 3 && filedownb > 0) {
-                                                                        filedownb = 0;
-                                                                        Toast.makeText(Chat2Activity.this, "8888", Toast.LENGTH_SHORT).show();
-                                                                        object.getBfile().download(new File(Environment.getExternalStorageDirectory(), object.getBfile().getFilename()), new DownloadFileListener() {
-                                                                            @Override
-                                                                            public void onStart() {
-//                                                                toast("开始下载...");
-                                                                                Toast.makeText(Chat2Activity.this, "开始下载...", Toast.LENGTH_SHORT).show();
-                                                                            }
-
-                                                                            @Override
-                                                                            public void done(String savePath, BmobException e) {
-                                                                                Log.d("18888", "url=" + url2);
-                                                                                if (e == null) {
-                                                                                    Toast.makeText(Chat2Activity.this, "下载成功，保存路径" + savePath, Toast.LENGTH_SHORT).show();
-                                                                                    Msg msg5 = new Msg(null, Msg.FILE_RECV, url2[1] , object.getBfile().getFilename(), object.getFilesize() + "", "已接收");
-                                                                                    msgList.add(msg5);
-
-
-
-                                                                                } else {
-                                                                                    Toast.makeText(Chat2Activity.this, "下载失败：" + e.getErrorCode() + "," + e.getMessage(), Toast.LENGTH_SHORT).show();
-                                                                                }
-                                                                                object.setObjectId(object.getObjectId());
-                                                                                object.delete(new UpdateListener() {
-
-                                                                                    @Override
-                                                                                    public void done(BmobException e) {
-                                                                                        if(e==null){
-                                                                                            Toast.makeText(Chat2Activity.this, "删除FILE成功", Toast.LENGTH_SHORT).show();
-                                                                                        }else{
-                                                                                            Toast.makeText(Chat2Activity.this, "删除FILE失败", Toast.LENGTH_SHORT).show();
-                                                                                        }
-                                                                                    }
-
-                                                                                });
-                                                                            }
-
-                                                                            @Override
-                                                                            public void onProgress(Integer value, long newworkSpeed) {
-                                                                                Log.i("bmob", "下载进度：" + value + "," + newworkSpeed);
-                                                                            }
-                                                                        });
-
-                                                                    }
-                                                                }
-                                                            }));
+//                                                            msgRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(Chat2Activity.this, new RecyclerItemClickListener.OnItemClickListener() {
+//                                                                @Override
+//                                                                public void onItemClick(View view, int position) {
+//
+//                                                                }
+//                                                                @Override
+//                                                                public void onLongClick(View view, int position) {
+//                                                                    if (msgList.get(position).getType() == 3 && filedownb > 0) {
+//                                                                        filedownb = 0;
+//                                                                        object.getBfile().download(new File(Environment.getExternalStorageDirectory(), object.getBfile().getFilename()), new DownloadFileListener() {
+//                                                                            @Override
+//                                                                            public void onStart() {
+////                                                                toast("开始下载...");
+//                                                                                Toast.makeText(Chat2Activity.this, "开始下载...", Toast.LENGTH_SHORT).show();
+//                                                                            }
+//
+//                                                                            @Override
+//                                                                            public void done(String savePath, BmobException e) {
+//                                                                                if (e == null) {
+//                                                                                    Toast.makeText(Chat2Activity.this, "下载成功，保存路径" + savePath, Toast.LENGTH_SHORT).show();
+//                                                                                    Msg msg5 = new Msg(null, Msg.FILE_RECV, url2[1] , object.getBfile().getFilename(), object.getFilesize() + "", "已接收");
+//                                                                                    msgList.add(msg5);
+//
+//
+//
+//                                                                                } else {
+//                                                                                    Toast.makeText(Chat2Activity.this, "下载失败：" + e.getErrorCode() + "," + e.getMessage(), Toast.LENGTH_SHORT).show();
+//                                                                                }
+//                                                                                object.setObjectId(object.getObjectId());
+//                                                                                object.delete(new UpdateListener() {
+//
+//                                                                                    @Override
+//                                                                                    public void done(BmobException e) {
+//                                                                                        if(e==null){
+//                                                                                            Toast.makeText(Chat2Activity.this, "删除FILE成功", Toast.LENGTH_SHORT).show();
+//                                                                                        }else{
+//                                                                                            Toast.makeText(Chat2Activity.this, "删除FILE失败", Toast.LENGTH_SHORT).show();
+//                                                                                        }
+//                                                                                    }
+//
+//                                                                                });
+//                                                                            }
+//
+//                                                                            @Override
+//                                                                            public void onProgress(Integer value, long newworkSpeed) {
+//                                                                            }
+//                                                                        });
+//
+//                                                                    }
+//                                                                }
+//                                                            }));
 
 
                                                         } else {
-                                                            Log.i("bmob", "失败：" + e.getMessage() + "," + e.getErrorCode());
                                                             Msg msg1 = new Msg(bb.getText(), Msg.TYPE_RECEIVCED, url2[1] );
 
 
@@ -403,13 +396,11 @@ public class Chat2Activity extends AppCompatActivity {
 
                 try {
                     long size=getFileSizes(file);
-                    Log.d("456",FormentFileSize(size)+"");
                     //send_tv2.setText(FormentFileSize(size));
 
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                Log.d("555",file+"");
 
                 final BmobFile icon = new BmobFile(file);
                 //send_tv1.setText(icon.getFilename());
@@ -447,7 +438,7 @@ public class Chat2Activity extends AppCompatActivity {
 
 
                                 }else{
-                                    Log.d("666","error");
+
                                 }
                             }
                         });
@@ -467,7 +458,6 @@ public class Chat2Activity extends AppCompatActivity {
             fis.close();
         } else {
             f.createNewFile();
-            System.out.println("文件夹不存在");
         }
 
         return s;

@@ -35,6 +35,8 @@ public class Info2Activity extends AppCompatActivity {
     private TextView tv3;
     private TextView tv4;
     private TextView tv5;
+    private TextView tv6;
+
     private ImageView im;
 
     @Override
@@ -52,6 +54,7 @@ public class Info2Activity extends AppCompatActivity {
         tv3 = (TextView) findViewById(R.id.info2_tv3);
         tv4 = (TextView) findViewById(R.id.info2_tv4);
         tv5 = (TextView) findViewById(R.id.info2_tv5);
+        tv6 = (TextView) findViewById(R.id.info2_tv6);
         im = (ImageView) findViewById(R.id.info2_im);
         Button btn1 = (Button) findViewById(R.id.info2_btn1);
         Button btn2 = (Button) findViewById(R.id.info2_btn2);
@@ -90,6 +93,7 @@ public class Info2Activity extends AppCompatActivity {
                     tv3.setText(u1.getSex());
                     tv4.setText(u1.getEmail());
                     tv5.setText(u1.getPs());
+                    tv6.setText(u1.getPhone());
                 }
             }
         });

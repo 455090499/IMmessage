@@ -179,67 +179,67 @@ private  static int filedowna=0;
 
                                             String sss = bb.getText().substring(0, 3);
                                             if (sss.equals("ftp")) {
-                                                filedowna++;
+
 //
                                                 BmobQuery<fileurl> query = new BmobQuery<>();
                                                 query.getObject(bb.getText().substring(4), new QueryListener<fileurl>() {
                                                     @Override
                                                     public void done(final fileurl object, BmobException e) {
                                                         if (e == null) {
-                                                            Msg msg1 = new Msg(null, Msg.FILE_RECV, url[1], object.getBfile().getFilename(), object.getFilesize() + "", "等待下载");
+                                                            Msg msg1 = new Msg(null, Msg.FILE_RECV, url[1], object.getBfile().getFilename(), object.getFilesize() + "", "等待下载",object.getObjectId());
                                                             msgList.add(msg1);
-                                                            msgRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(ChatActivity.this, new RecyclerItemClickListener.OnItemClickListener() {
-                                                                @Override
-                                                                public void onItemClick(View view, int position) {
-
-                                                                }
-                                                                @Override
-                                                                public void onLongClick(View view, int position) {
-                                                                    if (msgList.get(position).getType() == 3 && filedowna > 0) {
-                                                                        filedowna = 0;
-                                                                        object.getBfile().download(new File(Environment.getExternalStorageDirectory(), object.getBfile().getFilename()), new DownloadFileListener() {
-                                                                            @Override
-                                                                            public void onStart() {
-                                                                                Toast.makeText(ChatActivity.this, "开始下载...", Toast.LENGTH_SHORT).show();
-                                                                            }
-
-                                                                            @Override
-                                                                            public void done(String savePath, BmobException e) {
-                                                                                if (e == null) {
-                                                                                    Toast.makeText(ChatActivity.this, "下载成功，保存路径" + savePath, Toast.LENGTH_SHORT).show();
-                                                                                    Msg msg5 = new Msg(null, Msg.FILE_RECV, url[1], object.getBfile().getFilename(), object.getFilesize() + "", "已接收");
-                                                                                    msgList.add(msg5);
-
-                                                                                } else {
-                                                                                    Toast.makeText(ChatActivity.this, "下载失败：" + e.getErrorCode() + "," + e.getMessage(), Toast.LENGTH_SHORT).show();
-                                                                                }
-
-                                                                                object.setObjectId(object.getObjectId());
-                                                                                object.delete(new UpdateListener() {
-
-                                                                                    @Override
-                                                                                    public void done(BmobException e) {
-                                                                                        if(e==null){
-                                                                                        }else{
-                                                                                            Toast.makeText(ChatActivity.this, "删除FILE失败", Toast.LENGTH_SHORT).show();
-                                                                                        }
-                                                                                    }
-
-                                                                                });
-
-
-
-                                                                            }
-
-                                                                            @Override
-                                                                            public void onProgress(Integer value, long newworkSpeed) {
-
-                                                                            }
-                                                                        });
-
-                                                                    }
-                                                                }
-                                                            }));
+//                                                            msgRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(ChatActivity.this, new RecyclerItemClickListener.OnItemClickListener() {
+//                                                                @Override
+//                                                                public void onItemClick(View view, int position) {
+//
+//                                                                }
+//                                                                @Override
+//                                                                public void onLongClick(View view, int position) {
+//                                                                    if (msgList.get(position).getType() == 3 && filedowna > 0) {
+//                                                                        filedowna = 0;
+//                                                                        object.getBfile().download(new File(Environment.getExternalStorageDirectory(), object.getBfile().getFilename()), new DownloadFileListener() {
+//                                                                            @Override
+//                                                                            public void onStart() {
+//                                                                                Toast.makeText(ChatActivity.this, "开始下载...", Toast.LENGTH_SHORT).show();
+//                                                                            }
+//
+//                                                                            @Override
+//                                                                            public void done(String savePath, BmobException e) {
+//                                                                                if (e == null) {
+//                                                                                    Toast.makeText(ChatActivity.this, "下载成功，保存路径" + savePath, Toast.LENGTH_SHORT).show();
+//                                                                                    Msg msg5 = new Msg(null, Msg.FILE_RECV, url[1], object.getBfile().getFilename(), object.getFilesize() + "", "已接收");
+//                                                                                    msgList.add(msg5);
+//
+//                                                                                } else {
+//                                                                                    Toast.makeText(ChatActivity.this, "下载失败：" + e.getErrorCode() + "," + e.getMessage(), Toast.LENGTH_SHORT).show();
+//                                                                                }
+//
+//                                                                                object.setObjectId(object.getObjectId());
+//                                                                                object.delete(new UpdateListener() {
+//
+//                                                                                    @Override
+//                                                                                    public void done(BmobException e) {
+//                                                                                        if(e==null){
+//                                                                                        }else{
+//                                                                                            Toast.makeText(ChatActivity.this, "删除FILE失败", Toast.LENGTH_SHORT).show();
+//                                                                                        }
+//                                                                                    }
+//
+//                                                                                });
+//
+//
+//
+//                                                                            }
+//
+//                                                                            @Override
+//                                                                            public void onProgress(Integer value, long newworkSpeed) {
+//
+//                                                                            }
+//                                                                        });
+//
+//                                                                    }
+//                                                                }
+//                                                            }));
 
 
                                                         } else {

@@ -2,6 +2,7 @@ package cn.jit.immessage;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Environment;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,12 +11,20 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.List;
+
+import cn.bmob.v3.BmobQuery;
+import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.DownloadFileListener;
+import cn.bmob.v3.listener.QueryListener;
+import cn.bmob.v3.listener.UpdateListener;
 
 /**
  * Created by liweiwei on 2018/1/5.
@@ -39,12 +48,16 @@ public class MsgAdapter extends RecyclerView.Adapter<MsgAdapter.ViewHolder>{
          TextView recv_tv1;
          TextView recv_tv2;
          TextView recv_tv3;
+         TextView recv_tv4;
+
 
          ImageView leftImg;
          ImageView rightImg;
 
          ImageView leftImg1;
          ImageView rightImg1;
+
+        ImageView leftfileImg;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -64,6 +77,9 @@ public class MsgAdapter extends RecyclerView.Adapter<MsgAdapter.ViewHolder>{
             recv_tv1=(TextView)itemView.findViewById(R.id.file_recv_tv1) ;
             recv_tv2=(TextView)itemView.findViewById(R.id.file_recv_tv2) ;
             recv_tv3=(TextView)itemView.findViewById(R.id.file_recv_tv3) ;
+            recv_tv4=(TextView)itemView.findViewById(R.id.file_recv_tv4) ;
+
+            leftfileImg=(ImageView)itemView.findViewById(R.id.file_recv_img2);
 
         }
     }
@@ -72,9 +88,71 @@ public class MsgAdapter extends RecyclerView.Adapter<MsgAdapter.ViewHolder>{
     }
     @Override
     public MsgAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate
+        final View view = LayoutInflater.from(parent.getContext()).inflate
                 (R.layout.activity_chat_item,parent,false);
-        return new ViewHolder(view);
+        final ViewHolder holder=new ViewHolder(view);
+        holder.leftfileImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(holder.recv_tv3.getText().toString().equals("等待下载")) {
+                    BmobQuery<fileurl> query = new BmobQuery<>();
+                    query.getObject(holder.recv_tv4.getText().toString(), new QueryListener<fileurl>() {
+
+                        @Override
+                        public void done(final fileurl object, BmobException e) {
+                            object.getBfile().download(new File(Environment.getExternalStorageDirectory(), object.getBfile().getFilename()), new DownloadFileListener() {
+                                @Override
+                                public void onStart() {
+//                                    Toast.makeText(view.getContext(), "开始下载...", Toast.LENGTH_LONG).show();
+                                }
+
+                                @Override
+                                public void done(String savePath, BmobException e) {
+                                    if (e == null) {
+//                                        Toast.makeText(view.getContext(), "下载成功，保存路径" + savePath, Toast.LENGTH_LONG).show();
+//                                    Msg msg5 = new Msg(null, Msg.FILE_RECV, url[1], object.getBfile().getFilename(), object.getFilesize() + "", "已接收");
+//                                    msgList.add(msg5);
+
+                                    } else {
+                                        Toast.makeText(view.getContext(), "下载失败：" + e.getErrorCode() + "," + e.getMessage(), Toast.LENGTH_LONG).show();
+                                    }
+
+                                    object.setObjectId(object.getObjectId());
+                                    object.delete(new UpdateListener() {
+
+                                        @Override
+                                        public void done(BmobException e) {
+                                            if (e == null) {
+//                                                Toast.makeText(view.getContext(), "删除FILE成功", Toast.LENGTH_SHORT).show();
+                                            } else {
+                                                Toast.makeText(view.getContext(), "删除FILE失败", Toast.LENGTH_SHORT).show();
+                                            }
+                                        }
+
+                                    });
+
+
+                                }
+
+                                @Override
+                                public void onProgress(Integer value, long newworkSpeed) {
+
+                                }
+                            });
+
+                        }
+                    });
+                    holder.recv_tv3.setText("下载完成");
+                }else{
+
+                }
+
+            }
+        });
+
+
+
+        return holder;
     }
 
     @Override
@@ -123,6 +201,7 @@ public class MsgAdapter extends RecyclerView.Adapter<MsgAdapter.ViewHolder>{
             holder.recv_tv1.setText(msg.getFilename());
             holder.recv_tv2.setText(msg.getFilesize());
             holder.recv_tv3.setText(msg.getFilestate());
+            holder.recv_tv4.setText(msg.getFileobject());
             Bitmap bitmap2 = getBitmap(url2);
             holder.leftImg1.setImageBitmap(bitmap2);
         }

@@ -123,8 +123,6 @@ public class DemoFragment extends Fragment {
         else if (type == 1)
         {
 
-
-
             List<Map<String, Object>> listems = new ArrayList<Map<String, Object>>();
 
                 for(int i=0;i<getArguments().getInt("count");i++) {
@@ -180,10 +178,6 @@ public class DemoFragment extends Fragment {
                 }
             });
 
-
-
-
-
         } else if (type == 2)
         {
             List<Map<String, Object>> listems = new ArrayList<Map<String, Object>>();
@@ -223,8 +217,6 @@ public class DemoFragment extends Fragment {
             };
             simplead.notifyDataSetChanged();
             listView.setAdapter(simplead);
-
-
 
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override

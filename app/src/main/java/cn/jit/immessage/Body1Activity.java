@@ -1,4 +1,5 @@
 package cn.jit.immessage;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 
@@ -293,6 +294,7 @@ public class Body1Activity extends AppCompatActivity
         }else
         {
             SharedPreferences isservice = getSharedPreferences("isService", MODE_PRIVATE);
+            System.out.println("hhhhhhhhhh:"+ isservice.getString("isService", "1"));
             isService = "0".equals(isservice.getString("isService", "1").toString());
             if(!isService) {
                 Intent service = new Intent(Body1Activity.this, BodyService.class);
@@ -334,7 +336,11 @@ public class Body1Activity extends AppCompatActivity
                     Mes bb = new Mes((String) msg.obj);
                     if (!bb.getRecv().equals("0")) {
                         if (bb.getSend().equals("0")) {
-//                            if (bb.getText().length() == 11)
+                            if (bb.getText().length() == 11){
+                                startActivity(new Intent(Body1Activity.this,Body1Activity.class));
+                                finish();
+                            }
+
 //                                Toast.makeText(Body1Activity.this, bb.getText() + "请求添加好友", Toast.LENGTH_SHORT).show();
 //                            else {
 //                                String[] array = bb.getText().split("/");
@@ -359,6 +365,23 @@ public class Body1Activity extends AppCompatActivity
         } else {
 
         }
+        new CommomDialog(Body1Activity.this, R.style.dialog, "您确定退出IMmessage？", new CommomDialog.OnCloseListener() {
+            @Override
+            public void onClick(Dialog dialog, boolean confirm) {
+                if(confirm){
+                    Intent startMain = new Intent(Intent.ACTION_MAIN);
+                    startMain.addCategory(Intent.CATEGORY_HOME);
+                    startMain.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(startMain);
+                    finish();
+                }else{
+                    dialog.dismiss();
+                }
+
+
+
+            }
+        }).setTitle("提示").show();
     }
 
     @Override

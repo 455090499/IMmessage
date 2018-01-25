@@ -38,6 +38,7 @@ public class Info4Activity extends AppCompatActivity {
     private TextView tv3;
     private TextView tv4;
     private TextView tv5;
+    private TextView tv6;
     private ImageView img;
 
 
@@ -58,6 +59,7 @@ public class Info4Activity extends AppCompatActivity {
         tv3 = (TextView) findViewById(R.id.info4_tv3);
         tv4 = (TextView) findViewById(R.id.info4_tv4);
         tv5 = (TextView) findViewById(R.id.info4_tv5);
+        tv6 = (TextView) findViewById(R.id.info4_tv6);
         img = (ImageView) findViewById(R.id.info4_im);
         btn1 = (Button) findViewById(R.id.info4_btn1);
         btn2 = (Button) findViewById(R.id.info4_btn2);
@@ -78,7 +80,6 @@ public class Info4Activity extends AppCompatActivity {
                         try {
 
                             String url = bmobfile.getFileUrl();
-                            Log.e("1", url);
                             Bitmap bitmap = getBitmap(url);
                             img.setImageBitmap(bitmap);
                         } catch (IOException e2) {
@@ -90,6 +91,8 @@ public class Info4Activity extends AppCompatActivity {
                     tv3.setText(u1.getSex());
                     tv4.setText(u1.getEmail());
                     tv5.setText(u1.getPs());
+                    tv6.setText(u1.getPhone());
+
                 }
             }
         });
@@ -125,7 +128,7 @@ public class Info4Activity extends AppCompatActivity {
                                                 @Override
                                                 public void done(BmobException e) {
                                                     if (e == null) {
-                                                        Toast.makeText(Info4Activity.this, "删除好友成功", Toast.LENGTH_SHORT).show();
+                                                        //Toast.makeText(Info4Activity.this, "删除好友成功", Toast.LENGTH_SHORT).show();
                                                     } else {
                                                         Toast.makeText(Info4Activity.this, "删除好友失败", Toast.LENGTH_SHORT).show();
                                                     }

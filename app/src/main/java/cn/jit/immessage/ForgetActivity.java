@@ -132,14 +132,13 @@ public class ForgetActivity extends AppCompatActivity {
 
                                             }
                                         } else {
-                                            Log.i("bmob", "系统异常：" + e.getMessage() + "," + e.getErrorCode());
+
                                         }
                                     }
                                 });
                             }else
                                 Toast.makeText(ForgetActivity.this, "两次密码不相同！", Toast.LENGTH_SHORT).show();
                         }else{
-                            Log.i("bmob", "验证失败：code ="+ex.getErrorCode()+",msg = "+ex.getLocalizedMessage());
                             Toast.makeText(ForgetActivity.this,"验证码错误",Toast.LENGTH_SHORT).show();
                         }
 

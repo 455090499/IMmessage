@@ -38,8 +38,10 @@ import java.util.Map;
 
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.datatype.BmobFile;
+import cn.bmob.v3.datatype.BmobQueryResult;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.FindListener;
+import cn.bmob.v3.listener.SQLQueryListener;
 import rx.Subscription;
 
 import static cn.bmob.v3.Bmob.getApplicationContext;
@@ -74,8 +76,6 @@ public class AddActivity extends AppCompatActivity {
         final String content1 = pre.getString("sms_content", "");
         sendphone = content1;
 
-
-
         if (Build.VERSION.SDK_INT >= 21) {
             View decorView = getWindow().getDecorView();
             int option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
@@ -83,8 +83,6 @@ public class AddActivity extends AppCompatActivity {
             decorView.setSystemUiVisibility(option);
             getWindow().setStatusBarColor(Color.TRANSPARENT);
         }
-
-
 
         //图片设置
         StrictMode.setThreadPolicy(new
@@ -118,6 +116,9 @@ public class AddActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(et1.getText().toString().length() == 11){
+
+
+
                     BmobQuery<uinfo> bmobQuery5 = new BmobQuery<>();
                     bmobQuery5.addWhereEqualTo("phone", et1.getText().toString());
                     bmobQuery5.findObjects(new FindListener<uinfo>() {
@@ -167,10 +168,10 @@ public class AddActivity extends AppCompatActivity {
                                                                 SharedPreferences pre = getSharedPreferences("user", MODE_PRIVATE);
                                                                 if(isfound) {
                                                                     Body1Activity.inform1.insertinform(et1.getText().toString(),content1,"",photourl);
-//                                                                    Message msg = new Message();
-//                                                                    msg.what = 1;
-//                                                                    msg.obj = new Mes(sendphone, "0", recvphone);
-//                                                                    BodyService.bodyThread.revHandler.sendMessage(msg);
+                                                                    Message msg = new Message();
+                                                                    msg.what = 1;
+                                                                    msg.obj = new Mes(sendphone, "0", recvphone);
+                                                                    BodyService.bodyThread.revHandler.sendMessage(msg);
                                                                     pfriend.insertpfriend(pre.getString("sms_content", ""), et1.getText().toString());
                                                                     Toast.makeText(AddActivity.this,"好友申请已发送",Toast.LENGTH_SHORT).show();
                                                                 }
@@ -190,7 +191,8 @@ public class AddActivity extends AppCompatActivity {
                             }
                         }
                     });
-                }else{
+                }
+                else{
                     BmobQuery<ginfo> bmobQuery = new BmobQuery<>();
                     bmobQuery.addWhereEqualTo("gid", et1.getText().toString());
                     bmobQuery.findObjects(new FindListener<ginfo>() {
@@ -241,10 +243,10 @@ public class AddActivity extends AppCompatActivity {
                                                                 if(isfound) {
                                                                     Body1Activity.inform1.insertinform(recvphone,content1,et1.getText().toString(),photourl);
                                                                     Toast.makeText(AddActivity.this, "群组申请已发送！", Toast.LENGTH_SHORT).show();
-//                                                                    Message msg = new Message();
-//                                                                    msg.what = 1;
-//                                                                    msg.obj = new Mes(sendphone, "0", groupphone + "/" + recvphone);
-//                                                                    BodyService.bodyThread.revHandler.sendMessage(msg);
+                                                                    Message msg = new Message();
+                                                                    msg.what = 1;
+                                                                    msg.obj = new Mes(sendphone, "0", groupphone + "/" + recvphone);
+                                                                    BodyService.bodyThread.revHandler.sendMessage(msg);
                                                                 }
                                                             }
                                                         });

@@ -84,15 +84,38 @@
 
                 android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/file_recv_tv1"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginLeft="10dp"
-                    android:textSize="16sp"
-                    android:textColor="#000000"
-                    android:text="file" />
+                    android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/file_recv_tv1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginLeft="10dp"
+                        android:textSize="16sp"
+                        android:textColor="#000000"
+                        android:text="file" />
+
+                    <TextView
+                        android:id="@+id/file_recv_tv4"
+                        android:layout_width="50dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginLeft="10dp"
+                        android:visibility="gone"
+                        android:textSize="16sp"
+                        android:textColor="#000000"
+                        android:text="file" />
+
+
+                </LinearLayout>
+
+
+
+
+
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
