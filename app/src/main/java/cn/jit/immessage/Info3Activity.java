@@ -145,7 +145,7 @@ public class Info3Activity extends AppCompatActivity {
                                                                 if (e == null) {
                                                                     try {
                                                                         fphoto=false;
-                                                                        Toast.makeText(Info3Activity.this, "正在保存" + u1.getObjectId(), Toast.LENGTH_LONG).show();
+                                                                        Toast.makeText(Info3Activity.this, "正在保存", Toast.LENGTH_LONG).show();
                                                                         Thread.sleep(1000L);
 
                                                                         finish();

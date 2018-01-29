@@ -39,7 +39,7 @@ public class pfriend extends BmobObject {
                 if(e==null){
 
                 }else{
-                    Toast.makeText(getApplicationContext(),"好友申请发送失败：" + e.getMessage(),Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),"该好友已存在" ,Toast.LENGTH_SHORT).show();
                 }
             }
 

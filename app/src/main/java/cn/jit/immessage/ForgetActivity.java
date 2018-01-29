@@ -122,7 +122,7 @@ public class ForgetActivity extends AppCompatActivity {
                                                                         startActivity(intent);
                                                                         finish();
                                                                     }else
-                                                                        Toast.makeText(ForgetActivity.this, "密码修改成功！", Toast.LENGTH_SHORT).show();
+                                                                        Toast.makeText(ForgetActivity.this, "密码修改失败！", Toast.LENGTH_SHORT).show();
 
                                                                 }
                                                             });
