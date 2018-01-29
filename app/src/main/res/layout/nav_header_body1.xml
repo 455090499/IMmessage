@@ -23,8 +23,8 @@
 
         <cn.jit.immessage.Round1ImageViewActivity
             android:id="@+id/imageView"
-            android:layout_width="75dp"
-            android:layout_height="75dp"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
             app:srcCompat="@mipmap/touxiang1"
             />
 
@@ -33,20 +33,22 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="@dimen/nav_header_vertical_spacing"
-            android:layout_marginLeft="25dp"
+            android:layout_marginLeft="55dp"
             android:text="用户名"
             android:textSize="20sp"
+            android:textColor="#000000"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
     </LinearLayout>
+
     <TextView
         android:id="@+id/header_tv2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="40dp"
         android:textSize="16sp"
+        android:textColor="#646464"
         android:text="个性签名" />
-
 
 
 </LinearLayout>

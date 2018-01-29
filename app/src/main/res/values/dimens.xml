@@ -8,4 +8,6 @@
     <dimen name="fab_margin">16dp</dimen>
     //dimens里加上
     <dimen name="toolbar_padding_top">25dp</dimen>
+    <dimen name="grid_expected_size">120dp</dimen>
+
 </resources>

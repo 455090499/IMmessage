@@ -10,6 +10,9 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <application
         android:allowBackup="true"
@@ -75,6 +78,7 @@
         <activity android:name=".ShowAdviceActivity" />
         <activity android:name=".ShowAdvice2Activity" />
         <activity android:name=".ShowAboutUsActivity"></activity>
+        <activity android:name=".ShowImgActivity"></activity>
     </application>
 
 </manifest>

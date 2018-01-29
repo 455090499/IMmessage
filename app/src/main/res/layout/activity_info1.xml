@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="#ffffff"
     tools:context="cn.jit.immessage.Info1Activity">
 
     <cn.jit.immessage.Round1ImageViewActivity
@@ -16,17 +17,6 @@
         android:src="@mipmap/add_photo"
         android:layout_gravity="center"
         />
-
-    <!--<Button-->
-        <!--android:id="@+id/info1_btn1"-->
-        <!--android:text="选择头像"-->
-        <!--android:layout_width="70dp"-->
-        <!--android:layout_height="30dp"-->
-        <!--android:background="@drawable/shape_button"-->
-
-        <!--android:layout_gravity="center"-->
-        <!--android:layout_marginBottom="22dp"-->
-        <!--/>-->
 
     <LinearLayout
         android:layout_width="match_parent"

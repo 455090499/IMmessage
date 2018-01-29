@@ -139,6 +139,13 @@
             android:layout_toRightOf="@+id/chat2_imbtn3"
             android:layout_marginLeft="20dp"
             android:background="@mipmap/chatting_cam_icon"/>
+        <ImageButton
+            android:id="@+id/chat2_imbtn5"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_toRightOf="@+id/chat2_imbtn4"
+            android:layout_marginLeft="20dp"
+            android:background="@mipmap/chat_voice"/>
 
     </RelativeLayout>
     </LinearLayout>
