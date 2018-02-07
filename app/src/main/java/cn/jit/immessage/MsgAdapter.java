@@ -166,19 +166,19 @@ public class MsgAdapter extends RecyclerView.Adapter<MsgAdapter.ViewHolder>{
                                         Toast.makeText(view.getContext(), "下载失败：" + e.getErrorCode() + "," + e.getMessage(), Toast.LENGTH_LONG).show();
                                     }
 
-                                    object.setObjectId(object.getObjectId());
-                                    object.delete(new UpdateListener() {
-
-                                        @Override
-                                        public void done(BmobException e) {
-                                            if (e == null) {
-//                                                Toast.makeText(view.getContext(), "删除FILE成功", Toast.LENGTH_SHORT).show();
-                                            } else {
-                                                Toast.makeText(view.getContext(), "删除FILE失败", Toast.LENGTH_SHORT).show();
-                                            }
-                                        }
-
-                                    });
+//                                    object.setObjectId(object.getObjectId());
+//                                    object.delete(new UpdateListener() {
+//
+//                                        @Override
+//                                        public void done(BmobException e) {
+//                                            if (e == null) {
+////                                                Toast.makeText(view.getContext(), "删除FILE成功", Toast.LENGTH_SHORT).show();
+//                                            } else {
+//                                                Toast.makeText(view.getContext(), "删除FILE失败", Toast.LENGTH_SHORT).show();
+//                                            }
+//                                        }
+//
+//                                    });
 
 
                                 }
@@ -231,8 +231,12 @@ public class MsgAdapter extends RecyclerView.Adapter<MsgAdapter.ViewHolder>{
             public void onClick(View v) {
 
                 Intent intent=new Intent(context, ShowImgActivity.class);
+
                 intent.putExtra("picture", sendb);
+
                 context.startActivity(intent);
+                
+
             }
         });
         holder.Imgrecvimg2.setOnClickListener(new View.OnClickListener(){

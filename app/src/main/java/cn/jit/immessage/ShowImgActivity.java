@@ -9,6 +9,8 @@ import android.view.View;
 
 import com.bm.library.PhotoView;
 
+import qiu.niorgai.StatusBarCompat;
+
 /**
  * Created by liweiwei on 2018/1/26.
  */
@@ -18,7 +20,10 @@ public class ShowImgActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_showimg);
-
+        //透明状态栏
+        StatusBarCompat.translucentStatusBar(ShowImgActivity.this);
+        //SDK >= 21时, 取消状态栏的阴影
+        StatusBarCompat.translucentStatusBar(ShowImgActivity.this,true);
 
         Bundle extras = getIntent().getExtras();
         byte[] b = extras.getByteArray("picture");

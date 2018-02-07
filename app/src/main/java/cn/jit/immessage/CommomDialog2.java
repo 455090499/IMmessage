@@ -22,8 +22,7 @@ public class CommomDialog2 extends Dialog implements View.OnClickListener {
     private TextView titleTxt;
     private TextView submitTxt;
     private TextView cancelTxt;
-    private Chronometer timer;
-    private TextView timer1;
+
     private Context mContext;
     private String content;
     private OnCloseListener listener;
@@ -80,8 +79,6 @@ public class CommomDialog2 extends Dialog implements View.OnClickListener {
     private void initView(){
 //        contentTxt = (TextView)findViewById(R.id.prombox2_content);
         titleTxt = (TextView)findViewById(R.id.prombox2_title);
-        timer=(Chronometer)findViewById(R.id.voice_timer);
-        timer1=(TextView)findViewById(R.id.voice_timer1) ;
 
         submitTxt = (TextView)findViewById(R.id.prombox2_submit);
         submitTxt.setOnClickListener(this);
@@ -107,7 +104,7 @@ public class CommomDialog2 extends Dialog implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.prombox2_cancel:
-                timer.stop();
+
                 if(listener != null){
 
                     listener.onClick(this, false);
@@ -115,21 +112,8 @@ public class CommomDialog2 extends Dialog implements View.OnClickListener {
                 this.dismiss();
                 break;
             case R.id.prombox2_submit:
-                timer.setBase(SystemClock.elapsedRealtime());//计时器清零
-                int hour = (int) ((SystemClock.elapsedRealtime() - timer.getBase()) / 1000 / 60);
-                timer.setFormat("0"+String.valueOf(hour)+":%s");
-                timer.start();
-                new CountDownTimer(60000, 1000) {
-                    @Override
-                    public void onTick(long millisUntilFinished) {
-                        timer1.setText(millisUntilFinished / 1000 + "秒");
-                    }
 
-                    @Override
-                    public void onFinish() {
 
-                    }
-                }.start();
                 if(listener != null){
 
 

@@ -201,7 +201,6 @@
                         android:layout_width="70dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="30dp"
-
                         android:text="     已发送"
                         android:textColor="#ffffff"
                         android:textSize="14sp"
@@ -237,6 +236,8 @@
             android:id="@+id/img_recv_img2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/shape10_button"
             android:adjustViewBounds="true"
             android:maxHeight="200dp"
             android:maxWidth="200dp"
@@ -254,7 +255,9 @@
             android:id="@+id/img_send_img1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
             android:adjustViewBounds="true"
+            android:background="@drawable/shape10_button"
             android:maxHeight="200dp"
             android:maxWidth="200dp"
             />

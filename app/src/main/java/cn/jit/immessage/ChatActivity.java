@@ -85,7 +85,7 @@ public class ChatActivity extends AppCompatActivity  {
     private ImageButton imbtn5;
     private ImageButton imbtn2;
 
-
+    static boolean voice_flag;
     // 录音类
     private MediaRecorder mediaRecorder;
     // 以文件的形式保存
@@ -220,12 +220,15 @@ public class ChatActivity extends AppCompatActivity  {
                                                             Msg msg1 = new Msg(null, Msg.FILE_RECV, url[1], object.getBfile().getFilename(), object.getFilesize() + "", "等待下载",object.getObjectId());
                                                             msgList.add(msg1);
                                                             adapter.notifyItemChanged(msgList.size() - 1);
+                                                            msgRecyclerView.scrollToPosition(msgList.size() - 1);
 
 
                                                         } else {
                                                             Msg msg1 = new Msg(bb.getText(), Msg.TYPE_RECEIVCED, url[1]);
                                                             msgList.add(msg1);
                                                             adapter.notifyItemChanged(msgList.size() - 1);
+                                                            msgRecyclerView.scrollToPosition(msgList.size() - 1);
+
                                                         }
                                                     }
 
@@ -249,10 +252,12 @@ public class ChatActivity extends AppCompatActivity  {
                                                                     Msg msg1 = new Msg(null, Msg.VOICE_RECV, url[1], object.getObjectId());
                                                                     msgList.add(msg1);
                                                                     adapter.notifyItemChanged(msgList.size() - 1);
+                                                                    msgRecyclerView.scrollToPosition(msgList.size() - 1);
                                                                 } else {
                                                                     Msg msg1 = new Msg(bb.getText(), Msg.TYPE_RECEIVCED, url[1]);
                                                                     msgList.add(msg1);
                                                                     adapter.notifyItemChanged(msgList.size() - 1);
+                                                                    msgRecyclerView.scrollToPosition(msgList.size() - 1);
                                                                 }
 
                                                                 object.setObjectId(object.getObjectId());
@@ -289,11 +294,13 @@ public class ChatActivity extends AppCompatActivity  {
                                                             Msg msg1 = new Msg(null, Msg.IMG_RECV, url[1], object.getBfile().getFileUrl(),0);
                                                             msgList.add(msg1);
                                                             adapter.notifyItemChanged(msgList.size() - 1);
+                                                            msgRecyclerView.scrollToPosition(msgList.size() - 1);
 
                                                         } else {
                                                             Msg msg1 = new Msg(bb.getText(), Msg.TYPE_RECEIVCED, url[1]);
                                                             msgList.add(msg1);
                                                             adapter.notifyItemChanged(msgList.size() - 1);
+                                                            msgRecyclerView.scrollToPosition(msgList.size() - 1);
                                                         }
                                                     }
                                                 });
@@ -301,11 +308,13 @@ public class ChatActivity extends AppCompatActivity  {
                                                 Msg msg1 = new Msg(bb.getText(), Msg.TYPE_RECEIVCED, url[1]);
                                                 msgList.add(msg1);
                                                 adapter.notifyItemChanged(msgList.size() - 1);
+                                                msgRecyclerView.scrollToPosition(msgList.size() - 1);
                                             }
                                         } else {
                                             Msg msg1 = new Msg(bb.getText(), Msg.TYPE_RECEIVCED, url[1]);
                                             msgList.add(msg1);
                                             adapter.notifyItemChanged(msgList.size() - 1);
+                                            msgRecyclerView.scrollToPosition(msgList.size() - 1);
                                         }
                                     }
                                 }
@@ -371,12 +380,12 @@ public class ChatActivity extends AppCompatActivity  {
                 new CommomDialog2(ChatActivity.this, R.style.dialog, "点击按钮即可开始录音", new CommomDialog2.OnCloseListener() {
                     @Override
                     public void onClick(Dialog dialog, boolean confirm) {
-                        boolean flag=false;
+
                         final File recordFile = new File("/storage/sdcard0", "kk.amr");
                         if(confirm){
 
                             Toast.makeText(ChatActivity.this,"开始录音",Toast.LENGTH_SHORT).show();
-
+                            voice_flag=true;
 
                             mediaRecorder = new MediaRecorder();
 //                            // 判断，若当前文件已存在，则删除
@@ -401,9 +410,9 @@ public class ChatActivity extends AppCompatActivity  {
                                 e.printStackTrace();
                             }
                         }else{
-                            if (recordFile != null ) {
+                            if (recordFile != null && voice_flag) {
                                 mediaRecorder.stop();
-                                mediaRecorder.release();
+                                                                                                                                                                            mediaRecorder.release();
                                 Toast.makeText(ChatActivity.this,"录音结束",Toast.LENGTH_SHORT).show();
                                 final BmobFile voice = new BmobFile(recordFile);
 
@@ -446,7 +455,9 @@ public class ChatActivity extends AppCompatActivity  {
                             }else{
 
                             }
+                            voice_flag=false;
                             dialog.dismiss();
+
 
 
                         }

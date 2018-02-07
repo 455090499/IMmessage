@@ -36,7 +36,7 @@ public class BodyThread implements Runnable {
     public void run() {
         try {
             mSocket = new Socket("139.196.138.200", 30000);
-//            mSocket = new Socket("192.168.1.124", 30003);
+//            mSocket = new Socket("172.26.22.160", 30003);
             mBufferedReader = new BufferedReader(new InputStreamReader(mSocket.getInputStream()));
             mOutputStream = mSocket.getOutputStream();
 

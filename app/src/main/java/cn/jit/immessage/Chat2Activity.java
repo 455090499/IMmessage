@@ -81,6 +81,7 @@ public class Chat2Activity extends AppCompatActivity {
     List<Uri> mSelected;
     public static final int REQUEST_CODE_CHOOSE = 3;
 
+    static boolean voice_flag;
     // 录音类
     private MediaRecorder mediaRecorder;
     // 以文件的形式保存
@@ -213,7 +214,8 @@ public class Chat2Activity extends AppCompatActivity {
 
                         final File recordFile = new File("/storage/sdcard0", "kk.amr");
                         if(confirm){
-                            Toast.makeText(Chat2Activity.this,"111111",Toast.LENGTH_SHORT).show();
+                            voice_flag=true;
+                            Toast.makeText(Chat2Activity.this,"开始录音",Toast.LENGTH_SHORT).show();
                             mediaRecorder = new MediaRecorder();
 //                            // 判断，若当前文件已存在，则删除
 //                            if (recordFile.exists()) {
@@ -237,7 +239,8 @@ public class Chat2Activity extends AppCompatActivity {
                                 e.printStackTrace();
                             }
                         }else{
-                            if (recordFile != null) {
+                            if (recordFile != null && voice_flag) {
+                                Toast.makeText(Chat2Activity.this,"录音结束",Toast.LENGTH_SHORT).show();
                                 mediaRecorder.stop();
                                 mediaRecorder.release();
                                 final BmobFile voice = new BmobFile(recordFile);
@@ -278,7 +281,7 @@ public class Chat2Activity extends AppCompatActivity {
                                     }
                                 });
                             }
-
+                            voice_flag=false;
                             dialog.dismiss();
                         }
 
@@ -322,13 +325,15 @@ public class Chat2Activity extends AppCompatActivity {
                                                         if (e == null) {
                                                             Msg msg1 = new Msg(null, Msg.FILE_RECV, url2[1] , object.getBfile().getFilename(), object.getFilesize() + "", "等待下载",object.getObjectId());
                                                             msgList.add(msg1);
+                                                            adapter.notifyItemChanged(msgList.size() - 1);
+                                                            msgRecyclerView.scrollToPosition(msgList.size() - 1);
 //
 
                                                         } else {
                                                             Msg msg1 = new Msg(bb.getText(), Msg.TYPE_RECEIVCED, url2[1] );
-
-
                                                             msgList.add(msg1);
+                                                            adapter.notifyItemChanged(msgList.size() - 1);
+                                                            msgRecyclerView.scrollToPosition(msgList.size() - 1);
                                                         }
                                                     }
 
@@ -342,10 +347,14 @@ public class Chat2Activity extends AppCompatActivity {
                                                         if (e == null) {
                                                             Msg msg1 = new Msg(null, Msg.IMG_RECV, url2[1], object.getBfile().getFileUrl(),0);
                                                             msgList.add(msg1);
+                                                            adapter.notifyItemChanged(msgList.size() - 1);
+                                                            msgRecyclerView.scrollToPosition(msgList.size() - 1);
 
                                                         } else {
                                                             Msg msg1 = new Msg(bb.getText(), Msg.TYPE_RECEIVCED, url2[1]);
                                                             msgList.add(msg1);
+                                                            adapter.notifyItemChanged(msgList.size() - 1);
+                                                            msgRecyclerView.scrollToPosition(msgList.size() - 1);
                                                         }
                                                     }
                                                 });
@@ -366,9 +375,13 @@ public class Chat2Activity extends AppCompatActivity {
                                                                 if (e == null) {
                                                                     Msg msg1 = new Msg(null, Msg.VOICE_RECV, url2[1], object.getObjectId());
                                                                     msgList.add(msg1);
+                                                                    adapter.notifyItemChanged(msgList.size() - 1);
+                                                                    msgRecyclerView.scrollToPosition(msgList.size() - 1);
                                                                 } else {
                                                                     Msg msg1 = new Msg(bb.getText(), Msg.TYPE_RECEIVCED, url2[1]);
                                                                     msgList.add(msg1);
+                                                                    adapter.notifyItemChanged(msgList.size() - 1);
+                                                                    msgRecyclerView.scrollToPosition(msgList.size() - 1);
                                                                 }
 
                                                                 object.setObjectId(object.getObjectId());
@@ -400,10 +413,14 @@ public class Chat2Activity extends AppCompatActivity {
                                             } else {
                                                 Msg msg1 = new Msg(bb.getText(), Msg.TYPE_RECEIVCED,url2[1] );
                                                 msgList.add(msg1);
+                                                adapter.notifyItemChanged(msgList.size() - 1);
+                                                msgRecyclerView.scrollToPosition(msgList.size() - 1);
                                             }
                                         } else {
                                             Msg msg1 = new Msg(bb.getText(), Msg.TYPE_RECEIVCED, url2[1] );
                                             msgList.add(msg1);
+                                            adapter.notifyItemChanged(msgList.size() - 1);
+                                            msgRecyclerView.scrollToPosition(msgList.size() - 1);
 
                                         }
                                     }

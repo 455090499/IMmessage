@@ -1,11 +1,20 @@
 package cn.jit.immessage;
+import android.app.ActivityManager;
 import android.app.Dialog;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -15,6 +24,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.NotificationCompat;
 import android.support.v7.view.menu.MenuBuilder;
 import android.util.Log;
 import android.view.View;
@@ -55,6 +65,7 @@ import static java.lang.Thread.sleep;
 public class Body1Activity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private ViewPager viewPager;
+
     public static boolean rff=true;
     static int filedowna=0;
     private WeChatRadioGroup gradualRadioGroup;
@@ -336,10 +347,10 @@ public class Body1Activity extends AppCompatActivity
                     Mes bb = new Mes((String) msg.obj);
                     if (!bb.getRecv().equals("0")) {
                         if (bb.getSend().equals("0")) {
-                            if (bb.getText().length() == 11){
+//                            if (bb.getText().length() == 11){
                                 startActivity(new Intent(Body1Activity.this,Body1Activity.class));
-                                finish();
-                            }
+                                overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
+//                        }
 
 //                                Toast.makeText(Body1Activity.this, bb.getText() + "请求添加好友", Toast.LENGTH_SHORT).show();
 //                            else {
@@ -347,8 +358,45 @@ public class Body1Activity extends AppCompatActivity
 //                                Toast.makeText(Body1Activity.this, array[1] + "请求加群" + array[0], Toast.LENGTH_SHORT).show();
 //                            }
                         }
-                        else
-                            Toast.makeText(Body1Activity.this, bb.getSend() + "发来消息", Toast.LENGTH_SHORT).show();
+                        else{
+                            if(isBackground(getApplicationContext())){
+
+                                Drawable drawable = getResources().getDrawable(R.mipmap.logo);
+                                BitmapDrawable bd = (BitmapDrawable) drawable;
+                             Bitmap bmm = bd.getBitmap();
+                                Intent resultIntent = new Intent(Intent.ACTION_MAIN); // 启动栈顶的activity
+                                resultIntent.addCategory(Intent.CATEGORY_LAUNCHER);
+                                resultIntent.setClass(getApplicationContext(), Body1Activity.class);
+                                resultIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
+                                PendingIntent resultPendingIntent = PendingIntent.getActivity(
+                                        getApplicationContext(),
+                                        0,
+                                        resultIntent,
+                                        PendingIntent.FLAG_UPDATE_CURRENT
+                                );
+                                NotificationManager notificationManager=(NotificationManager)getSystemService(NOTIFICATION_SERVICE);
+                                NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext());
+                                builder.setTicker("简单的notification的应用")
+                                        .setContentTitle("通知")
+                                        .setContentText(bb.getSend() + "给你发来消息")
+                                        .setSubText("")
+                                        .setSmallIcon(R.mipmap.ic_launcher)
+                                        .setLargeIcon(bmm)
+                                        .setAutoCancel(true)
+                                        .setContentIntent(resultPendingIntent)
+                                        .setWhen(System.currentTimeMillis());
+                                Notification notify1=builder.build();
+                                notificationManager.notify(Integer.parseInt(bb.getSend().substring(6)),notify1);
+
+                                Toast.makeText(Body1Activity.this,"新通知", Toast.LENGTH_SHORT).show();
+
+                            }else{
+                                Toast.makeText(Body1Activity.this,bb.getSend() + "发来消息", Toast.LENGTH_SHORT).show();
+
+                            }
+
+                        }
+
                     }
                 }
                 super.handleMessage(msg);
@@ -540,6 +588,32 @@ public class Body1Activity extends AppCompatActivity
         editor1.commit();
         Intent service = new Intent(Body1Activity.this, BodyService.class);
         stopService(service);
+    }
+
+    public static boolean isBackground(Context context) {
+        boolean isInBackground = true;
+        ActivityManager am = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT_WATCH) {
+            List<ActivityManager.RunningAppProcessInfo> runningProcesses = am.getRunningAppProcesses();
+            for (ActivityManager.RunningAppProcessInfo processInfo : runningProcesses) {
+                //前台程序
+                if (processInfo.importance == ActivityManager.RunningAppProcessInfo.IMPORTANCE_FOREGROUND) {
+                    for (String activeProcess : processInfo.pkgList) {
+                        if (activeProcess.equals(context.getPackageName())) {
+                            isInBackground = false;
+                        }
+                    }
+                }
+            }
+        } else {
+            List<ActivityManager.RunningTaskInfo> taskInfo = am.getRunningTasks(1);
+            ComponentName componentInfo = taskInfo.get(0).topActivity;
+            if (componentInfo.getPackageName().equals(context.getPackageName())) {
+                isInBackground = false;
+            }
+        }
+
+        return isInBackground;
     }
 }
 

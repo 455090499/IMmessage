@@ -32,22 +32,6 @@ public class SplashActivity extends AppCompatActivity {
                 return false;
             }
         }).sendEmptyMessageDelayed(0,2000);
-//        new Thread(){
-//            @Override
-//            public void run() {
-//                super.run();
-//                try {
-//                    Thread.sleep(2000);
-//                    Intent intent = new Intent(SplashActivity.this,LoginActivity.class);
-//                    SplashActivity.this.startActivity(intent);
-//                    SplashActivity.this.finish();
-//                    overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
-//                    overridePendingTransition(android.R.anim.slide_in_left,android.R.anim.slide_out_right);
-//
-//                } catch (InterruptedException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        }.start();
+
     }
 }

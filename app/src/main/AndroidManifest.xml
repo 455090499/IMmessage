@@ -43,7 +43,6 @@
         <activity android:name=".Notify2Activity" />
         <activity android:name=".CreatActivity" />
         <activity android:name=".LoginActivity" />
-        <activity android:name=".Splash2Activity" />
         <activity android:name=".AddActivity" />
         <activity android:name=".ShowSoftwareActivity" />
         <activity android:name=".ForgetActivity" />
